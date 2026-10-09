@@ -1,4 +1,5 @@
 export { Breaker } from "./breaker.js";
 export { checkGate, executeIsolated, withTimeout, resolveComponentFeature, COMPONENT_PREFIXES, COMPONENT_EXACT, type TimeoutResult } from "./guard.js";
+export { Guardian, guardian, type GuardianSource, type GuardianLevel, type GuardianObserveInput, type GuardianFeatureHealth, type GuardianGuildSummary } from "./guardian.js";
 export { BREAKER_THRESHOLD, BREAKER_WINDOW_MS, DEFAULT_COMMAND_TIMEOUT_MS, SYSTEM_FEATURE_ID, type BlockReason, type GateDecision, type IsolatedOutcome, type ModuleErrorInfo, type ModuleHealth, type ModuleManifest, } from "./types.js";
 //# sourceMappingURL=index.d.ts.map

@@ -1,6 +1,10 @@
 "use strict";
 /**
- * Guardian — sistema immunitario del Commander (compilato da src/guardian.ts).
+ * Guardian — sistema immunitario del Commander (cervello).
+ * Non è un LLM: regole + punteggi deterministici (~mini-IA).
+ * Osserva gli esiti dei muscoli (moduli/dashboard/MCP), aggiorna uno score
+ * per guild:feature e espone summary per la dashboard.
+ * La quarantena resta sul Breaker/registry: il Guardian valuta e consiglia.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.guardian = exports.Guardian = void 0;
@@ -21,9 +25,7 @@ function key(guildId, featureId) {
     return `${guildId || "dm"}:${featureId}`;
 }
 class Guardian {
-    constructor() {
-        this.states = new Map();
-    }
+    states = new Map();
     observe(input, now = Date.now()) {
         const featureId = input.featureId ? String(input.featureId) : "";
         if (!featureId)
@@ -34,6 +36,7 @@ class Guardian {
             st = { score: 100, fails: 0, oks: 0, recentFails: [], lastAt: 0, lastError: null };
             this.states.set(k, st);
         }
+        // scarta fail fuori finestra
         st.recentFails = st.recentFails.filter((t) => now - t <= WINDOW_MS);
         if (input.ok) {
             st.oks += 1;
@@ -70,6 +73,7 @@ class Guardian {
         }
         return this.toHealth(featureId, st);
     }
+    /** Riepilogo per una guild (dashboard Diagnostica / panoramica). */
     summary(guildId) {
         const gid = guildId || "dm";
         const prefix = `${gid}:`;
@@ -89,6 +93,7 @@ class Guardian {
             ok: features.filter((f) => f.level === "ok").length,
         };
     }
+    /** Azzera stato (dopo reload/reset modulo). */
     reset(guildId, featureId) {
         if (featureId) {
             this.states.delete(key(guildId, featureId));
@@ -116,4 +121,6 @@ class Guardian {
     }
 }
 exports.Guardian = Guardian;
+/** Singleton di processo: un solo sistema immunitario nel cervello. */
 exports.guardian = new Guardian();
+//# sourceMappingURL=guardian.js.map

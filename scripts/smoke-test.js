@@ -1792,7 +1792,8 @@ try {
   //  3. le righe con '+' vengono ricomposte in un template unico dove ogni
   //     espressione dinamica diventa :p, poi verificato contro il contratto.
   // Endpoint extra -> FAIL.
-  // Contratto FE<->BE: scansiona app.js (legacy/stub) + tutti i public/js/*.js.
+  // Contratto FE<->BE: scansiona app.js (legacy/stub) + tutti i public/js/*.js
+  // + public/*.html con fetch inline (es. agents.html).
   // File candidati: app.js se contiene codice (oltre i commenti), più ogni js/*.js.
   const dashFiles = [];
   const dashApp = path.join(ROOT, 'src', 'dashboard', 'public', 'app.js');
@@ -1802,6 +1803,10 @@ try {
     for (const f of fs.readdirSync(dashJsDir).filter((f) => f.endsWith('.js')).sort()) {
       dashFiles.push(path.join(dashJsDir, f));
     }
+  }
+  const dashPubDir = path.join(ROOT, 'src', 'dashboard', 'public');
+  for (const f of fs.readdirSync(dashPubDir).filter((f) => f.endsWith('.html')).sort()) {
+    dashFiles.push(path.join(dashPubDir, f));
   }
   if (dashFiles.length === 0) {
     warn('dashboard/app.js: file non ancora presente (src/dashboard/public/app.js) — skip (lavori in corso)');
@@ -1817,6 +1822,10 @@ try {
       /^\/api\/guilds\/[^/]+\/perms\/?$/, // PUT perms
       /^\/api\/guilds\/[^/]+\/audit\/?$/, // registro modifiche (sola lettura)
       /^\/api\/guilds\/[^/]+\/diag\/?$/, // diagnostica (sola lettura)
+      /^\/api\/agents\/?$/, // control-room JARVIS (sola lettura stato)
+      /^\/api\/agents\/[^/]+\/?$/, // sessions / approvals sotto-risorse
+      /^\/api\/agents\/[^/]+\/[^/]+\/?$/,
+      /^\/api\/agents\/[^/]+\/[^/]+\/[^/]+\/?$/, // approvals/:id/resolve, sessions/:id/stream|inbox
     ];
     // Spoglia commenti block + line (i commenti citano gli endpoint).
     const perFile = [];
@@ -2667,7 +2676,7 @@ try {
   const parsed = yj.parseFeed(salmon);
   if (parsed.length !== 1 || parsed[0].id !== 'v1') fail('wow: parseFeed RSS');
   const registry = require(path.join(ROOT, 'src', 'modules', 'registry.js'));
-  for (const [cmd, mod] of [['compleanno', 'fun'], ['afk', 'fun'], ['stats-canali', 'utility'], ['youtube', 'utility']]) {
+  for (const [cmd, mod] of [['compleanno', 'fun'], ['afk', 'fun'], ['stats-canali', 'utility'], ['youtube', 'youtube']]) {
     if (registry.featureOfCommand(cmd) !== mod) fail(`wow: /${cmd} non mappato a ${mod}`);
   }
   for (const n of ['birthdays', 'afk', 'youtube', 'statChannels']) clean(n);
