@@ -29,6 +29,20 @@ function agentChoices() {
   }
 }
 
+/**
+ * Solo il proprietario approva (i segreti del vault sono globali e i
+ * servizi esterni costano/rischiano). Fail closed: senza ownerId, nessuno.
+ */
+function canApproveOwner(interaction, userId) {
+  try {
+    const ownerId = interaction && interaction.guild && interaction.guild.ownerId;
+    if (!ownerId || !userId) return false;
+    return String(userId) === String(ownerId);
+  } catch {
+    return false;
+  }
+}
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('jarvis')
@@ -58,6 +72,10 @@ module.exports = {
     }
 
     const uid = interaction.user?.id;
+    // SICUREZZA: le approvazioni spendono i segreti del vault (globali) e
+    // pilotano servizi esterni — solo il proprietario del server può darle
+    // (vedi canApproveOwner). Chiunque può avviare compiti innocui, ma il
+    // cancello umano è dell'owner.
     const pendingMsgs = new Map(); // approvalId -> message
 
     /** Mostra il cancello umano come bottoni Discord. */
@@ -70,7 +88,7 @@ module.exports = {
       let msg = null;
       try {
         msg = await interaction.followUp({
-          content: `${label} richiesta da un agente:\n**${truncate(title, 200)}**\n${truncate(detail, 500)}`,
+          content: `${label} richiesta da un agente (solo il proprietario può approvare):\n**${truncate(title, 200)}**\n${truncate(detail, 500)}`,
           components: [row],
         });
         pendingMsgs.set(id, msg);
@@ -80,8 +98,8 @@ module.exports = {
           filter: (i) => i.customId === `jarvis:ok:${id}` || i.customId === `jarvis:no:${id}`,
         });
         collector.on('collect', async (i) => {
-          if (i.user.id !== uid) {
-            return i.reply({ content: '❌ Solo chi ha avviato il compito può approvare.', flags: MessageFlags.Ephemeral }).catch(() => null);
+          if (!canApproveOwner(interaction, i.user.id)) {
+            return i.reply({ content: '❌ Solo il proprietario del server può approvare.', flags: MessageFlags.Ephemeral }).catch(() => null);
           }
           const ok = i.customId === `jarvis:ok:${id}`;
           approvals.resolve(id, ok, i.user.username);
@@ -122,3 +140,6 @@ module.exports = {
     await interaction.editReply({ embeds: [embed] }).catch(() => null);
   },
 };
+
+// Riesportato per i test (regola di sicurezza).
+module.exports.canApproveOwner = canApproveOwner;

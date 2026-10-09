@@ -2870,6 +2870,49 @@ hostPromise = hostPromise.then(() => (async () => {
   }
 })());
 
+// ------------------------------------------------- (c21) JARVIS SECURITY
+console.log('== [21/5] JARVIS (approvazioni owner, vault, sandbox) ==');
+let jarvisPromise = Promise.resolve();
+try {
+  const jarvis = require(path.join(ROOT, 'src', 'commands', 'ai', 'jarvis.js'));
+  if (typeof jarvis.canApproveOwner !== 'function') fail('jarvis: canApproveOwner mancante');
+  const ix = { guild: { ownerId: 'owner1' } };
+  if (!jarvis.canApproveOwner(ix, 'owner1')) fail('jarvis: owner deve poter approvare');
+  if (jarvis.canApproveOwner(ix, 'membro2')) fail('jarvis: membro NON deve approvare');
+  if (jarvis.canApproveOwner({}, 'owner1')) fail('jarvis: senza guild nessuno approva');
+  if (jarvis.canApproveOwner(ix, null)) fail('jarvis: user null');
+  if (jarvis.canApproveOwner(null, 'owner1')) fail('jarvis: interaction nulla');
+  // Vault: senza chiave è spento e non si può usare.
+  const vault = require(path.join(ROOT, 'src', 'agents', 'vault.js'));
+  const hadKey = process.env.VAULT_KEY;
+  delete process.env.VAULT_KEY;
+  if (vault.isEnabled()) fail('jarvis: vault senza chiave deve essere spento');
+  try {
+    vault.storeSecret('s', 'a', 'x');
+    fail('jarvis: store senza chiave dovrebbe lanciare');
+  } catch {}
+  jarvisPromise = vault.withSecret({ service: 's', account: 'a' }, async () => 'x').then(
+    () => fail('jarvis: withSecret senza chiave dovrebbe lanciare'),
+    () => {}
+  );
+  if (hadKey !== undefined) process.env.VAULT_KEY = hadKey;
+  // Sandbox: solo tool del manifest, mai tutto.
+  const sandbox = require(path.join(ROOT, 'src', 'agents', 'sandbox.js'));
+  jarvisPromise = jarvisPromise.then(() => sandbox.runAgent({ id: 'qa', tools: ['say'] }, async (ctx) => {
+    if (typeof ctx.tools.say !== 'function') throw new Error('say mancante');
+    if (ctx.tools.useService) throw new Error('useService non doveva esserci');
+    if (ctx.tools.fetchUrl) throw new Error('fetchUrl non doveva esserci');
+    return 'ok';
+  })).then((r) => {
+    if (!r.ok || r.result !== 'ok') fail('jarvis: sandbox capability');
+  }, (e) => {
+    fail(`jarvis sandbox: ${String(e.message || e).split('\n')[0]}`);
+  });
+  console.log('jarvis: owner-gate, vault spento, sandbox ok');
+} catch (e) {
+  fail(`jarvis (qatest): ${e.message.split('\n')[0]}`);
+}
+
 // ------------------------------------------------------------------ REPORT
 function report() {
 console.log('\n================ SMOKE TEST ================');
@@ -2891,4 +2934,4 @@ if (errors.length) {
 
 // Il REPORT aspetta i test async del Commander (c6): errori registrati dopo
 // il report non verrebbero stampati ma cambierebbero solo l'exit code.
-Promise.all([commanderPromise, ticketPromise, hostPromise, dashBootPromise]).then(report);
+Promise.all([commanderPromise, ticketPromise, hostPromise, dashBootPromise, jarvisPromise]).then(report);
