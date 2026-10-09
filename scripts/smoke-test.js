@@ -2830,6 +2830,37 @@ try {
   fail(`guardian (qatest): ${e.message.split('\n')[0]}`);
 }
 
+// ------------------------------------------------- (c20) CLI ADMIN
+console.log('== [20/5] CLI admin da terminale ==');
+hostPromise = hostPromise.then(() => (async () => {
+  try {
+    const { execFile } = require('child_process');
+    const run = (args) => new Promise((resolve) => {
+      execFile(process.execPath, [path.join(ROOT, 'scripts', 'admin.js'), ...args], { timeout: 30000 }, (err, stdout, stderr) => {
+        resolve({ code: err && Number.isFinite(err.code) ? err.code : (err ? 1 : 0), out: String(stdout || ''), err: String(stderr || '') });
+      });
+    });
+    const st = await run(['status']);
+    if (st.code !== 0) fail('admin: status exit!=0');
+    let parsed = null;
+    try {
+      parsed = JSON.parse(st.out);
+    } catch {
+      fail('admin: status non JSON');
+    }
+    if (!parsed || parsed.ok !== true || !parsed.modules) fail('admin: status incompleto');
+    const bad = await run(['nopex']);
+    if (bad.code === 0) fail('admin: comando ignoto dovrebbe fallire');
+    const g = await run(['guilds']);
+    if (g.code !== 0) fail('admin: guilds exit!=0');
+    const cfg = await run(['config', 'lista']);
+    if (cfg.code !== 0 || !cfg.out.includes('AI_PROVIDER')) fail('admin: config lista');
+    console.log('admin: status, errori, config ok');
+  } catch (e) {
+    fail(`admin (qatest): ${e.message.split('\n')[0]}`);
+  }
+})());
+
 // ------------------------------------------------------------------ REPORT
 function report() {
 console.log('\n================ SMOKE TEST ================');

@@ -10,6 +10,7 @@
     "dev": "node --watch src/index.js",
     "test": "node scripts/smoke-test.js",
     "setup": "node scripts/setup.js",
+    "admin": "node scripts/admin.js",
     "verify": "node_modules/.bin/tsc -p packages/commander/tsconfig.json && node scripts/smoke-test.js",
     "build:commander": "node_modules/.bin/tsc -p packages/commander/tsconfig.json"
   },
