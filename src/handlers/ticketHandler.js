@@ -12,7 +12,7 @@ const {
   MessageFlags,
 } = require('discord.js');
 const {
-  TICKET_TYPES, PRIORITIES, getConfig, nextNumber, saveTicket, getTicket, getUserOpenTickets, removeTicket,
+  TICKET_TYPES, getConfig, nextNumber, saveTicket, getTicket, getUserOpenTickets, removeTicket,
   setRating, getQuestions,
 } = require('../database/tickets');
 const { getGuild } = require('../database/guildConfig');
@@ -69,7 +69,7 @@ function buildPanel() {
     .setTitle('🎫 Centro Assistenza')
     .setDescription(
       'Hai bisogno di aiuto? Seleziona il tipo di richiesta dal menu qui sotto e si aprirà un ticket privato con lo staff.\n\n' +
-      Object.entries(TICKET_TYPES).map(([k, t]) => `${t.emoji} **${t.label}** — ${t.descrizione}`).join('\n') +
+      Object.entries(TICKET_TYPES).map(([, t]) => `${t.emoji} **${t.label}** — ${t.descrizione}`).join('\n') +
       '\n\n⚠️ Non aprire ticket per scherzo: è punibile.'
     )
     .setFooter({ text: 'Lo staff ti risponderà il prima possibile' })

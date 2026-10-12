@@ -1,4 +1,5 @@
 /* app.js — ZealBot Control. Viste: panoramica, moduli (+dettaglio con config), permessi, audit. */
+/*global Api*/
 'use strict';
 
 const S = {
@@ -23,6 +24,13 @@ const EMPTY_HINTS = {
   utility: 'Setup e preferenze si fanno in Discord con /setup, /wizard, /config e /lingua.',
 };
 
+
+/** Voce controller dai dati live (per toggle/stato). */
+function ctlEntry(ctrl) {
+  const ctl = Array.isArray(S.detail.controller) ? S.detail.controller : [];
+  return (ctl.find((x) => x && x.id === ctrl)) || null;
+}
+
 /** Canali obbligatori per modulo schema: se almeno uno è vuoto -> badge "Da configurare". */
 const REQUIRED_CHANNELS = {
   tickets: ['panelChannelId'],
@@ -39,49 +47,15 @@ function isSet(v) {
   return true;
 }
 
-/** Voce controller dai dati live (per toggle/stato). */
-function ctlEntry(ctrl) {
-  const ctl = Array.isArray(S.detail.controller) ? S.detail.controller : [];
-  return (ctl.find((x) => x && x.id === ctrl)) || null;
-}
-
 /** true se alla voce manca almeno un canale obbligatorio. */
 function itemNeedsSetup(it) {
   const mods = (S.detail && S.detail.modules) || {};
-  for (const sid of it.schemas) {
+  for (const sid of it.schemas || []) {
     for (const key of REQUIRED_CHANNELS[sid] || []) {
       if (!isSet(mods[sid] && mods[sid][key])) return true;
     }
   }
   return false;
-}
-
-/** Badge stato per la riga sidebar: dot on/off + "da configurare". */
-function itemBadgeHTML(it) {
-  const m = it.ctrl ? ctlEntry(it.ctrl) : null;
-  if (!m) return '<span class="badge">⚙️ config</span>';
-  const dot = (m.enabled && !m.isolated)
-    ? '<span class="dot on" title="attivo"></span>'
-    : '<span class="dot off" title="spento"></span>';
-  const setup = (m.enabled && !m.isolated && !m.locked && itemNeedsSetup(it))
-    ? '<span class="badge setup" title="manca un canale obbligatorio">⚙️</span>' : '';
-  const lock = m.locked ? '<span class="badge">🔒</span>' : '';
-  return `${dot}${lock}${setup}`;
-}
-/** Icona modulo: mai testo in chiaro. Gli id del registry usano slug stile
- *  Lucide (cpu, ticket, shield…): mappati a una emoji singola. Se è già
- *  un'emoji valida la tiene, altrimenti fallback neutro. */
-const ICON_EMOJI = {
-  cpu: '🤖', message: '💬', users: '👥', terminal: '⌨️', cart: '🛒',
-  star: '⭐', shield: '🛡️', mic: '🎤', check: '✅', server: '🖥️',
-  ticket: '🎫', sliders: '🎚️', tv: '📺', grid: '🧩',
-};
-
-function modIcon(m) {
-  const raw = String((m && m.icon) || '');
-  if (ICON_EMOJI[raw]) return ICON_EMOJI[raw];
-  if (raw && !/^[a-z-]+$/.test(raw) && [...raw].length <= 4) return raw;
-  return '🧩';
 }
 
 /** Sidebar moduli stile MEE6: categorie con sole voci reali (mai premium copiato:
@@ -564,21 +538,6 @@ function wirePromo() {
   }
 }
 
-/** Card plugin stile MEE6: tile, titolo, desc 2 righe, pulsante Abilita/Configura. */
-function plugCard(it) {
-  const m = it.ctrl ? ctlEntry(it.ctrl) : null;
-  const on = m ? (m.enabled && !m.isolated) : true;
-  const setup = m && on && !m.locked && itemNeedsSetup(it);
-  const badges = (m && m.locked ? '<span class="badge">🔒 sistema</span>' : '') +
-    (setup ? '<span class="badge setup">⚙️ da configurare</span>' : '');
-  const btn = on
-    ? `<button class="plug-btn primary" data-open="${esc(it.id)}">Configura →</button>`
-    : `<button class="plug-btn" data-enable="${esc(it.id)}">+ Abilita</button>`;
-  const desc = it.desc || (m && m.description) || '';
-  return `<div class="plug" data-open-card="${esc(it.id)}" role="button" tabindex="0" aria-label="Apri ${esc(it.label)}">` +
-    `<div class="plug-top-row"><span class="plug-tile" aria-hidden="true">${esc(it.icon)}</span><span class="plug-badges">${badges}</span></div>` +
-    `<h3>${esc(it.label)}</h3><p class="desc">${esc(desc)}</p>${btn}</div>`;
-}
 
 function wirePlugCards() {
   const tabQ = S.pluginTab && S.pluginTab !== 'all' ? `&tab=${encodeURIComponent(S.pluginTab)}` : '';
@@ -613,16 +572,20 @@ function wirePlugCards() {
   });
 }
 
-/** Dettaglio voce sidebar: riusa toggle + form esistenti (fieldInput, wireConfig, Salva). */
-function vModuleDetail(itemId) {
-  const it = sideItem(itemId);
-  if (!it) {
-    $('#view').innerHTML = topbar('Voce non trovata', '') +
-      `<div class="empty">Nessuna voce <span class="mono">${esc(itemId)}</span>.</div>`;
-    return;
-  }
-  S.selectedMod = it.id;
-  renderItemDetail(it);
+
+function plugCard(it) {
+  const m = it.ctrl ? ctlEntry(it.ctrl) : null;
+  const on = m ? (m.enabled && !m.isolated) : true;
+  const setup = m && on && !m.locked && itemNeedsSetup(it);
+  const badges = (m && m.locked ? '<span class="badge">🔒 sistema</span>' : '') +
+    (setup ? '<span class="badge setup">⚙️ da configurare</span>' : '');
+  const btn = on
+    ? `<button class="plug-btn primary" data-open="${esc(it.id)}">Configura →</button>`
+    : `<button class="plug-btn" data-enable="${esc(it.id)}">+ Abilita</button>`;
+  const desc = it.desc || (m && m.description) || '';
+  return `<div class="plug" data-open-card="${esc(it.id)}" role="button" tabindex="0" aria-label="Apri ${esc(it.label)}">` +
+    `<div class="plug-top-row"><span class="plug-tile" aria-hidden="true">${esc(it.icon)}</span><span class="plug-badges">${badges}</span></div>` +
+    `<h3>${esc(it.label)}</h3><p class="desc">${esc(desc)}</p>${btn}</div>`;
 }
 
 /** Render dettaglio nel pannello destro (o a tutto schermo su mobile). */
@@ -887,7 +850,7 @@ function messagePreviewInner(text, opts) {
   if (o.style === 'text') return `<p>${rendered}</p>`;
   const border = /^#[0-9a-fA-F]{6}$/.test(o.color || '') ? o.color : 'var(--accent)';
   const av = o.avatar === false ? '' : '<span class="lp-bot">U</span>';
-  return `${av}<div><b>ZealBot</b> <span>oggi</span><p>${rendered}</p></div>`;
+  return `${av}<div style="border-left:3px solid ${border};padding-left:.6rem;"><b>ZealBot</b> <span>oggi</span><p>${rendered}</p></div>`;
 }
 
 function messagePreview(text, opts) {

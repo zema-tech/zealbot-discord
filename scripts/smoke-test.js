@@ -2156,7 +2156,7 @@ try {
     if (e.status !== 400) fail(`orchestratore: dispatch ignoto atteso status 400, ottenuto ${e.status}`);
   }
   scrubTestKeys();
-  const { load, dbFile } = require(path.join(DB_DIR, 'jsonDb.js'));
+  const { dbFile } = require(path.join(DB_DIR, 'jsonDb.js'));
   const rawTickets = fs.readFileSync(dbFile('tickets'), 'utf8');
   if (rawTickets.includes(QGUILD)) fail('orchestratore: cleanup tickets incompleto dopo dispatch');
   void before;

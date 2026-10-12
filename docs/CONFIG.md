@@ -56,3 +56,21 @@ Note:
   configurabile via env.
 - Backup sempre ore 03:00 locali e retention 7 giorni: costanti nel codice
   (`src/jobs/backup.js`), non env.
+
+## Lingue dei messaggi (i18n)
+
+I testi di risposta passano da `src/utils/i18n.js`: `t(chiave, lingua, vars)`
+con fallback per-chiave all'italiano, `getLang(guildId)` legge `language` da
+`guildConfig` (`/lingua imposta`). Lingue supportate: `it`, `en`
+(`SUPPORTED_LANGS`, fallback `it`).
+
+Copertura attuale: parziale (una manciata di comandi, es. ping/help/serverinfo).
+I nomi/descrizioni slash restano in italiano.
+
+Per aggiungere una lingua (es. `es`):
+
+1. Crea `src/locales/es.js` con le stesse chiavi di `it.js` (le mancanti
+   ricadono sull'italiano automaticamente).
+2. Aggiungi `'es'` a `SUPPORTED_LANGS` in `src/utils/i18n.js`.
+3. Usa `t('chiave', await getLang(guildId), { vars })` nei nuovi testi invece
+   di stringhe hardcoded; non cambiare i testi esistenti senza motivo.

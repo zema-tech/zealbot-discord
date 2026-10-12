@@ -41,7 +41,7 @@ function validateTitle(title) {
 
 function extractLinks(text) {
   const out = [];
-  const re = /\[\[([^\[\]]{1,60})\]\]/g;
+  const re = /\[\[([^[\]]{1,60})\]\]/g;
   let m;
   while ((m = re.exec(String(text || ''))) !== null) {
     const t = m[1].trim();

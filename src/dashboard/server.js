@@ -232,7 +232,7 @@ function startDashboard(client) {
   app.use((req, res) => res.status(404).json({ errore: 'Non trovato.' }));
 
   // Error handler: mai crashare su guild assente o input imprevisti.
-  // eslint-disable-next-line no-unused-vars
+  // (next è richiesto dalla firma Express a 4 argomenti.)
   app.use((err, req, res, next) => {
     let status = 500;
     try {

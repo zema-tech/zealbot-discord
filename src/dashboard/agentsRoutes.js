@@ -82,7 +82,6 @@ function sessionGuild(sid) {
 function approvalGuild(aid) {
   try {
     const approvals = require('../agents/approvals');
-    const sessions = require('../agents/sessions');
     const list = typeof approvals.pending === 'function' ? approvals.pending() : [];
     const rec = Array.isArray(list) ? list.find((a) => a && a.id === String(aid)) : null;
     if (!rec || !rec.sessionId) return null;

@@ -10,11 +10,6 @@ try {
 const COLORS = T?.COLORS ?? { primary: 0x5865f2, success: 0x57f287, error: 0xed4245, warn: 0xfee75c };
 const themeBar = typeof T?.bar === 'function' ? T.bar : null;
 const trunc = typeof T?.truncate === 'function' ? T.truncate : (s, m) => String(s ?? '').slice(0, m);
-const applyFooter = typeof T?.applyFooter === 'function' ? T.applyFooter : (e, i) => {
-  try { e.setFooter({ text: `Richiesto da ${i?.user?.tag ?? 'Utente'}` }); } catch { /* ignora */ }
-  try { e.setTimestamp(); } catch { /* ignora */ }
-  return e;
-};
 const {
   MUSIC_UNAVAILABLE_MESSAGE,
   getPlayer,

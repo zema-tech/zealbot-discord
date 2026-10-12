@@ -535,14 +535,6 @@ function createApiRouter(client) {
     }
   }
 
-  /** Dimensioni cache Discord difensive: mai lanciare su guild parziali. */
-  function cacheSize(map) {
-    try {
-      return (map && typeof map.size === 'number') ? map.size : 0;
-    } catch {
-      return 0;
-    }
-  }
 
   /**
    * true se l'errore Discord è un problema di rete/lato Discord (timeout dopo
@@ -1143,7 +1135,6 @@ function createApiRouter(client) {
   router.put('/guilds/:gid/modules/:mod', loadAccess, async (req, res) => {
     const gid = req.params.gid;
     const mod = req.params.mod;
-    const guild = req.access.guild;
     // Vista compat canali/ruoli per i validatori (cache o REST).
     const gl = await guildLike(gid);
     // Audit best-effort: logga solo le scritture riuscite ({ok:true}).
@@ -1418,7 +1409,6 @@ function createApiRouter(client) {
   // ---- PUT /api/guilds/:gid/perms ----------------------------------------
   router.put('/guilds/:gid/perms', loadAccess, async (req, res) => {
     const gid = req.params.gid;
-    const guild = req.access.guild;
     const gl = await guildLike(gid);
     const origJsonPerms = res.json.bind(res);
     res.json = (body) => {

@@ -1,7 +1,7 @@
 {
   "name": "zealbot",
   "version": "1.0.0",
-  "description": "ZealBot — bot Discord multi-server con tante funzioni",
+  "description": "ZealBot — self-hosted multi-server Discord bot: moderation, economy, tickets, AI, dashboard",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -12,13 +12,26 @@
     "setup": "node scripts/setup.js",
     "admin": "node scripts/admin.js",
     "verify": "node_modules/.bin/tsc -p packages/commander/tsconfig.json && node scripts/smoke-test.js",
-    "build:commander": "node_modules/.bin/tsc -p packages/commander/tsconfig.json"
+    "build:commander": "node_modules/.bin/tsc -p packages/commander/tsconfig.json",
+    "test:unit": "node --test --test-concurrency=1 test/unit/*.test.js",
+    "lint": "eslint src/ scripts/ test/",
+    "format": "prettier --write src/ scripts/ test/"
   },
   "keywords": [
     "discord",
+    "discord-bot",
     "bot",
     "discord.js",
     "multi-server",
+    "self-hosted",
+    "moderation",
+    "economy",
+    "tickets",
+    "ai",
+    "typescript",
+    "nodejs",
+    "commander-architecture",
+    "guardian",
     "zealbot"
   ],
   "author": "zema-tech",
@@ -29,7 +42,10 @@
     "url": "https://github.com/zema-tech/zealbot-discord.git"
   },
   "homepage": "https://github.com/zema-tech/zealbot-discord#readme",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "dependencies": {
     "@discord-player/extractor": "7.2.0",
     "@discordjs/voice": "0.19.2",
@@ -43,5 +59,8 @@
   },
   "engines": {
     "node": ">=22.12.0"
+  },
+  "bugs": {
+    "url": "https://github.com/zema-tech/zealbot-discord/issues"
   }
 }

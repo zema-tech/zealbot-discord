@@ -69,6 +69,7 @@ export class Guardian {
   private readonly states = new Map<string, FeatureState>();
 
   observe(input: GuardianObserveInput, now = Date.now()): GuardianFeatureHealth | null {
+    if (!input || typeof input !== "object") return null;
     const featureId = input.featureId ? String(input.featureId) : "";
     if (!featureId) return null;
 

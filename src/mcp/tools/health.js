@@ -4,7 +4,7 @@
  * Il client Discord è opzionale: senza, i campi live sono null (degradata
  * onesta invece di numeri inventati).
  */
-const { textResult, toolError, ERR } = require('../protocol');
+const { textResult } = require('../protocol');
 
 let liveClient = null;
 

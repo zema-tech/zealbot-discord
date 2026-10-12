@@ -7,7 +7,7 @@
 //   - `ready.js` avvia già `startTicketAutoclose(client)` ogni 15 minuti.
 // Nessun sottocomando /ticket viene creato qui per non confliggere con l'altro agente.
 
-const { getConfig, setConfig, saveTicket, removeTicket } = require('../database/tickets');
+const { getConfig, setConfig, removeTicket } = require('../database/tickets');
 const { doClose } = require('../handlers/ticketHandler');
 
 const AUTO_CLOSE_REASON = 'Chiusura automatica per inattività';

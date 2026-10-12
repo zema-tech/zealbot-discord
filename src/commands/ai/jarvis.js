@@ -9,7 +9,6 @@ const {
 } = require('discord.js');
 
 const agents = require('../../agents');
-const sessions = require('../../agents/sessions');
 const approvals = require('../../agents/approvals');
 
 let _theme = null;

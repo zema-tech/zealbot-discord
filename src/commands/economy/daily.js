@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
-const { getUser, updateUser, getTuning, DEFAULT_TUNING } = require('../../database/economy');
+const { getUser, updateUser, getTuning } = require('../../database/economy');
 
 let theme = null;
 try {

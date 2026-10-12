@@ -15,7 +15,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const sessions = require('./sessions');
 const { buildTools } = require('./tools');
 
 function taskTimeoutMs() {
