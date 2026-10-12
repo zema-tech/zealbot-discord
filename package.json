@@ -13,9 +13,10 @@
     "admin": "node scripts/admin.js",
     "verify": "node_modules/.bin/tsc -p packages/commander/tsconfig.json && node scripts/smoke-test.js",
     "build:commander": "node_modules/.bin/tsc -p packages/commander/tsconfig.json",
-    "test:unit": "node --test --test-concurrency=1 test/unit/*.test.js",
+    "test:unit": "vitest run",
     "lint": "eslint src/ scripts/ test/",
-    "format": "prettier --write src/ scripts/ test/"
+    "format": "prettier --write src/ scripts/ test/",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "discord",
@@ -62,5 +63,11 @@
   },
   "bugs": {
     "url": "https://github.com/zema-tech/zealbot-discord/issues"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^3.2.7",
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.10",
+    "vitest": "^3.2.7"
   }
 }

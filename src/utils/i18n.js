@@ -17,9 +17,20 @@
 const SUPPORTED_LANGS = ['it', 'en'];
 const FALLBACK_LANG = 'it';
 
+/** JSON canonico (src/locales/<lang>.json), fallback ai legacy .js. */
+function loadLocale(lang) {
+  try {
+    return require(`../locales/${lang}.json`);
+  } catch {}
+  try {
+    return require(`../locales/${lang}`);
+  } catch {}
+  return {};
+}
+
 const locales = {
-  it: require('../locales/it'),
-  en: require('../locales/en'),
+  it: loadLocale('it'),
+  en: loadLocale('en'),
 };
 
 function lookup(obj, key) {

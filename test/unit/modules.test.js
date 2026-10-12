@@ -3,7 +3,6 @@
  * Unit test moduli/DB puri + guardie. Chiavi `utest_*` su disco con cleanup
  * in finally (ogni test pulisce il suo). Mai rete.
  */
-const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('path');
 
