@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, MessageFlags, ChannelType } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const { getGuild } = require('../../database/guildConfig');
 const { load, save, dbFile } = require('../../database/jsonDb');
 let theme;

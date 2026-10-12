@@ -21,9 +21,6 @@ const COLORS = theme?.COLORS ?? { primary: 0x5865f2, success: 0x57f287, error: 0
 const ok = theme?.ok ?? ((t, d) =>
   new EmbedBuilder().setColor(COLORS.success).setTitle(String(t ?? '').slice(0, 256)).setDescription(String(d ?? '').slice(0, 4000)).setTimestamp()
 );
-const info = theme?.info ?? ((t, d, c = COLORS.primary) =>
-  new EmbedBuilder().setColor(c ?? COLORS.primary).setTitle(String(t ?? '').slice(0, 256)).setDescription(String(d ?? '').slice(0, 4000)).setTimestamp()
-);
 const themeErr = theme?.err ?? ((t) =>
   new EmbedBuilder().setColor(COLORS.error).setTitle('❌ Errore').setDescription(String(t ?? '').slice(0, 4000)).setTimestamp()
 );

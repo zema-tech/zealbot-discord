@@ -2,7 +2,6 @@
 // Conteggi best-effort dalla cache (online = presenze in cache, può essere
 // parziale senza intenti privilegiati). Unref dentro.
 
-const { ChannelType } = require('discord.js');
 const { load, dbFile } = require('../database/jsonDb');
 
 function guildIds() {

@@ -4,6 +4,7 @@ const ms = require('ms');
 // Theme condiviso con fallback inline se il require fallisse.
 let COLORS = { primary: 0x5865f2, success: 0x57f287 };
 let bar = (cur, max, len = 10) => {
+  const L = Number.isFinite(Number(len)) && Number(len) >= 1 ? Math.min(25, Math.floor(Number(len))) : 10;
   const c = Number(cur);
   const m = Number(max);
   let ratio = 0;
@@ -11,8 +12,8 @@ let bar = (cur, max, len = 10) => {
     ratio = Math.max(0, Math.min(1, c / m));
     if (!Number.isFinite(ratio)) ratio = 0;
   }
-  const filled = Math.round(ratio * 10);
-  return '█'.repeat(filled) + '░'.repeat(10 - filled);
+  const filled = Math.round(ratio * L);
+  return '█'.repeat(filled) + '░'.repeat(L - filled);
 };
 let num = (n) => (Number.isFinite(Number(n)) ? Number(n).toLocaleString('it-IT') : 'n/d');
 let truncate = (s, max) => {

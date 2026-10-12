@@ -58,10 +58,6 @@ async function fetchJson(apiPath) {
   }
 }
 
-function asId(v) {
-  return typeof v === 'string' && v ? v : null;
-}
-
 /** Guild con conteggi (with_counts=true): id, name, icon, memberCount. */
 async function getGuild(gid) {
   const g = await fetchJson(`/guilds/${encodeURIComponent(gid)}?with_counts=true`);

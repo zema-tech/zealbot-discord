@@ -1,4 +1,4 @@
-const { Events, EmbedBuilder } = require('discord.js');
+const { Events } = require('discord.js');
 const { getGuild } = require('../database/guildConfig');
 const { addXp } = require('../database/levels');
 const { addWarn } = require('../database/warnings');

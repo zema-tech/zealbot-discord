@@ -1,5 +1,5 @@
 const {
-  SlashCommandBuilder, EmbedBuilder, MessageFlags, PermissionFlagsBits, AttachmentBuilder,
+  SlashCommandBuilder, EmbedBuilder, MessageFlags, PermissionFlagsBits,
 } = require('discord.js');
 const skills = require('../../ai/brain/skills');
 const memory = require('../../ai/brain/memory');
@@ -301,7 +301,7 @@ module.exports = {
         await interaction.deferReply({ flags: MessageFlags.Ephemeral }).catch(() => null);
         try {
           const att = interaction.options.getAttachment('allegato', true);
-          const { name, buf } = await downloadAttachment(att);
+          const { buf } = await downloadAttachment(att);
           const saved = files.saveFile(gid, interaction.options.getString('nome', true), buf);
           await interaction.editReply({ content: `✅ File **${saved}** caricato (${Math.round(buf.length / 1024)}KB).` }).catch(() => null);
         } catch (e) {

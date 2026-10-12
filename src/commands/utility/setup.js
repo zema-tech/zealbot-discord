@@ -15,7 +15,7 @@ try {
     truncate: (s, m) => { const str = typeof s === 'string' ? s : String(s ?? ''); const n = Math.floor(Number(m)); if (!Number.isFinite(n) || n < 0) return str; return str.length <= n ? str : str.slice(0, n); },
   };
 }
-const { COLORS, ok, applyFooter, truncate } = theme;
+const { COLORS, applyFooter, truncate } = theme;
 
 // La configurazione si fa solo dalla dashboard web: i subcommand di scrittura
 // rispondono con un puntatore alla sezione corretta (nessuna scrittura DB).

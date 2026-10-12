@@ -101,11 +101,11 @@ function safeRequire(relPath) {
 }
 
 function fail(message) {
-  throw { status: 400, message: String(message) };
+  throw Object.assign(new Error(String(message)), { status: 400 });
 }
 
 function failUnavailable(modulo) {
-  throw { status: 501, message: `Modulo ${modulo} non disponibile.` };
+  throw Object.assign(new Error(`Modulo ${modulo} non disponibile.`), { status: 501 });
 }
 
 function isSnowflake(v) {

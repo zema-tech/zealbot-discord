@@ -6,7 +6,7 @@ const FILE = dbFile('birthdays');
 
 /** 'GG/MM' -> 'MM-DD' o null. */
 function parseDay(input) {
-  const m = /^\s*(\d{1,2})[\/\-.](\d{1,2})(?:[\/\-.]\d{2,4})?\s*$/.exec(String(input || ''));
+  const m = /^\s*(\d{1,2})[/\-.](\d{1,2})(?:[/\-.]\d{2,4})?\s*$/.exec(String(input || ''));
   if (!m) return null;
   const a = Number(m[1]);
   const b = Number(m[2]);

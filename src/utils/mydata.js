@@ -50,7 +50,6 @@ function exportData(guildId, userId) {
     out.stores.cases = cases.getUserCases(guildId, userId, 100).map((c) => ({ id: c.id, type: c.type, reason: c.reason, at: c.at }));
   } catch { out.stores.cases = null; }
   try {
-    const tickets = require('../database/tickets');
     const { load: l2, dbFile: d2 } = require('../database/jsonDb');
     const db = l2(d2('tickets'));
     const recs = Object.values((db[guildId] && db[guildId].tickets) || {}).filter((t) => t && typeof t === 'object');

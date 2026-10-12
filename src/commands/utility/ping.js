@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { t, getLang } = require('../../utils/i18n');
 
 // Theme condiviso con fallback inline se il require fallisse (mai nomi/opzioni diversi).

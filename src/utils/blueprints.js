@@ -315,6 +315,7 @@ function describeBlueprint(clean) {
     lines.push(`📁 **${c.name}**`);
     for (const ch of c.channels) {
       const icon = ch.type === ChannelType.GuildVoice || ch.type === 'voice' ? '🔊' : '💬';
+      // eslint-disable-next-line no-irregular-whitespace -- U+3000 intenzionale (indent tipografico nel preview)
       lines.push(`　${icon} ${ch.name}`);
     }
   }

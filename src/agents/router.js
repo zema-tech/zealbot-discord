@@ -85,8 +85,6 @@ function parseAct(text) {
   return { kind: 'answer', text: t.trim() };
 }
 
-const TOOL_ARITY = { say: ['testo'], note: ['testo'], fetchUrl: ['url'], useService: ['servizio', 'account', 'req'], askOwner: ['domanda'] };
-
 function mapArgs(tool, args) {
   const obj = args && typeof args === 'object' ? args : {};
   const pick = (...keys) => {
@@ -164,7 +162,7 @@ async function runSpecialist(agent, task, ctx) {
   return lastAnswer || 'Ho esaurito i passi senza una risposta completa: riformula il compito in modo più specifico.';
 }
 
-function capabilityCard(route, task) {
+function capabilityCard(route) {
   const names = manifest.list().map((a) => `${a.icon} **${a.name}** — ${a.tagline}`).join('\n');
   return (
     `Modalità senza AI (nessun provider configurato).\n` +

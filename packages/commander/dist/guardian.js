@@ -27,6 +27,8 @@ function key(guildId, featureId) {
 class Guardian {
     states = new Map();
     observe(input, now = Date.now()) {
+        if (!input || typeof input !== "object")
+            return null;
         const featureId = input.featureId ? String(input.featureId) : "";
         if (!featureId)
             return null;

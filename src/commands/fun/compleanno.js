@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags, PermissionFlagsBits, ChannelType } = require('discord.js');
-const { setBirthday, removeBirthday, getBirthday, listBirthdays, setChannel } = require('../../database/birthdays');
+const { setBirthday, removeBirthday, listBirthdays, setChannel } = require('../../database/birthdays');
 
 let theme = null;
 try {

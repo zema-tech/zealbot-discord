@@ -3,10 +3,6 @@ const {
   EmbedBuilder,
   MessageFlags,
   PermissionFlagsBits,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  ComponentType,
 } = require('discord.js');
 const { TEMPLATES, validateBlueprint, describeBlueprint } = require('../../utils/blueprints');
 let theme;
@@ -38,27 +34,6 @@ function previewEmbed(key) {
     .setTimestamp();
 }
 
-function confirmRow(prefix) {
-  return new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId(`${prefix}:si`).setLabel('Conferma').setStyle(ButtonStyle.Success).setEmoji('✅'),
-    new ButtonBuilder().setCustomId(`${prefix}:no`).setLabel('Annulla').setStyle(ButtonStyle.Secondary).setEmoji('✖️')
-  );
-}
-
-function disabledRow(prefix) {
-  return new ActionRowBuilder().addComponents(
-    new ButtonBuilder().setCustomId(`${prefix}:si:fin`).setLabel('Conferma').setStyle(ButtonStyle.Success).setDisabled(true),
-    new ButtonBuilder().setCustomId(`${prefix}:no:fin`).setLabel('Annulla').setStyle(ButtonStyle.Secondary).setDisabled(true)
-  );
-}
-
-function botCanBuild(guild) {
-  const me = guild.members.me;
-  if (!me) return false;
-  return (
-    me.permissions.has(PermissionFlagsBits.ManageRoles) && me.permissions.has(PermissionFlagsBits.ManageChannels)
-  );
-}
 
 module.exports = {
   data: new SlashCommandBuilder()

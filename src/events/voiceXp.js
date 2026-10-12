@@ -12,11 +12,6 @@ function trackKey(guildId, userId) {
   return `${guildId}:${userId}`;
 }
 
-function isXpEligible(member, state) {
-  if (!member || member.user.bot) return false;
-  if (state.mute || state.deaf || state.selfMute || state.selfDeaf || state.serverMute || state.serverDeaf) return false;
-  return true;
-}
 
 function isMutedState(state) {
   return Boolean(state.mute || state.deaf || state.selfMute || state.selfDeaf || state.serverMute || state.serverDeaf);
