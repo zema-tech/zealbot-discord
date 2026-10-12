@@ -1,7 +1,7 @@
 {
   "name": "zealbot",
   "version": "1.0.0",
-  "description": "ZealBot — bot Discord multi-server con tante funzioni",
+  "description": "ZealBot — self-hosted multi-server Discord bot: moderation, economy, tickets, AI, dashboard",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -18,7 +18,14 @@
     "discord",
     "bot",
     "discord.js",
+    "discord-bot",
     "multi-server",
+    "self-hosted",
+    "moderation",
+    "economy",
+    "tickets",
+    "nodejs",
+    "typescript",
     "zealbot"
   ],
   "author": "zema-tech",
@@ -27,6 +34,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/zema-tech/zealbot-discord.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zema-tech/zealbot-discord/issues"
   },
   "homepage": "https://github.com/zema-tech/zealbot-discord#readme",
   "workspaces": ["apps/*", "packages/*"],
