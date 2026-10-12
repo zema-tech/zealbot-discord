@@ -1,44 +1,47 @@
+[English](README.md) | [Italiano](README.it.md)
+
 # ⚡ ZealBot
 
+[![CI](https://github.com/zema-tech/zealbot-discord/actions/workflows/ci.yml/badge.svg)](https://github.com/zema-tech/zealbot-discord/actions/workflows/ci.yml)
 ![Node](https://img.shields.io/badge/node-22%2B-brightgreen)
 ![discord.js](https://img.shields.io/badge/discord.js-v14-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Commands](https://img.shields.io/badge/slash%20commands-85%2B-orange)
 [![Donate](https://img.shields.io/badge/donate-Stripe-635BFF?logo=stripe&logoColor=white)](https://donate.stripe.com/test_aFa9AMegr8Me61bgAXcbC01)
 
-Bot Discord **multi-server** (ZealBot) con ~85 slash command, moduli attivabili per guild, **dashboard web** e un **Commander** centrale (cervello: gate, timeout, circuit-breaker, **Guardian**).
+Multi-server Discord bot (**ZealBot**) with ~85 slash commands, per-guild module toggles, a **web dashboard** and a central **Commander** (brain: gate, timeout, circuit-breaker, **Guardian**).
 
-> Self-hostabile · MIT · Dashboard stile MEE6 · Commander + sistema immunitario
+> Self-hostable · MIT · MEE6-style dashboard · Commander + immune system
 
-## Perché è diverso
+## Why it's different
 
-- **Commander (cervello)** — unico ingresso: toggle per server, esecuzione isolata, un modulo rotto non spegne gli altri
-- **Guardian (immunità)** — score salute per modulo/guild, quarantena consigliata, recovery; niente LLM nel hot path
-- **AI plug-and-play** — una chiave (Groq, Gemini, OpenAI, …) oppure endpoint free; brain/skill per guild
-- **Ticket professionali** — claim, transcript, priorità, SLA, rating
-- **Moderazione seria** — warn con escalation, lockdown con snapshot permessi, registro casi
-- **Dashboard web** — OAuth2 Discord, griglia server, moduli configurabili, overview attività
+- **Commander (brain)** — single entry point: per-server toggles, isolated execution, one broken module never kills the others
+- **Guardian (immunity)** — health score per module/guild, suggested quarantine, recovery; no LLM in the hot path
+- **Plug-and-play AI** — one key (Groq, Gemini, OpenAI, …) or a free endpoint; per-guild brain/skills
+- **Professional tickets** — claim, transcripts, priorities, SLA, ratings
+- **Serious moderation** — escalating warns, lockdown with permission snapshots, case registry
+- **Web dashboard** — Discord OAuth2, server grid, configurable modules, activity overview
 
-## Supporta il progetto
+## Support the project
 
-Se il bot ti è utile, una donazione aiuta **hosting, tempo di sviluppo e nuove feature**.
+If the bot is useful to you, a donation helps with **hosting, development time and new features**.
 
 | | |
 |--|--|
-| **Donazione libera (Stripe)** | [Apri Payment Link →](https://donate.stripe.com/test_aFa9AMegr8Me61bgAXcbC01) |
-| **Importo a scelta (EUR)** | minimo 1 € · preset 5 € |
+| **Open donation (Stripe)** | [Open Payment Link →](https://donate.stripe.com/test_aFa9AMegr8Me61bgAXcbC01) |
+| **Custom amount (EUR)** | minimum €1 · €5 preset |
 
-> **Nota:** il link attuale è sul **Stripe Sandbox** (`livemode: false`) collegato a questo account. Per donazioni **reali** crea lo stesso prodotto/Payment Link in **Live mode** dalla [Dashboard Stripe](https://dashboard.stripe.com/payment-links) e sostituisci l’URL qui e in [`.github/FUNDING.yml`](.github/FUNDING.yml).
+> **Note:** the current link is on **Stripe Sandbox** (`livemode: false`) tied to this account. For **real** donations, create the same product/Payment Link in **Live mode** from the [Stripe Dashboard](https://dashboard.stripe.com/payment-links) and replace the URL here and in [`.github/FUNDING.yml`](.github/FUNDING.yml).
 
-Altri modi di aiutare: **★ star** al repo · issue e PR · feedback sulla dashboard.
+Other ways to help: **★ star** the repo · issues and PRs · dashboard feedback.
 
-### Sponsor
+### Sponsors
 
-Aziende o community che vogliono sponsorizzare hosting / feature prioritarie: aprite una [issue](https://github.com/zema-tech/zealbot-discord/issues) con titolo `Sponsor` oppure usate il link Stripe sopra.
+Companies or communities wanting to sponsor hosting / priority features: open an [issue](https://github.com/zema-tech/zealbot-discord/issues) titled `Sponsor` or use the Stripe link above.
 
-Grazie a chi supporta già il progetto 💚
+Thanks to everyone supporting the project 💚
 
-## Avvio rapido
+## Quick Start
 
 ```bash
 git clone https://github.com/zema-tech/zealbot-discord.git
@@ -49,145 +52,169 @@ node deploy-commands.js
 npm start
 ```
 
-> **Bot + dashboard Express** (`src/dashboard`): usa **npm** come sopra.
-> La dashboard **Next.js** in `apps/dashboard` usa dipendenze `workspace:*`
-> (Bun/pnpm): **non** fare solo `npm install` in root se stai sviluppando
-> quel path — vedi [docs/HOSTING.md](docs/HOSTING.md).
-
 ```bash
-npm test   # smoke senza token: comandi, eventi, commander, DB
+npm test   # tokenless smoke test: commands, events, commander, DB
 ```
 
-## Indice
+### Docker
 
-| Sezione | Contenuto |
-|---------|-----------|
-| [Supporta](#supporta-il-progetto) | Donazioni Stripe · sponsor |
-| [Architettura](#architettura) | Cervello → muscoli → Guardian |
-| [Funzionalità](#funzionalità-sintesi) | Panoramica per area |
-| [Requisiti](#requisiti) | Node, intents |
-| [Variabili](#variabili-essenziali) | Env minime |
-| [Dashboard](#dashboard-web) | OAuth2 e avvio |
+```bash
+cp .env.example .env   # fill in DISCORD_TOKEN + CLIENT_ID
+docker compose up -d --build
+```
+
+Health: `GET /healthz`. Data persists via the `./data`, `./logs`, `./backups` volumes — see [docs/en/HOSTING.md](docs/en/HOSTING.md).
+
+### Fly.io
+
+```bash
+fly launch              # creates fly.toml (already in repo)
+fly secrets set DISCORD_TOKEN=... CLIENT_ID=...
+fly deploy
+```
+
+Use a [volume](https://fly.io/docs/volumes/) for `data/` or data resets on every deploy — see [docs/en/HOSTING.md](docs/en/HOSTING.md).
+
+### PM2 (`ecosystem.config.js`)
+
+```bash
+npm install
+cp .env.example .env
+node deploy-commands.js
+pm2 start ecosystem.config.js
+pm2 save && pm2 startup
+```
+
+## Index
+
+| Section | Content |
+|---------|---------|
+| [Support](#support-the-project) | Stripe donations · sponsors |
+| [Architecture](#architecture) | Brain → muscles → Guardian |
+| [Features](#features-summary) | Overview by area |
+| [Requirements](#requirements) | Node, intents |
+| [Variables](#essential-variables) | Minimal env |
+| [Dashboard](#web-dashboard) | OAuth2 and startup |
 | [Hosting](#hosting) | Render, Docker, VPS |
-| [Docs](docs/) | [CONFIG](docs/CONFIG.md) · [COMMANDS](docs/COMMANDS.md) · [HOSTING](docs/HOSTING.md) · [PLAN](PLAN.md) |
+| [Docs](docs/README.md) | [CONFIG](docs/en/CONFIG.md) · [COMMANDS](docs/en/COMMANDS.md) · [HOSTING](docs/en/HOSTING.md) · [PLAN](PLAN.md) |
 
 ---
 
-## Architettura
+## Architecture
 
 ```text
-        Dashboard / Discord / MCP   (nervi)
+        Dashboard / Discord / MCP   (nerves)
                     │
                     ▼
             ┌───────────────┐
-            │   COMMANDER   │  cervello: gate, dispatch, config
-            │  + Guardian   │  immunità: score, quarantine hint
+            │   COMMANDER   │  brain: gate, dispatch, config
+            │  + Guardian   │  immunity: score, quarantine hint
             └───────┬───────┘
                     │
-     ┌──────────────┼──────────────┐
-     ▼              ▼              ▼
-  moduli        dashboard        eventi
-  (muscoli)     (muscoli)        (muscoli)
+      ┌──────────────┼──────────────┐
+      ▼              ▼              ▼
+   modules        dashboard        events
+   (muscles)      (muscles)        (muscles)
 ```
 
-- I moduli non si chiamano tra loro: solo tramite **Commander**
-- Toggle **on/off per server** (default ON)
-- Config dashboard: la UI valida, il **Commander esegue**
-- **Guardian** osserva ok/fail/timeout e espone `guardianSummary(guildId)`
-- Core tipizzato: `packages/commander` (TypeScript) + bridge in `src/modules/commander.js`
+- Modules never call each other: only through the **Commander**
+- **On/off toggle per server** (default ON)
+- Dashboard config: the UI validates, the **Commander executes**
+- **Guardian** observes ok/fail/timeout and exposes `guardianSummary(guildId)`
+- Typed core: `packages/commander` (TypeScript) + bridge in `src/modules/commander.js`
 
 ---
 
-## Funzionalità (sintesi)
+## Features (summary)
 
-| Area | Esempi |
+| Area | Examples |
 |------|--------|
-| **Moderazione** | ban, kick, timeout, warn, clear, lockdown, casi |
-| **Economia** | balance, daily, bank, shop, lotteria, rob, slots |
-| **Livelli** | XP chat/vocale, rank, top, ruoli premio |
-| **Ticket** | pannello, claim, transcript, priorità, SLA, rating |
-| **AI** | /chiedi, riassumi, brain/skill, provider auto |
-| **Agenti** | /jarvis + specialisti in sandbox, control-room live ([docs/AGENTS.md](docs/AGENTS.md)) |
-| **Utility** | welcome, automod, starboard, reaction roles, giveaway… |
-| **Musica** | /musica (play, coda, skip, loop…) |
+| **Moderation** | ban, kick, timeout, warn, clear, lockdown, cases |
+| **Economy** | balance, daily, bank, shop, lottery, rob, slots |
+| **Levels** | chat/voice XP, rank, top, reward roles |
+| **Tickets** | panel, claim, transcript, priorities, SLA, ratings |
+| **AI** | /ask, summarize, brain/skills, auto provider |
+| **Agents** | /jarvis + sandboxed specialists, live control-room ([docs/en/AGENTS.md](docs/en/AGENTS.md)) |
+| **Utility** | welcome, automod, starboard, reaction roles, giveaways… |
+| **Music** | /musica (play, queue, skip, loop…) |
 
-Dettaglio comandi → [docs/COMMANDS.md](docs/COMMANDS.md).
+Full command details → [docs/en/COMMANDS.md](docs/en/COMMANDS.md).
 
 ---
 
-## Requisiti
+## Requirements
 
-- **Node.js 22+** (richiesto da `package.json`; consigliato Node 24 per `@discordjs/voice` e `DB_BACKEND=sqlite`)
+- **Node.js 22+** (required by `package.json`; Node 24 recommended for `@discordjs/voice` and `DB_BACKEND=sqlite`)
 - Intents: Guilds, GuildMessages, **Message Content**, **Server Members**, GuildModeration
-- App Discord: token + Client ID
+- Discord app: token + Client ID
 
 ---
 
-## Variabili essenziali
+## Essential variables
 
-| Variabile | Ruolo |
+| Variable | Role |
 |-----------|--------|
-| `DISCORD_TOKEN` | Token bot |
-| `CLIENT_ID` | Deploy comandi |
-| `GUILD_ID` | Opzionale: un solo server di test |
-| `DB_BACKEND` | `json` (default) o `sqlite` |
+| `DISCORD_TOKEN` | Bot token |
+| `CLIENT_ID` | Command deploy |
+| `GUILD_ID` | Optional: single test server |
+| `DB_BACKEND` | `json` (default) or `sqlite` |
 | `CLIENT_SECRET` · `SESSION_SECRET` · `BASE_URL` | Dashboard OAuth2 |
-| `DASHBOARD_AUDIT_LOG` | Opzionale: path audit log dashboard |
-| `GROQ_API_KEY` / `GEMINI_API_KEY` / … | AI (opzionale) |
+| `DASHBOARD_AUDIT_LOG` | Optional: dashboard audit log path |
+| `GROQ_API_KEY` / `GEMINI_API_KEY` / … | AI (optional) |
 
-Completo → [docs/CONFIG.md](docs/CONFIG.md) · [`.env.example`](.env.example).
+Full list → [docs/en/CONFIG.md](docs/en/CONFIG.md) · [`.env.example`](.env.example).
 
 ---
 
-## Dashboard web
+## Web dashboard
 
-1. Developer Portal → OAuth2 → redirect `<BASE_URL>/callback` (scope `identify guilds`)
+1. Developer Portal → OAuth2 → redirect `<BASE_URL>/callback` (scopes `identify guilds`)
 2. Env: `DASHBOARD_PORT`, `SESSION_SECRET`, `CLIENT_SECRET`, `BASE_URL`
-3. Avvio:
+3. Start:
 
 ```bash
 npm start            # bot
-npm run dashboard    # pannello Express (stesso .env / DB)
+npm run dashboard    # Express panel (same .env / DB)
 ```
 
-Serve **Gestisci Server** + bot presente nella guild.
+Requires **Manage Server** + bot present in the guild.
 
-Griglia server (Entra / Invita) · moduli a categorie · Welcome a sezioni · overview 7/14/30.
+Server grid (Join / Invite) · categorized modules · sectioned Welcome · 7/14/30 overview.
 
 ---
 
 ## Hosting
 
-[docs/HOSTING.md](docs/HOSTING.md) — Docker, PM2, Render, Railway, VPS.
+[docs/en/HOSTING.md](docs/en/HOSTING.md) — Docker, PM2, Render, Railway, VPS.
 
 Health: `GET /healthz` → `ok`, `guilds`, `commands`, `backend`.
 
 ---
 
-## Struttura
+## Structure
 
 ```text
-src/commands/          slash per categoria
-src/events/            listener Discord
-src/modules/           descrittori + commander bridge
+src/commands/          slash commands by category
+src/events/            Discord listeners
+src/modules/           descriptors + commander bridge
 src/database/          json / sqlite
-src/dashboard/         Express + UI (produzione tipica)
-apps/dashboard/        Next.js opzionale (Bun/pnpm, workspace:*)
-packages/commander/    core TS (gate, breaker, guardian)
-docs/                  CONFIG, COMMANDS, HOSTING
-.github/FUNDING.yml    link donazioni (Sponsor button)
+src/dashboard/         Express + UI (typical production)
+apps/dashboard/        optional Next.js (Bun/pnpm, workspace:*)
+packages/commander/    TS core (gate, breaker, guardian)
+docs/                  CONFIG, COMMANDS, HOSTING (it/en)
+.github/FUNDING.yml    donation links (Sponsor button)
 ```
 
 ```bash
 npm run dev
-npm run build:commander   # dopo modifiche a packages/commander
+npm run build:commander   # after changes to packages/commander
 npm test
 ```
 
 ---
 
-## Licenza
+## License
 
-[MIT](LICENSE) — contributi e issue benvenuti.
+[MIT](LICENSE) — contributions and issues welcome.
 
-[![Donate with Stripe](https://img.shields.io/badge/Supporta-dona%20con%20Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://donate.stripe.com/test_aFa9AMegr8Me61bgAXcbC01)
+[![Donate with Stripe](https://img.shields.io/badge/Support-donate%20with%20Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://donate.stripe.com/test_aFa9AMegr8Me61bgAXcbC01)
