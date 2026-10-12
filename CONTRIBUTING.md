@@ -1,36 +1,38 @@
-# Contribuire
+[English](CONTRIBUTING.md) | [Italiano](CONTRIBUTING.it.md)
 
-Bot open-source (MIT) per la community: ogni PR viene letta e riceve una
-risposta vera. Poche regole, rispettate sempre.
+# Contributing
 
-## Gate (obbligatorio prima di aprire la PR)
+Open-source bot (MIT) for the community: every PR gets read and gets a real
+answer. Few rules, always respected.
+
+## Gate (mandatory before opening a PR)
 
 ```bash
-npm run verify   # tsc (packages/commander) + smoke test completo
+npm run verify   # tsc (packages/commander) + full smoke test
 ```
 
-Rosso in CI = informazione, non bocciatura: fixa e ripusha.
+Red in CI = information, not rejection: fix and re-push.
 
-## Convenzioni
+## Conventions
 
 - **Conventional commits**: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`.
-- **Mai** force-push, `reset --hard`, `branch -D` senza averlo chiesto.
-- **Mai** secret nei commit (token, chiavi API, sessioni). Solo `.env` locale.
-- Funzioni sotto le 50 righe; test insieme al codice (sezione smoke `scripts/smoke-test.js`).
-- Italiano per i messaggi utente del bot; codice e commenti concisi.
+- **Never** force-push, `reset --hard`, `branch -D` without being asked.
+- **Never** secrets in commits (tokens, API keys, sessions). Local `.env` only.
+- Functions under 50 lines; tests alongside the code (smoke section in `scripts/smoke-test.js`).
+- Italian for the bot's user-facing messages; concise code and comments.
 
-## Architettura (da rispettare)
+## Architecture (must respect)
 
-- **Commander unico orchestratore** (`src/modules/commander.js`): dashboard,
-  comandi, eventi e handler non richiedono mai `modules/registry` diretto —
-  lo smoke `[8/5]` lo vieta e fallisce se lo fai.
-- **Moduli isolati**: descrittore in `src/modules/<id>.js` via `defineModule`,
-  mai chiamate tra moduli.
-- **DB**: JSON con `schema.js` versionato (`__v`); niente nuove dipendenze
-  senza necessità di correttezza.
-- Vedi `decisions/` (ADR) per le scelte già prese e i loro trigger.
+- **Commander as the single orchestrator** (`src/modules/commander.js`): dashboard,
+  commands, events and handlers never require `modules/registry` directly —
+  smoke `[8/5]` forbids it and fails if you do.
+- **Isolated modules**: descriptor in `src/modules/<id>.js` via `defineModule`,
+  never calls between modules.
+- **DB**: JSON with versioned `schema.js` (`__v`); no new dependencies
+  without a correctness need.
+- See `decisions/` (ADRs) for past decisions and their triggers.
 
-## Issue utili
+## Useful issues
 
-Una riproduzione minima è già un contributo ottimo. Per le idee nuove apri
-prima una issue: decidiamo insieme *prima* che tu spenda un weekend a costruirle.
+A minimal reproduction is already a great contribution. For new ideas open
+an issue first: let's decide together *before* you spend a weekend building them.
