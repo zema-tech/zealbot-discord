@@ -3,7 +3,6 @@
  * Unit test core Commander (puro, zero Discord/DB).
  * `node --test test/unit/` — mai rete, mai chiavi qatest su disco.
  */
-const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
 const {
