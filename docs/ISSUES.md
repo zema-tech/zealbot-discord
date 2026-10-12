@@ -16,3 +16,11 @@
    `PLAN.md`; `src/dashboard` (Express) is the only supported one.
 5. Product default language is Italian (`FALLBACK_LANG='it'`), not English:
    deliberate (see 2), against the letter of the i18n request.
+6. `scripts/gen-docs.js` writes to `docs/COMMANDS.md`, but docs now live in
+   `docs/it/` + `docs/en/`. Decide: generator targets `docs/it/COMMANDS.md`
+   (+ English edition strategy) before re-running, or it recreates the old path.
+7. `docs/it/HOSTING.md` §5 suggests a Pterodactyl egg with Node.js version 20,
+   but `package.json` `engines` requires `>=22.12.0` (voice). Decide the
+   minimum supported Node for eggs.
+8. `docs/it/ARCHITECTURE.md` interaction pipeline lists two steps numbered
+   "5." (gate + custom perms). Cosmetic; renumber when touching the file.

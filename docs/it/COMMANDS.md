@@ -1,15 +1,15 @@
 # Comandi del bot
 
-> Generato automaticamente con `node scripts/gen-docs.js` il 2026-09-26 — non modificare a mano.
+> Generato automaticamente con `node scripts/gen-docs.js` il 2026-10-12 — non modificare a mano.
 >
-> Totale: **88 comandi** in **8 categorie**.
+> Totale: **89 comandi** in **8 categorie**.
 > La categoria corrisponde alla sottocartella in src/commands/.
 > Cooldown in secondi per utente (default 3 s se non specificato nel modulo).
 > I parametri marcati con asterisco (*) sono obbligatori.
 
 ## Indice categorie
 
-- [ai](#ai) (8)
+- [ai](#ai) (9)
 - [economy](#economy) (11)
 - [fun](#fun) (12)
 - [levels](#levels) (3)
@@ -20,7 +20,7 @@
 
 ## ai
 
-Comandi: 8
+Comandi: 9
 
 | Comando | Descrizione | Cooldown | Sottocomandi / Opzioni |
 |---|---|---|---|
@@ -30,6 +30,7 @@ Comandi: 8
 | `/chiedi` | Fai una domanda all’AI del server | 15 s | `domanda: stringa*` |
 | `/codice` | Chiedi all’AI cose sul codice del bot | 10 s | **chiedi** — Fai una domanda sul codice del bot (`domanda: stringa*`)<br>**file** — Mostra un file del bot (prime righe) (`percorso: stringa*`)<br>**cerca** — Cerca un termine nel codice (`termine: stringa*`)<br>**albero** — Panoramica della struttura del codice (nessun parametro) |
 | `/immagina` | Genera un’immagine con l’AI dal tuo prompt | 20 s | `prompt: stringa*` |
+| `/jarvis` | Affida un compito a JARVIS e ai suoi agenti specialisti | 10 s | `compito: stringa*`, `agente: stringa` |
 | `/riassumi` | Riassume gli ultimi messaggi del canale con l’AI | 30 s | `quantita: intero` |
 | `/storia` | Genera un racconto originale con l’AI | 20 s | `tema: stringa*`, `lunghezza: stringa` |
 

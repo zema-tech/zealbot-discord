@@ -1,11 +1,13 @@
+[English](README.md) | [Italiano](README.it.md)
+
 # ⚡ ZealBot
 
+[![CI](https://github.com/zema-tech/zealbot-discord/actions/workflows/ci.yml/badge.svg)](https://github.com/zema-tech/zealbot-discord/actions/workflows/ci.yml)
 ![Node](https://img.shields.io/badge/node-22%2B-brightgreen)
 ![discord.js](https://img.shields.io/badge/discord.js-v14-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Commands](https://img.shields.io/badge/slash%20commands-85%2B-orange)
 [![Donate](https://img.shields.io/badge/donate-Stripe-635BFF?logo=stripe&logoColor=white)](https://donate.stripe.com/test_aFa9AMegr8Me61bgAXcbC01)
-
 **Production-ready multi-server Discord bot** with ~85 slash commands, per-guild feature toggles, a modern web dashboard, and a central **Commander** architecture (gate · timeout · circuit-breaker · **Guardian**).
 
 > Self-hostable · MIT · Dashboard inspired by MEE6 · Commander + immune system
@@ -23,10 +25,26 @@
 | **Serious moderation** | Warns with escalation, lockdown with permission snapshots, case registry |
 | **Web dashboard** | Discord OAuth2, server grid, configurable modules, activity overview |
 
----
+## Support the project
 
-## Quick start
+If the bot is useful to you, a donation helps with **hosting, development time and new features**.
 
+| | |
+|--|--|
+| **Open donation (Stripe)** | [Open Payment Link →](https://donate.stripe.com/test_aFa9AMegr8Me61bgAXcbC01) |
+| **Custom amount (EUR)** | minimum €1 · €5 preset |
+
+> **Note:** the current link is on **Stripe Sandbox** (`livemode: false`) tied to this account. For **real** donations, create the same product/Payment Link in **Live mode** from the [Stripe Dashboard](https://dashboard.stripe.com/payment-links) and replace the URL here and in [`.github/FUNDING.yml`](.github/FUNDING.yml).
+
+Other ways to help: **★ star** the repo · issues and PRs · dashboard feedback.
+
+### Sponsors
+
+Companies or communities wanting to sponsor hosting / priority features: open an [issue](https://github.com/zema-tech/zealbot-discord/issues) titled `Sponsor` or use the Stripe link above.
+
+Thanks to everyone supporting the project 💚
+
+## Quick Start
 ```bash
 git clone https://github.com/zema-tech/zealbot-discord.git
 cd zealbot-discord
@@ -42,7 +60,7 @@ npm run dashboard             # web panel (separate process)
 ```
 
 > **Note:** The production dashboard lives in `src/dashboard` (Express).  
-> The Next.js version in `apps/dashboard` is experimental and uses workspace dependencies (Bun/pnpm). See [docs/HOSTING.md](docs/HOSTING.md).
+> The Next.js version in `apps/dashboard` is experimental and uses workspace dependencies (Bun/pnpm). See [docs/en/HOSTING.md](docs/en/HOSTING.md).
 
 ---
 
@@ -59,10 +77,53 @@ npm run dashboard             # web panel (separate process)
 | **Utility** | welcome, automod, starboard, reaction roles, giveaway… |
 | **Music** | `/musica` (play, queue, skip, loop…) |
 
-Full command list → [docs/COMMANDS.md](docs/COMMANDS.md)
+Full command list → [docs/en/COMMANDS.md](docs/en/COMMANDS.md)
 
 ---
 
+### Docker
+
+```bash
+cp .env.example .env   # fill in DISCORD_TOKEN + CLIENT_ID
+docker compose up -d --build
+```
+
+Health: `GET /healthz`. Data persists via the `./data`, `./logs`, `./backups` volumes — see [docs/en/HOSTING.md](docs/en/HOSTING.md).
+
+### Fly.io
+
+```bash
+fly launch              # creates fly.toml (already in repo)
+fly secrets set DISCORD_TOKEN=... CLIENT_ID=...
+fly deploy
+```
+
+Use a [volume](https://fly.io/docs/volumes/) for `data/` or data resets on every deploy — see [docs/en/HOSTING.md](docs/en/HOSTING.md).
+
+### PM2 (`ecosystem.config.js`)
+
+```bash
+npm install
+cp .env.example .env
+node deploy-commands.js
+pm2 start ecosystem.config.js
+pm2 save && pm2 startup
+```
+
+## Index
+
+| Section | Content |
+|---------|---------|
+| [Support](#support-the-project) | Stripe donations · sponsors |
+| [Architecture](#architecture) | Brain → muscles → Guardian |
+| [Features](#features-summary) | Overview by area |
+| [Requirements](#requirements) | Node, intents |
+| [Variables](#essential-variables) | Minimal env |
+| [Dashboard](#web-dashboard) | OAuth2 and startup |
+| [Hosting](#hosting) | Render, Docker, VPS |
+| [Docs](docs/README.md) | [CONFIG](docs/en/CONFIG.md) · [COMMANDS](docs/en/COMMANDS.md) · [HOSTING](docs/en/HOSTING.md) · [PLAN](PLAN.md) |
+
+---
 ## Architecture
 
 ```text
@@ -105,9 +166,10 @@ Full command list → [docs/COMMANDS.md](docs/COMMANDS.md)
 | `GUILD_ID` | Optional — restrict to a single test server |
 | `DB_BACKEND` | `json` (default) or `sqlite` |
 | `CLIENT_SECRET` · `SESSION_SECRET` · `BASE_URL` | Dashboard OAuth2 |
+| `DASHBOARD_AUDIT_LOG` | Optional: dashboard audit log path |
 | `GROQ_API_KEY` / `GEMINI_API_KEY` / … | AI providers (optional) |
 
-Full list → [docs/CONFIG.md](docs/CONFIG.md) · [`.env.example`](.env.example)
+Full list → [docs/en/CONFIG.md](docs/en/CONFIG.md) · [`.env.example`](.env.example).
 
 ---
 
@@ -124,11 +186,13 @@ npm run dashboard      # panel (shares .env + DB with the bot)
 
 Requires **Manage Server** permission and the bot present in the guild.
 
+Server grid (Join / Invite) · categorized modules · sectioned Welcome · 7/14/30 overview.
+
 ---
 
 ## Hosting
 
-See [docs/HOSTING.md](docs/HOSTING.md) for Docker, PM2, Render, Railway and VPS setups.
+[docs/en/HOSTING.md](docs/en/HOSTING.md) — Docker, PM2, Render, Railway, VPS.
 
 Health endpoint: `GET /healthz` → `{ ok, guilds, commands, backend }`
 
@@ -144,7 +208,8 @@ src/database/          json / sqlite store
 src/dashboard/         Express dashboard (production)
 apps/dashboard/        Next.js dashboard (experimental)
 packages/commander/    TypeScript core (gate, breaker, guardian)
-docs/                  CONFIG · COMMANDS · HOSTING · AGENTS
+docs/                  CONFIG · COMMANDS · HOSTING · AGENTS (it/en)
+.github/FUNDING.yml    donation links (Sponsor button)
 ```
 
 ```bash

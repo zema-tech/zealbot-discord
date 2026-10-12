@@ -165,7 +165,6 @@ Griglia server (Entra / Invita) · moduli a categorie · Welcome a sezioni · ov
 Health: `GET /healthz` → `ok`, `guilds`, `commands`, `backend`.
 
 > Decisione dashboard (bloccata): Express (`src/dashboard`) è l'unica supportata. L'app Next.js in `apps/dashboard` è sperimentale.
-
 ---
 
 ## Struttura
@@ -178,7 +177,7 @@ src/database/          json / sqlite
 src/dashboard/         Express + UI (produzione tipica)
 apps/dashboard/        Next.js opzionale (Bun/pnpm, workspace:*)
 packages/commander/    core TS (gate, breaker, guardian)
-docs/                  CONFIG, COMMANDS, HOSTING
+docs/                  CONFIG, COMMANDS, HOSTING (it/en)
 .github/FUNDING.yml    link donazioni (Sponsor button)
 ```
 
