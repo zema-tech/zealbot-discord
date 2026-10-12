@@ -78,6 +78,14 @@ module.exports = [
         clearInterval: 'readonly',
         fetch: 'readonly',
         URL: 'readonly',
+        // Vitest globals (vitest.config: globals true).
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
       },
     },
     rules: {
