@@ -23,4 +23,5 @@ jobs:
       - run: npm run build:commander
       - run: npm run lint
       - run: npm run test:unit
+      - run: npm run test:coverage
       - run: npm test
