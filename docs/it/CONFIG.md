@@ -62,6 +62,25 @@ Note:
 I testi di risposta passano da `src/utils/i18n.js`: `t(chiave, lingua, vars)`
 con fallback per-chiave all'italiano, `getLang(guildId)` legge `language` da
 `guildConfig` (`/lingua imposta`). Lingue supportate: `it`, `en`
+(`SUPPORTED_LANGS`, fallback `it`). Le stringhe canoniche vivono in
+`src/locales/<lingua>.json` (`it.js`/`en.js` le riesportano per compatibilità).
+
+Copertura attuale: parziale (una manciata di comandi); nomi e descrizioni
+slash restano in italiano.
+
+Per aggiungere una lingua (es. `es`):
+
+1. Copia `src/locales/en.json` in `src/locales/es.json` e traduci i valori
+   (le chiavi mancanti ricadono sull'italiano automaticamente).
+2. Aggiungi `'es'` a `SUPPORTED_LANGS` in `src/utils/i18n.js`.
+3. Usa `t('chiave', await getLang(guildId), { vars })` nei nuovi testi invece
+   di stringhe hardcoded; non cambiare i testi esistenti senza motivo.
+
+## Lingue dei messaggi (i18n)
+
+I testi di risposta passano da `src/utils/i18n.js`: `t(chiave, lingua, vars)`
+con fallback per-chiave all'italiano, `getLang(guildId)` legge `language` da
+`guildConfig` (`/lingua imposta`). Lingue supportate: `it`, `en`
 (`SUPPORTED_LANGS`, fallback `it`).
 
 Copertura attuale: parziale (una manciata di comandi, es. ping/help/serverinfo).
