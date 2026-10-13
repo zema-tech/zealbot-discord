@@ -20,7 +20,7 @@ jobs:
           node-version: 22
       - run: node -e "const fs=require('fs');const p=require('./package.json');delete p.workspaces;fs.writeFileSync('package.json',JSON.stringify(p,null,2))"
       - run: npm ci --omit=dev --no-audit --no-fund
-      - uses: changesets/action@v1
+      - uses: changesets/action@v2
         with:
           publish: npm run release
           title: 'chore(release): version packages'
