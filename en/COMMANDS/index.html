@@ -1,0 +1,1990 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Self-hosted multi-server Discord bot — docs (EN/IT).">
+      
+      
+      
+        <link rel="canonical" href="https://zema-tech.github.io/zealbot-discord/en/COMMANDS/">
+      
+      
+        <link rel="prev" href="../ARCHITECTURE/">
+      
+      
+        <link rel="next" href="../CONFIG/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Commands - ZealBot Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bot-commands" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ZealBot Docs" class="md-header__button md-logo" aria-label="ZealBot Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ZealBot Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Commands
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zema-tech/zealbot-discord" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zema-tech/zealbot-discord
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ARCHITECTURE/" class="md-tabs__link">
+          
+  
+  
+  Guide (EN)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../it/ARCHITECTURE/" class="md-tabs__link">
+          
+  
+  
+  Guide (IT)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ISSUES/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ZealBot Docs" class="md-nav__button md-logo" aria-label="ZealBot Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ZealBot Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zema-tech/zealbot-discord" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zema-tech/zealbot-discord
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide (EN)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide (EN)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#category-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Category index
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ai
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#economy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        economy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fun
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moderation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        moderation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#music" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        music
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tickets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tickets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        utility
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HOSTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Internal API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AGENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide (IT)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide (IT)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/COMMANDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comandi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/CONFIG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/HOSTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/MCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interne
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/AGENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ISSUES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#category-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Category index
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ai
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#economy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        economy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fun
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moderation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        moderation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#music" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        music
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tickets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tickets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        utility
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="bot-commands">Bot commands<a class="headerlink" href="#bot-commands" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Auto-generated with <code>node scripts/gen-docs.js</code> (Italian original: <code>docs/it/COMMANDS.md</code>, refreshed 2026-10-12) — do not edit by hand.</p>
+<p>Total: <strong>89 commands</strong> in <strong>8 categories</strong>.
+The category matches the subfolder in src/commands/.
+Cooldown in seconds per user (default 3s if not set by the module).
+Parameters marked with an asterisk (*) are required.
+Descriptions mirror the bot's ItalianSlash strings; names/options stay untranslated (code).</p>
+</blockquote>
+<h2 id="category-index">Category index<a class="headerlink" href="#category-index" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#ai">ai</a> (9)</li>
+<li><a href="#economy">economy</a> (11)</li>
+<li><a href="#fun">fun</a> (12)</li>
+<li><a href="#levels">levels</a> (3)</li>
+<li><a href="#moderation">moderation</a> (15)</li>
+<li><a href="#music">music</a> (1)</li>
+<li><a href="#tickets">tickets</a> (2)</li>
+<li><a href="#utility">utility</a> (36)</li>
+</ul>
+<h2 id="ai">ai<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h2>
+<p>Commands: 9</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Cooldown</th>
+<th>Subcommands / Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/ai-config</code></td>
+<td>Configure the server's AI features</td>
+<td>3 s</td>
+<td><strong>mostra</strong> — Show current AI config (no params)<br><strong>mention</strong> — Auto-reply when the bot is mentioned (<code>stato: boolean*</code>)<br><strong>automod-ai</strong> — AI analysis of suspicious messages (automod) (<code>stato: boolean*</code>)<br><strong>ticket-ai</strong> — Automatic AI replies in tickets (<code>stato: boolean*</code>)<br><strong>fun-ai</strong> — AI fun commands (/immagina, /storia) (<code>stato: boolean*</code>)<br><strong>prompt</strong> — Set custom system prompt (<code>testo: string*</code>)<br><strong>prompt-reset</strong> — Restore the default system prompt (no params)</td>
+</tr>
+<tr>
+<td><code>/analizza</code></td>
+<td>Ask the AI for 5 actionable insights to grow the server</td>
+<td>30 s</td>
+<td><code>giorni: integer</code></td>
+</tr>
+<tr>
+<td><code>/brain</code></td>
+<td>The bot's brain: skills, memories and files (Obsidian style)</td>
+<td>5 s</td>
+<td><strong>stato</strong> — Server brain stats (no params)<br><strong>skill-lista</strong> — List active skills (no params)<br><strong>skill-mostra</strong> — Show a skill (<code>nome: string*</code>)<br><strong>skill-crea</strong> — Create a skill (staff) (<code>nome: string*</code>, <code>descrizione: string*</code>, <code>trigger: string*</code>, <code>istruzioni: string*</code>)<br><strong>skill-toggle</strong> — Enable/disable a skill (staff) (<code>nome: string*</code>, <code>stato: boolean*</code>)<br><strong>skill-rimuovi</strong> — Delete a server skill (staff) (<code>nome: string*</code>)<br><strong>skill-importa</strong> — Import a skill from the skills/ library (staff) (<code>nome: string*</code>)<br><strong>memoria-salva</strong> — Save a note to the brain (staff) (<code>titolo: string*</code>, <code>testo: string*</code>, <code>tag: string</code>)<br><strong>memoria-cerca</strong> — Search memories (<code>query: string*</code>)<br><strong>memoria-lista</strong> — List notes (no params)<br><strong>memoria-mostra</strong> — Show a note (staff) (<code>titolo: string*</code>)<br><strong>memoria-dimentica</strong> — Delete a note (staff) (<code>titolo: string*</code>)<br><strong>memoria-modello</strong> — Create a note from a memory/modelli/ template (staff) (<code>modello: string*</code>, <code>titolo: string</code>)<br><strong>file-aggiungi</strong> — Upload a .txt/.md reference file (staff) (<code>nome: string*</code>, <code>allegato: attachment*</code>)<br><strong>file-lista</strong> — List uploaded files (no params)<br><strong>file-leggi</strong> — Read a file (staff) (<code>nome: string*</code>)<br><strong>file-rimuovi</strong> — Delete a file (staff) (<code>nome: string*</code>)<br><strong>persona-mostra</strong> — Show memories about you (or a user, staff) (<code>utente: user</code>)<br><strong>persona-dimentica</strong> — Forget a memory (number or text) (<code>rif: string*</code>, <code>utente: user</code>)<br><strong>profilo</strong> — Show the server card as seen by the AI (no params)<br><strong>profilo-imposta</strong> — Free-form server note for the AI (staff) (<code>testo: string*</code>)<br><strong>profilo-reset</strong> — Remove the staff server note (staff) (no params)</td>
+</tr>
+<tr>
+<td><code>/chiedi</code></td>
+<td>Ask the server AI a question</td>
+<td>15 s</td>
+<td><code>domanda: string*</code></td>
+</tr>
+<tr>
+<td><code>/codice</code></td>
+<td>Ask the AI about the bot's code</td>
+<td>10 s</td>
+<td><strong>chiedi</strong> — Ask a question about the bot code (<code>domanda: string*</code>)<br><strong>file</strong> — Show a bot file (first lines) (<code>percorso: string*</code>)<br><strong>cerca</strong> — Search a term in the code (<code>termine: string*</code>)<br><strong>albero</strong> — Code structure overview (no params)</td>
+</tr>
+<tr>
+<td><code>/immagina</code></td>
+<td>Generate an image with AI from your prompt</td>
+<td>20 s</td>
+<td><code>prompt: string*</code></td>
+</tr>
+<tr>
+<td><code>/jarvis</code></td>
+<td>Assign a task to JARVIS and its specialist agents</td>
+<td>10 s</td>
+<td><code>compito: string*</code>, <code>agente: string</code></td>
+</tr>
+<tr>
+<td><code>/riassumi</code></td>
+<td>Summarize recent channel messages with AI</td>
+<td>30 s</td>
+<td><code>quantita: integer</code></td>
+</tr>
+<tr>
+<td><code>/storia</code></td>
+<td>Generate an original tale with AI</td>
+<td>20 s</td>
+<td><code>tema: string*</code>, <code>lunghezza: string</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="economy">economy<a class="headerlink" href="#economy" title="Permanent link">&para;</a></h2>
+<p>Commands: 11</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Cooldown</th>
+<th>Subcommands / Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/balance</code></td>
+<td>See your balance or another user's</td>
+<td>3 s</td>
+<td><code>utente: user</code></td>
+</tr>
+<tr>
+<td><code>/bank</code></td>
+<td>Manage the bank (safe from theft)</td>
+<td>3 s</td>
+<td><strong>deposita</strong> — Deposit coins in the bank (<code>importo: integer*</code>)<br><strong>preleva</strong> — Withdraw coins from the bank (<code>importo: integer*</code>)</td>
+</tr>
+<tr>
+<td><code>/daily</code></td>
+<td>Claim the daily reward (500 🪙)</td>
+<td>5 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/leaderboard</code></td>
+<td>Richest users leaderboard</td>
+<td>5 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/lotteria</code></td>
+<td>Server lottery: buy tickets and win the pot!</td>
+<td>3 s</td>
+<td><strong>info</strong> — Show pot, price and tickets sold (no params)<br><strong>compra</strong> — Buy lottery tickets (<code>biglietti: integer</code>)<br><strong>estrai</strong> — Draw the winner now (staff) (no params)</td>
+</tr>
+<tr>
+<td><code>/pay</code></td>
+<td>Send coins to another user</td>
+<td>5 s</td>
+<td><code>utente: user*</code>, <code>importo: integer*</code></td>
+</tr>
+<tr>
+<td><code>/rep</code></td>
+<td>Server reputation system</td>
+<td>3 s</td>
+<td><strong>dai</strong> — Give +1 rep to a user (<code>utente: user*</code>)<br><strong>mostra</strong> — Show a user's rep (<code>utente: user</code>)<br><strong>classifica</strong> — Top 10 users by rep (no params)</td>
+</tr>
+<tr>
+<td><code>/rob</code></td>
+<td>Try to steal (wallet only) coins from a user</td>
+<td>10 s</td>
+<td><code>utente: user*</code></td>
+</tr>
+<tr>
+<td><code>/shop</code></td>
+<td>Server role shop</td>
+<td>3 s</td>
+<td><strong>lista</strong> — Show roles for sale (no params)<br><strong>compra</strong> — Buy a role with your coins (<code>ruolo: role*</code>)<br><strong>aggiungi</strong> — Put a role up for sale (staff) (<code>ruolo: role*</code>, <code>prezzo: integer*</code>)<br><strong>rimuovi</strong> — Remove a role from sale (staff) (<code>ruolo: role*</code>)</td>
+</tr>
+<tr>
+<td><code>/slots</code></td>
+<td>Slot machine: bet your coins</td>
+<td>8 s</td>
+<td><code>puntata: integer*</code></td>
+</tr>
+<tr>
+<td><code>/work</code></td>
+<td>Work to earn coins</td>
+<td>5 s</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fun">fun<a class="headerlink" href="#fun" title="Permanent link">&para;</a></h2>
+<p>Commands: 12</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Cooldown</th>
+<th>Subcommands / Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/8ball</code></td>
+<td>Ask the magic 8-ball something</td>
+<td>3 s</td>
+<td><code>domanda: string*</code></td>
+</tr>
+<tr>
+<td><code>/affinita</code></td>
+<td>Compute the (ironic) affinity between two users</td>
+<td>3 s</td>
+<td><code>utente1: user*</code>, <code>utente2: user</code></td>
+</tr>
+<tr>
+<td><code>/afk</code></td>
+<td>Tell you're away (or back)</td>
+<td>3 s</td>
+<td><code>motivo: string</code></td>
+</tr>
+<tr>
+<td><code>/compleanno</code></td>
+<td>Server birthdays 🎂</td>
+<td>3 s</td>
+<td><strong>imposta</strong> — Save your birthday (DD/MM) (<code>data: string*</code>)<br><strong>rimuovi</strong> — Forget your birthday (no params)<br><strong>lista</strong> — Upcoming birthdays (no params)<br><strong>canale</strong> — Announcements channel (staff) (<code>canale: channel</code>)</td>
+</tr>
+<tr>
+<td><code>/confessa</code></td>
+<td>Anonymous server confessions</td>
+<td>5 s</td>
+<td><strong>imposta</strong> — Set the channel for anonymous confessions (staff) (<code>canale: channel*</code>)<br><strong>invia</strong> — Send an anonymous confession (max 500 chars) (<code>testo: string*</code>)</td>
+</tr>
+<tr>
+<td><code>/dice</code></td>
+<td>Roll one or more dice</td>
+<td>3 s</td>
+<td><code>facce: integer</code>, <code>quantita: integer</code></td>
+</tr>
+<tr>
+<td><code>/joke</code></td>
+<td>Tell a joke</td>
+<td>3 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/meme</code></td>
+<td>Generate a random meme</td>
+<td>3 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/oroscopo</code></td>
+<td>Discover today's horoscope: love, work and luck!</td>
+<td>3 s</td>
+<td><code>segno: string*</code></td>
+</tr>
+<tr>
+<td><code>/preferiresti</code></td>
+<td>An impossible dilemma: vote A or B and see what the server thinks!</td>
+<td>10 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/sfida</code></td>
+<td>Show the weekly server challenge</td>
+<td>5 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/trivia</code></td>
+<td>Multiple-choice quiz: guess the answer within 20 seconds!</td>
+<td>10 s</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="levels">levels<a class="headerlink" href="#levels" title="Permanent link">&para;</a></h2>
+<p>Commands: 3</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Cooldown</th>
+<th>Subcommands / Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/premi</code></td>
+<td>Manage level reward roles</td>
+<td>3 s</td>
+<td><strong>imposta</strong> — Assign a role to a level (<code>livello: integer*</code>, <code>ruolo: role*</code>)<br><strong>rimuovi</strong> — Remove a level reward (<code>livello: integer*</code>)<br><strong>lista</strong> — Show all level rewards (no params)</td>
+</tr>
+<tr>
+<td><code>/rank</code></td>
+<td>Show your level (or another user's)</td>
+<td>3 s</td>
+<td><code>utente: user</code></td>
+</tr>
+<tr>
+<td><code>/top</code></td>
+<td>Server level leaderboard</td>
+<td>5 s</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="moderation">moderation<a class="headerlink" href="#moderation" title="Permanent link">&para;</a></h2>
+<p>Commands: 15</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Cooldown</th>
+<th>Subcommands / Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/ban</code></td>
+<td>Ban a user from the server</td>
+<td>5 s</td>
+<td><code>utente: user*</code>, <code>motivo: string</code>, <code>giorni: integer</code></td>
+</tr>
+<tr>
+<td><code>/caso</code></td>
+<td>Server moderation history</td>
+<td>3 s</td>
+<td><strong>vedi</strong> — View a case by ID (<code>id: string*</code>)<br><strong>utente</strong> — View a user's history (<code>utente: user*</code>, <code>tipo: string</code>)<br><strong>nota</strong> — Add a note to a user's history (<code>utente: user*</code>, <code>testo: string*</code>)<br><strong>elimina</strong> — Delete a case from history (ManageGuild) (<code>id: string*</code>)</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>Delete messages with filters (max 100, last 14 days only)</td>
+<td>5 s</td>
+<td><code>quantita: integer*</code>, <code>utente: user</code>, <code>solo-bot: boolean</code>, <code>con-link: boolean</code>, <code>contiene: string</code></td>
+</tr>
+<tr>
+<td><code>/kick</code></td>
+<td>Kick a user from the server</td>
+<td>5 s</td>
+<td><code>utente: user*</code>, <code>motivo: string</code></td>
+</tr>
+<tr>
+<td><code>/lock</code></td>
+<td>Lock/unlock a text channel</td>
+<td>3 s</td>
+<td><strong>on</strong> — Lock the channel (staff only can write) (no params)<br><strong>off</strong> — Unlock the channel (no params)</td>
+</tr>
+<tr>
+<td><code>/lockdown</code></td>
+<td>Lock/unlock ALL text channels (raid emergency)</td>
+<td>10 s</td>
+<td><strong>on</strong> — Lock all text channels (@everyone can't write) (<code>motivo: string</code>)<br><strong>off</strong> — Restore pre-lockdown permissions (no params)</td>
+</tr>
+<tr>
+<td><code>/nuke</code></td>
+<td>Regenerate the channel (clone + delete the old one)</td>
+<td>10 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/segnala</code></td>
+<td>Report a user to staff</td>
+<td>60 s</td>
+<td><code>utente: user*</code>, <code>motivo: string*</code></td>
+</tr>
+<tr>
+<td><code>/slowmode</code></td>
+<td>Set a channel slowmode</td>
+<td>3 s</td>
+<td><code>secondi: integer*</code>, <code>canale: channel</code></td>
+</tr>
+<tr>
+<td><code>/timeout</code></td>
+<td>Time out a user (e.g. 10m, 1h, 1d)</td>
+<td>5 s</td>
+<td><code>utente: user*</code>, <code>durata: string*</code>, <code>motivo: string</code></td>
+</tr>
+<tr>
+<td><code>/unban</code></td>
+<td>Unban a user by ID</td>
+<td>5 s</td>
+<td><code>userid: string*</code>, <code>motivo: string</code></td>
+</tr>
+<tr>
+<td><code>/untimeout</code></td>
+<td>Remove a user's timeout</td>
+<td>3 s</td>
+<td><code>utente: user*</code>, <code>motivo: string</code></td>
+</tr>
+<tr>
+<td><code>/warn</code></td>
+<td>Warn a user (automatic threshold actions, see /warnazioni)</td>
+<td>3 s</td>
+<td><code>utente: user*</code>, <code>motivo: string*</code></td>
+</tr>
+<tr>
+<td><code>/warnazioni</code></td>
+<td>Configure automatic warn-threshold actions (staff)</td>
+<td>3 s</td>
+<td><strong>mostra</strong> — Show active rules (no params)<br><strong>imposta</strong> — Replace rules (max 5, compact format) (<code>regole: string*</code>)<br><strong>reset</strong> — Back to default (3 warns → 10 min timeout) (no params)</td>
+</tr>
+<tr>
+<td><code>/warnings</code></td>
+<td>Manage a user's warnings</td>
+<td>3 s</td>
+<td><strong>lista</strong> — View a user's warnings (<code>utente: user*</code>)<br><strong>rimuovi</strong> — Remove a single warn by ID (<code>utente: user*</code>, <code>id: string*</code>)<br><strong>pulisci</strong> — Remove all warnings of a user (<code>utente: user*</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="music">music<a class="headerlink" href="#music" title="Permanent link">&para;</a></h2>
+<p>Commands: 1</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Cooldown</th>
+<th>Subcommands / Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/musica</code></td>
+<td>Play music in voice (PeakBot style)</td>
+<td>3 s</td>
+<td><strong>play</strong> — Play a track or queue it (<code>query: string*</code>)<br><strong>skip</strong> — Skip the current track (no params)<br><strong>stop</strong> — Stop music and clear the queue (no params)<br><strong>coda</strong> — Show the play queue (no params)<br><strong>pausa</strong> — Pause the current track (no params)<br><strong>riprendi</strong> — Resume the paused track (no params)<br><strong>volume</strong> — Set volume (0-100) (<code>livello: integer*</code>)<br><strong>attuale</strong> — Show the now-playing track (no params)<br><strong>mescola</strong> — Shuffle the queue (no params)<br><strong>ripeti</strong> — Repeat: off, track or queue (<code>modo: string*</code>)<br><strong>testi</strong> — Lyrics of the now-playing track (no params)<br><strong>cronologia</strong> — Recent tracks in this server (no params)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tickets">tickets<a class="headerlink" href="#tickets" title="Permanent link">&para;</a></h2>
+<p>Commands: 2</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Cooldown</th>
+<th>Subcommands / Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/ticket</code></td>
+<td>Professional ticket system</td>
+<td>3 s</td>
+<td><strong>setup</strong> — Configure the ticket system (category, panel, log, roles) (<code>canale-panel: channel*</code>, <code>categoria: channel*</code>, <code>ruolo-supporto: role*</code>, <code>canale-log: channel</code>, <code>ruolo-supporto-2: role</code>, <code>max-per-utente: integer</code>)<br><strong>panel</strong> — Publish the button ticket panel (staff) (<code>canale: channel</code>, <code>tipi: string</code>, <code>titolo: string</code>)<br><strong>domande-mostra</strong> — Show pre-open questions per type (<code>tipo: string*</code>)<br><strong>domande-imposta</strong> — Set pre-open questions (staff, max 5) (<code>tipo: string*</code>, <code>d1: string*</code>, <code>d2: string</code>, <code>d3: string</code>, <code>d4: string</code>, <code>d5: string</code>)<br><strong>domande-reset</strong> — Remove pre-open questions (staff) (<code>tipo: string*</code>)<br><strong>aggiungi</strong> — Add a user to the ticket (<code>utente: user*</code>)<br><strong>rimuovi</strong> — Remove a user from the ticket (<code>utente: user*</code>)<br><strong>claim</strong> — Take charge of this ticket (staff) (no params)<br><strong>chiudi</strong> — Close this ticket with transcript (<code>motivo: string</code>)<br><strong>riapri</strong> — Reopen this ticket (staff) (no params)<br><strong>transcript</strong> — Download this ticket's transcript (no params)<br><strong>priorita</strong> — Set ticket priority (staff) (<code>livello: string*</code>)<br><strong>assegna</strong> — Assign the ticket to a staffer (staff) (<code>staff: user*</code>)<br><strong>oggetto</strong> — Set the ticket subject (<code>testo: string</code>)<br><strong>nota</strong> — Add a staff note to the ticket (staff) (<code>testo: string*</code>)<br><strong>stats</strong> — Server ticket stats (no params)<br><strong>rinomina</strong> — Rename the ticket channel (<code>nome: string*</code>)<br><strong>tipo</strong> — Change the ticket type (staff) (<code>nuovo: string*</code>)<br><strong>trasferisci</strong> — Transfer ticket ownership (staff) (<code>utente: user*</code>)<br><strong>proteggi</strong> — Protect the ticket from auto-close/deletion (staff) (no params)<br><strong>blacklist</strong> — Block/unblock ticket users (staff) (<code>azione: string*</code>, <code>utente: user</code>)<br><strong>autoelimina</strong> — Delete closed tickets after N days, 0 = off (staff) (<code>giorni: integer</code>)<br><strong>sposta</strong> — Move the ticket to another category (staff) (<code>categoria: channel*</code>)<br><strong>tag</strong> — Quick staff replies: use, create, list or remove (<code>azione: string*</code>, <code>nome: string</code>, <code>testo: string</code>)<br><strong>archivio</strong> — Recent closed tickets (staff) (no params)</td>
+</tr>
+<tr>
+<td><code>/ticket-ai</code></td>
+<td>AI assistant for tickets (drafts and summaries)</td>
+<td>10 s</td>
+<td><strong>suggerisci</strong> — Generate a staff reply draft for this ticket (no params)<br><strong>riassumi</strong> — Summarize this ticket in 5 points (no params)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="utility">utility<a class="headerlink" href="#utility" title="Permanent link">&para;</a></h2>
+<p>Commands: 36</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Cooldown</th>
+<th>Subcommands / Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/analytics</code></td>
+<td>YouTube-Studio-style server stats (messages and members)</td>
+<td>10 s</td>
+<td><code>giorni: integer</code></td>
+</tr>
+<tr>
+<td><code>/autoresponder</code></td>
+<td>Keyword or regex auto-replies (PeakBot style)</td>
+<td>3 s</td>
+<td><strong>aggiungi</strong> — Add an auto-reply (<code>parola: string*</code>, <code>risposta: string*</code>, <code>modalita: string</code>)<br><strong>rimuovi</strong> — Remove an auto-reply by ID (<code>id: string*</code>)<br><strong>lista</strong> — Show all auto-replies (no params)<br><strong>pulisci</strong> — Delete all auto-replies (no params)</td>
+</tr>
+<tr>
+<td><code>/autorole</code></td>
+<td>Manage roles auto-assigned to new members</td>
+<td>3 s</td>
+<td><strong>aggiungi</strong> — Add an automatic role for new members (<code>ruolo: role*</code>)<br><strong>rimuovi</strong> — Remove an automatic role (<code>ruolo: role*</code>)<br><strong>lista</strong> — Show current autorole state (no params)<br><strong>attiva</strong> — Enable or disable autorole (<code>stato: boolean*</code>)</td>
+</tr>
+<tr>
+<td><code>/avatar</code></td>
+<td>Show a user's avatar</td>
+<td>3 s</td>
+<td><code>utente: user</code></td>
+</tr>
+<tr>
+<td><code>/comando</code></td>
+<td>Server custom commands: !name triggers with custom reply (PeakBot style)</td>
+<td>3 s</td>
+<td><strong>crea</strong> — Create a !name custom command (<code>nome: string*</code>, <code>risposta: string*</code>)<br><strong>modifica</strong> — Edit a custom command reply (<code>nome: string*</code>, <code>risposta: string*</code>)<br><strong>elimina</strong> — Delete a custom command (<code>nome: string*</code>)<br><strong>lista</strong> — Show all custom commands (no params)</td>
+</tr>
+<tr>
+<td><code>/config</code></td>
+<td>Configure the bot from chat (applies instantly, no restart)</td>
+<td>3 s</td>
+<td><strong>mostra</strong> — Show effective values (masked secrets) (no params)<br><strong>lista</strong> — Configurable keys (no params)<br><strong>imposta</strong> — Set a variable (owner-only secrets) (<code>chiave: string*</code>, <code>valore: string*</code>)<br><strong>reset</strong> — Back to .env/default for a key (<code>chiave: string*</code>)</td>
+</tr>
+<tr>
+<td><code>/costruisci</code></td>
+<td>Generate the server structure with AI from a description</td>
+<td>60 s</td>
+<td><code>descrizione: string*</code></td>
+</tr>
+<tr>
+<td><code>/embed</code></td>
+<td>Create a custom embed with preview</td>
+<td>5 s</td>
+<td><strong>crea</strong> — Create an embed via modal and send it to the chosen channel (<code>canale: channel*</code>)</td>
+</tr>
+<tr>
+<td><code>/evento</code></td>
+<td>Manage scheduled server events</td>
+<td>5 s</td>
+<td><strong>crea</strong> — Create a scheduled event (<code>nome: string*</code>, <code>data-ora: string*</code>, <code>descrizione: string</code>, <code>canale-vocale: channel</code>)<br><strong>lista</strong> — Show scheduled events (no params)<br><strong>elimina</strong> — Delete a scheduled event (<code>id: string*</code>)</td>
+</tr>
+<tr>
+<td><code>/export</code></td>
+<td>Server data export and backup management (staff only)</td>
+<td>30 s</td>
+<td><strong>server</strong> — Download a JSON with all this server's data (no params)<br><strong>backup-ora</strong> — Run a database backup now (no params)<br><strong>backup-lista</strong> — Show the last 7 backups with date and size (no params)<br><strong>backup-ripristina</strong> — Restore a previous backup (asks confirmation) (<code>nome: string*</code>)</td>
+</tr>
+<tr>
+<td><code>/giveaway</code></td>
+<td>Start a giveaway (the bot draws a winner)</td>
+<td>10 s</td>
+<td><code>durata: string*</code>, <code>premio: string*</code>, <code>vincitori: integer</code>, <code>ruolo: role</code></td>
+</tr>
+<tr>
+<td><code>/help</code></td>
+<td>Show the full command list</td>
+<td>5 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/inviti</code></td>
+<td>Server invite stats</td>
+<td>3 s</td>
+<td><strong>info</strong> — Who invited a user and their counts (<code>utente: user</code>)<br><strong>classifica</strong> — Top inviters (no params)</td>
+</tr>
+<tr>
+<td><code>/lingua</code></td>
+<td>Set the bot language for this server</td>
+<td>3 s</td>
+<td><strong>mostra</strong> — Show the server's current language (no params)<br><strong>imposta</strong> — Set the server language (<code>lingua: string*</code>)</td>
+</tr>
+<tr>
+<td><code>/mcp</code></td>
+<td>Bot external MCP connections (Hermes style)</td>
+<td>5 s</td>
+<td><strong>stato</strong> — Connected / failed MCP servers / registered tools (no params)<br><strong>lista</strong> — Tools available in this server (mcp_&lt;server&gt;_&lt;tool&gt;) (no params)<br><strong>cerca</strong> — Search a tool across connected servers (Composio style) (<code>query: string*</code>)<br><strong>chiama</strong> — Call an external MCP tool (<code>nome: string*</code>, <code>argomenti: string</code>)<br><strong>ricarica</strong> — Re-read mcp/servers.json without restart (no params)</td>
+</tr>
+<tr>
+<td><code>/modulo</code></td>
+<td>Commander: module status, on/off and reload (one fault never kills the rest)</td>
+<td>3 s</td>
+<td><strong>stato</strong> — Show health of every module (no params)<br><strong>on</strong> — Re-enable a module in this server (<code>nome: string*</code>)<br><strong>off</strong> — Disable a module in this server (<code>nome: string*</code>)<br><strong>reload</strong> — Reload a module without restarting the bot (<code>nome: string*</code>)</td>
+</tr>
+<tr>
+<td><code>/mydata</code></td>
+<td>Your data in the bot: export or delete (GDPR, this server only)</td>
+<td>10 s</td>
+<td><strong>esporta</strong> — Download everything the bot knows about you here (no params)<br><strong>dimentica</strong> — Delete your data from this server (no params)</td>
+</tr>
+<tr>
+<td><code>/permessi</code></td>
+<td>Custom permissions: restrict commands to specific roles (PeakBot style)</td>
+<td>3 s</td>
+<td><strong>imposta</strong> — Allow a command only to certain roles (max 5) (<code>comando: string*</code>, <code>ruolo: role*</code>, <code>ruolo2: role</code>, <code>ruolo3: role</code>, <code>ruolo4: role</code>, <code>ruolo5: role</code>)<br><strong>rimuovi</strong> — Remove a role from a command, or reset the command (no role) (<code>comando: string*</code>, <code>ruolo: role</code>)<br><strong>mostra</strong> — Show custom permissions (of a command or all) (<code>comando: string</code>)<br><strong>reset</strong> — Wipe ALL custom permissions (with confirmation) (no params)</td>
+</tr>
+<tr>
+<td><code>/ping</code></td>
+<td>Show the bot latency</td>
+<td>3 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/poll</code></td>
+<td>Create a reaction poll</td>
+<td>5 s</td>
+<td><code>domanda: string*</code>, <code>opzioni: string</code>, <code>durata: string</code></td>
+</tr>
+<tr>
+<td><code>/profilo</code></td>
+<td>Show a user's full profile</td>
+<td>3 s</td>
+<td><code>utente: user</code></td>
+</tr>
+<tr>
+<td><code>/reactionroles</code></td>
+<td>Create a reaction-role panel with select menu</td>
+<td>3 s</td>
+<td><strong>crea</strong> — Set panel channel, title and description (<code>canale: channel*</code>, <code>titolo: string*</code>, <code>descrizione: string*</code>)<br><strong>aggiungi</strong> — Add a role to the panel (<code>ruolo: role*</code>, <code>etichetta: string*</code>, <code>emoji: string*</code>)<br><strong>rimuovi</strong> — Remove a role from the panel (<code>ruolo: role*</code>)<br><strong>pubblica</strong> — Publish the panel in the chosen channel (no params)<br><strong>elimina</strong> — Delete the panel and its config (no params)</td>
+</tr>
+<tr>
+<td><code>/remind</code></td>
+<td>Set a reminder (e.g. 10m, 2h, 1d)</td>
+<td>5 s</td>
+<td><code>tempo: string*</code>, <code>testo: string*</code>, <code>canale: channel</code></td>
+</tr>
+<tr>
+<td><code>/selfimprove</code></td>
+<td>Nightly bot self-improvement (status, dry run, execution)</td>
+<td>60 s</td>
+<td><strong>stato</strong> — Status: active? last run? AI provider? (no params)<br><strong>prova</strong> — Dry-run now (proposes without applying) (no params)<br><strong>esegui</strong> — Run the full cycle now (applies if tests pass) (no params)<br><strong>lezioni</strong> — Lessons learned from the compendium (how it improves) (no params)<br><strong>principi</strong> — Compendium review principles (no params)</td>
+</tr>
+<tr>
+<td><code>/serverinfo</code></td>
+<td>Show server information</td>
+<td>5 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/setup</code></td>
+<td>Configure the bot for this server</td>
+<td>3 s</td>
+<td><strong>welcome</strong> — Welcome channel + message (<code>canale: channel</code>, <code>messaggio: string</code>)<br><strong>goodbye</strong> — Goodbye channel (<code>canale: channel</code>)<br><strong>logs</strong> — Moderation log channel (<code>canale: channel</code>)<br><strong>suggest</strong> — Suggestions channel (<code>canale: channel</code>)<br><strong>automod</strong> — Enable/disable automoderation (<code>attiva: boolean*</code>)<br><strong>mostra</strong> — Show current config (no params)</td>
+</tr>
+<tr>
+<td><code>/stanza</code></td>
+<td>Create and manage your private rooms</td>
+<td>3 s</td>
+<td><strong>crea</strong> — Create a private room (max 3 per user) (<code>nome: string</code>, <code>tipo: string</code>)<br><strong>aggiungi</strong> — Add a user to the room (<code>utente: user*</code>)<br><strong>rimuovi</strong> — Remove a user from the room (<code>utente: user*</code>)<br><strong>elimina</strong> — Delete this room (no params)</td>
+</tr>
+<tr>
+<td><code>/starboard</code></td>
+<td>Configure the most-appreciated-message board</td>
+<td>3 s</td>
+<td><strong>imposta</strong> — Set starboard channel, threshold and emoji (<code>canale: channel*</code>, <code>soglia: integer</code>, <code>emoji: string</code>)<br><strong>disattiva</strong> — Disable the starboard (no params)<br><strong>mostra</strong> — Show current config (no params)</td>
+</tr>
+<tr>
+<td><code>/stats-canali</code></td>
+<td>Voice channels with live server stats</td>
+<td>5 s</td>
+<td><strong>attiva</strong> — Create the 3 stats channels (staff) (no params)<br><strong>disattiva</strong> — Delete the stats channels (staff) (no params)</td>
+</tr>
+<tr>
+<td><code>/suggest</code></td>
+<td>Send a server suggestion</td>
+<td>10 s</td>
+<td><code>testo: string*</code></td>
+</tr>
+<tr>
+<td><code>/template</code></td>
+<td>Apply a server-structure template (PeakBot style)</td>
+<td>10 s</td>
+<td><strong>lista</strong> — Show available templates (no params)<br><strong>anteprima</strong> — Preview a template structure without creating it (<code>nome: string*</code>)<br><strong>applica</strong> — Create template roles and channels (deletes nothing) (<code>nome: string*</code>)</td>
+</tr>
+<tr>
+<td><code>/tempvoice</code></td>
+<td>Configure temporary voice channels</td>
+<td>3 s</td>
+<td><strong>imposta</strong> — Set temp-voice lobby and category (<code>lobby: channel*</code>, <code>categoria: channel*</code>)<br><strong>disattiva</strong> — Disable temporary voice (no params)<br><strong>mostra</strong> — Show current config (no params)</td>
+</tr>
+<tr>
+<td><code>/token</code></td>
+<td>Personal API tokens to connect Claude to the bot (owner only)</td>
+<td>5 s</td>
+<td><strong>crea</strong> — Create a token (shown once) (<code>nome: string</code>)<br><strong>lista</strong> — Active tokens of this server (no params)<br><strong>revoca</strong> — Revoke a token (<code>id: string*</code>)</td>
+</tr>
+<tr>
+<td><code>/voice</code></td>
+<td>Manage your temporary voice channel</td>
+<td>3 s</td>
+<td><strong>nome</strong> — Rename your voice channel (<code>nome: string*</code>)<br><strong>limite</strong> — Set the user limit (0 = no limit) (<code>numero: integer*</code>)<br><strong>blocca</strong> — Lock the voice channel (no new joins) (no params)<br><strong>sblocca</strong> — Unlock the voice channel (no params)<br><strong>kick</strong> — Disconnect a user from voice (<code>utente: utente*</code>)</td>
+</tr>
+<tr>
+<td><code>/wizard</code></td>
+<td>Guided bot setup, step by step (channels, tickets, automod…)</td>
+<td>5 s</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>/youtube</code></td>
+<td>New YouTube video notifications (free, via RSS)</td>
+<td>5 s</td>
+<td><strong>aggiungi</strong> — Notify new videos from a channel (staff) (<code>canale: string*</code>, <code>annunci: channel*</code>)<br><strong>rimuovi</strong> — Stop notifications (staff) (<code>canale: string*</code>)<br><strong>lista</strong> — Monitored channels (no params)</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

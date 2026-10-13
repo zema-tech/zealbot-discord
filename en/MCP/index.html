@@ -1,0 +1,1550 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Self-hosted multi-server Discord bot — docs (EN/IT).">
+      
+      
+      
+        <link rel="canonical" href="https://zema-tech.github.io/zealbot-discord/en/MCP/">
+      
+      
+        <link rel="prev" href="../HOSTING/">
+      
+      
+        <link rel="next" href="../API/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>MCP - ZealBot Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mcp-bot-remote-control-hermes-agent-style" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ZealBot Docs" class="md-header__button md-logo" aria-label="ZealBot Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ZealBot Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MCP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zema-tech/zealbot-discord" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zema-tech/zealbot-discord
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ARCHITECTURE/" class="md-tabs__link">
+          
+  
+  
+  Guide (EN)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../it/ARCHITECTURE/" class="md-tabs__link">
+          
+  
+  
+  Guide (IT)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ISSUES/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ZealBot Docs" class="md-nav__button md-logo" aria-label="ZealBot Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ZealBot Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zema-tech/zealbot-discord" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zema-tech/zealbot-discord
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide (EN)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide (EN)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../COMMANDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HOSTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-server-bot-remote-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Server — bot remote control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A. Server — bot remote control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-create-the-token-once-from-discord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1. Create the token (once, from Discord)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-connect-claude" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2. Connect Claude
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-scope-rules-apply-to-every-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3. Scope rules (apply to every tool)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-read-tools-never-writes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4. Read tools (never writes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-write-tools-via-commander-scope-never-direct-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.5. Write tools (via Commander + scope, never direct DB)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.6. Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b-client-connect-the-bot-to-ais-hermes-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Client — connect the bot to AIs (Hermes style)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Internal API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AGENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide (IT)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide (IT)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/COMMANDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comandi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/CONFIG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/HOSTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/MCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interne
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../it/AGENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ISSUES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-server-bot-remote-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Server — bot remote control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A. Server — bot remote control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-create-the-token-once-from-discord" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1. Create the token (once, from Discord)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-connect-claude" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2. Connect Claude
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-scope-rules-apply-to-every-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3. Scope rules (apply to every tool)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-read-tools-never-writes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.4. Read tools (never writes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-write-tools-via-commander-scope-never-direct-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.5. Write tools (via Commander + scope, never direct DB)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.6. Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b-client-connect-the-bot-to-ais-hermes-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Client — connect the bot to AIs (Hermes style)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="mcp-bot-remote-control-hermes-agent-style">MCP — bot remote control (Hermes Agent style)<a class="headerlink" href="#mcp-bot-remote-control-hermes-agent-style" title="Permanent link">&para;</a></h1>
+<p>Inspired by <a href="https://github.com/nousresearch/hermes-agent">NousResearch/hermes-agent</a>:
+same concepts (<code>mcp_servers</code>, <code>tools.include/exclude</code>, stdio + Streamable HTTP,
+<code>mcp_&lt;server&gt;_&lt;tool&gt;</code> prefix), adapted to the bot.</p>
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>What it does</th>
+<th>Config</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. Server</strong> (AI → bot)</td>
+<td>Claude/ChatGPT operate the bot via <code>POST /mcp</code></td>
+<td><code>/token crea</code>, snippet in <code>mcp/claude.example.json</code></td>
+</tr>
+<tr>
+<td><strong>B. Client</strong> (bot → AI/tools)</td>
+<td>The bot uses external MCP servers as tools</td>
+<td><code>mcp/servers.json</code> (from <code>mcp/servers.example.json</code>), <code>/mcp</code> command</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a-server-bot-remote-control">A. Server — bot remote control<a class="headerlink" href="#a-server-bot-remote-control" title="Permanent link">&para;</a></h2>
+<p>The bot exposes an <strong>MCP server</strong> (Streamable HTTP) on <code>POST /mcp</code>. Protocol
+(<code>src/mcp/protocol.js</code>) and Bearer auth (<code>src/mcp/auth.js</code>) are stable and
+untouchable: every token is valid for <strong>one server only</strong> and every tool enforces it.</p>
+<h3 id="a1-create-the-token-once-from-discord">A.1. Create the token (once, from Discord)<a class="headerlink" href="#a1-create-the-token-once-from-discord" title="Permanent link">&para;</a></h3>
+<p>As the server owner:</p>
+<pre><code>/token crea nome:claude-casa
+</code></pre>
+<p>Copy the shown token (it won't be recoverable) and the endpoint:</p>
+<pre><code>https://TUO-HOST/mcp
+</code></pre>
+<h3 id="a2-connect-claude">A.2. Connect Claude<a class="headerlink" href="#a2-connect-claude" title="Permanent link">&para;</a></h3>
+<p><strong>Claude Code</strong> (recommended):</p>
+<pre><code class="language-bash">claude mcp add --transport http zealbot https://TUO-HOST/mcp \
+  --header &quot;Authorization: Bearer dbt_...&quot;
+</code></pre>
+<p><strong>Claude Desktop</strong>: <code>Settings → Connectors → Add</code> with URL + header
+<code>Authorization: Bearer dbt_...</code>. The same snippet is ready in
+<code>mcp/claude.example.json</code>.</p>
+<p><strong>Other MCP clients</strong>: <code>POST /mcp</code> endpoint, <code>2025-06-18</code> protocol,
+<code>initialize</code> (replies with <code>Mcp-Session-Id</code> header, send it back),
+<code>tools/list</code>, <code>tools/call</code>. <code>GET /mcp</code> opens an SSE stream (needs a session),
+<code>DELETE /mcp</code> closes it.</p>
+<p>Code layout: <code>src/mcp/</code> — <code>protocol.js</code> (JSON-RPC, stable), <code>auth.js</code>
+(Bearer + sessions, stable), <code>tools/</code> (one file per area + <code>index.js</code>
+registry: new tool = new file + one line), <code>server.js</code> (Express mount).</p>
+<h3 id="a3-scope-rules-apply-to-every-tool">A.3. Scope rules (apply to every tool)<a class="headerlink" href="#a3-scope-rules-apply-to-every-tool" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Every call requires <code>guildId</code>, which must match the token's server
+   (logical 403 otherwise) — shared helper <code>src/mcp/tools/scope.js</code>.</li>
+<li><strong>Status comes from the roster</strong>: <code>module_status</code> and <code>guild_info</code> include the
+   server's presence entry (name, members, snapshot freshness) read from the shared
+   DB. If the bot is no (longer) in the server, the tool reports it
+   (<code>botPresente: false</code>) but still answers — the roster is informative,
+   never a blocker.</li>
+<li>Top <code>limit</code>s are capped (default 10, max 25).</li>
+</ol>
+<h3 id="a4-read-tools-never-writes">A.4. Read tools (never writes)<a class="headerlink" href="#a4-read-tools-never-writes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>modules_list</code></td>
+<td>modules, versions, commands</td>
+</tr>
+<tr>
+<td><code>module_status</code></td>
+<td>on/off, 🛡️ protection, errors (per server)</td>
+</tr>
+<tr>
+<td><code>module_toggle</code></td>
+<td>turns a module on/off</td>
+</tr>
+<tr>
+<td><code>module_reset</code></td>
+<td>clears errors and protection (recovery)</td>
+</tr>
+<tr>
+<td><code>guild_snapshot</code></td>
+<td>modules + tickets + level top</td>
+</tr>
+<tr>
+<td><code>brain_search</code></td>
+<td>searches server skills/memories/files</td>
+</tr>
+<tr>
+<td><code>ticket_stats</code></td>
+<td>by type, avg close time, rating, staff top</td>
+</tr>
+<tr>
+<td><code>tickets_open</code></td>
+<td>open tickets with priority and claim</td>
+</tr>
+<tr>
+<td><code>brain_note_save</code> / <code>brain_note_forget</code></td>
+<td>writes/deletes server memories</td>
+</tr>
+<tr>
+<td><code>settings_get</code> / <code>settings_set</code></td>
+<td>AI provider, limits, logs (never API keys)</td>
+</tr>
+<tr>
+<td><code>economy_top</code>, <code>levels_top</code></td>
+<td>leaderboards</td>
+</tr>
+<tr>
+<td><code>user_cases</code> / <code>mod_history</code></td>
+<td>user moderation history</td>
+</tr>
+<tr>
+<td><code>bot_health</code></td>
+<td>uptime, mode, backend (honest nulls without client)</td>
+</tr>
+<tr>
+<td><code>config_get</code>, <code>shop_list</code>, <code>invites_top</code>, <code>channels_list</code>, <code>roles_list</code>, <code>analytics_summary</code>, <code>guild_info</code></td>
+<td>extra reads</td>
+</tr>
+<tr>
+<td><code>module_reload</code>, <code>module_config</code>, <code>announce_send</code></td>
+<td>writes via Commander</td>
+</tr>
+<tr>
+<td><code>economy_top</code></td>
+<td>wallet top (<code>limit</code>)</td>
+</tr>
+<tr>
+<td><code>levels_top</code></td>
+<td>level/XP top (<code>limit</code>)</td>
+</tr>
+<tr>
+<td><code>mod_history</code></td>
+<td>user moderation history (<code>userId</code>, <code>limit</code>)</td>
+</tr>
+<tr>
+<td><code>analytics_summary</code></td>
+<td>messages/joins/leaves for the last N days (<code>days</code>, max 30)</td>
+</tr>
+<tr>
+<td><code>config_get</code></td>
+<td>read-only server config (language, channels, automod…)</td>
+</tr>
+<tr>
+<td><code>shop_list</code></td>
+<td>roles-for-sale catalog</td>
+</tr>
+<tr>
+<td><code>invites_top</code></td>
+<td>top inviters (<code>limit</code>)</td>
+</tr>
+<tr>
+<td><code>channels_list</code></td>
+<td>live channels from Discord (id, name, type)</td>
+</tr>
+<tr>
+<td><code>roles_list</code></td>
+<td>live roles from Discord (id, name, color)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="a5-write-tools-via-commander-scope-never-direct-db">A.5. Write tools (via Commander + scope, never direct DB)<a class="headerlink" href="#a5-write-tools-via-commander-scope-never-direct-db" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+<th>Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>module_toggle</code></td>
+<td>turns a module on/off</td>
+<td><code>Commander.setModuleEnabled</code></td>
+</tr>
+<tr>
+<td><code>module_reload</code></td>
+<td>reloads without restart, clears errors+breaker</td>
+<td><code>Commander.reloadModule</code></td>
+</tr>
+<tr>
+<td><code>module_reset</code></td>
+<td>clears errors+protection</td>
+<td><code>Commander.resetModule</code></td>
+</tr>
+<tr>
+<td><code>module_config</code></td>
+<td>changes config (general, welcome, logging, levels, automod, autorole, starboard, confessioni, tickets, tempvoice, ai). Read first with <code>config_get</code>. Max 20-key patch, 2KB max values</td>
+<td><code>Commander.updateModuleConfig</code></td>
+</tr>
+<tr>
+<td><code>announce_send</code></td>
+<td>sends a message to a server text channel (verified in the live list, max 2000 chars, @everyone/@here neutralized)</td>
+<td>REST Bot token + channel scope</td>
+</tr>
+</tbody>
+</table>
+<p>Example (Claude): "read <code>config_get</code>, raise the automod level with
+<code>module_config</code>, confirm with <code>module_status</code>, announce in #annunci with
+<code>announce_send</code>".</p>
+<h3 id="a6-management">A.6. Management<a class="headerlink" href="#a6-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>/token lista</code> — usage and last-use of every token</li>
+<li><code>/token revoca id:...</code> — disconnects Claude immediately</li>
+</ul>
+<p>Security: tokens stored as sha256 only, never in logs; instant revocation;
+every write goes through the Commander gate like everything else.</p>
+<h2 id="b-client-connect-the-bot-to-ais-hermes-style">B. Client — connect the bot to AIs (Hermes style)<a class="headerlink" href="#b-client-connect-the-bot-to-ais-hermes-style" title="Permanent link">&para;</a></h2>
+<p>The bot becomes an MCP <strong>host</strong>: it connects to external servers (filesystem, github,
+fetch, sqlite, OpenAI-compatible gateway, local Ollama) and exposes them as
+<code>mcp_&lt;server&gt;_&lt;tool&gt;</code> tools, usable from Discord (<code>/mcp chiama</code>) and by the AI.</p>
+<pre><code class="language-bash">cp mcp/servers.example.json mcp/servers.json  # NEVER commit servers.json (tokens!)
+# enable a server in servers.json, then from Discord:
+/mcp stato     # connected / failed servers / registered tools
+/mcp lista     # names like mcp_&lt;server&gt;_&lt;tool&gt;
+/mcp chiama nome:mcp_fetch_fetch argomenti:{&quot;url&quot;:&quot;https://...&quot;}
+/mcp ricarica  # re-reads servers.json without restart
+</code></pre>
+<p>Format details, catalog (<code>mcp/catalog.json</code>) and stdio security: see
+<code>mcp/README.md</code>. Code: <code>src/mcp/client/</code> — <code>config.js</code> (<code>mcp_servers</code> loader
++ <code>${VAR}</code>), <code>transports.js</code> (stdio + Streamable HTTP, TAG sanitization),
+<code>manager.js</code> (4-wave discovery, include/exclude filters with globs,
+<code>include</code> wins, resources/prompts wrappers only if supported),
+<code>aiBridge.js</code> (function-specs for the AI), <code>index.js</code> (lazy singleton).</p>
+<p>Env: <code>MCP_ENABLED=1</code>, <code>MCP_SERVERS_PATH=./mcp/servers.json</code>, <code>MCP_TIMEOUT=30000</code>.
+The native AI stays in <code>src/ai/aiProviders.js</code> (<code>OPENAI_API_KEY</code> keys etc.,
+free Pollinations fallback): MCP adds <em>tools</em>, it doesn't replace providers.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

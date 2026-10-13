@@ -1,0 +1,1637 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Self-hosted multi-server Discord bot — docs (EN/IT).">
+      
+      
+      
+        <link rel="canonical" href="https://zema-tech.github.io/zealbot-discord/it/HOSTING/">
+      
+      
+        <link rel="prev" href="../CONFIG/">
+      
+      
+        <link rel="next" href="../MCP/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Hosting - ZealBot Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hosting-zealbot" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ZealBot Docs" class="md-header__button md-logo" aria-label="ZealBot Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ZealBot Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Hosting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zema-tech/zealbot-discord" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zema-tech/zealbot-discord
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../en/ARCHITECTURE/" class="md-tabs__link">
+          
+  
+  
+  Guide (EN)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ARCHITECTURE/" class="md-tabs__link">
+          
+  
+  
+  Guide (IT)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ISSUES/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ZealBot Docs" class="md-nav__button md-logo" aria-label="ZealBot Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ZealBot Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zema-tech/zealbot-discord" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zema-tech/zealbot-discord
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide (EN)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide (EN)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/COMMANDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/CONFIG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/HOSTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/MCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Internal API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/AGENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide (IT)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide (IT)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../COMMANDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comandi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CONFIG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hosting
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#matrice-host-rilevata-in-automatico-da-srchost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matrice host (rilevata in automatico da src/host/)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-termux-android" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Termux (Android)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-vps-debianubuntu-systemd-oppure-pm2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. VPS (Debian/Ubuntu) — systemd oppure PM2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. VPS (Debian/Ubuntu) — systemd oppure PM2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opzione-a-systemd-consigliato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opzione A: systemd (consigliato)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opzione-b-pm2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opzione B: PM2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immagine-precompilata-ghcr-senza-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immagine precompilata (GHCR, senza build)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-railway-render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Railway / Render
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-pterodactyl-nota-egg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Pterodactyl — nota egg
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interne
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AGENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ISSUES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#matrice-host-rilevata-in-automatico-da-srchost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matrice host (rilevata in automatico da src/host/)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-termux-android" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Termux (Android)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-vps-debianubuntu-systemd-oppure-pm2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. VPS (Debian/Ubuntu) — systemd oppure PM2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. VPS (Debian/Ubuntu) — systemd oppure PM2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opzione-a-systemd-consigliato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opzione A: systemd (consigliato)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opzione-b-pm2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opzione B: PM2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immagine-precompilata-ghcr-senza-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immagine precompilata (GHCR, senza build)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-railway-render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Railway / Render
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-pterodactyl-nota-egg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Pterodactyl — nota egg
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="hosting-zealbot">Hosting — ZealBot<a class="headerlink" href="#hosting-zealbot" title="Permanent link">&para;</a></h1>
+<p>Guida in italiano per avviare il bot ovunque. Via rapida per tutti:</p>
+<pre><code class="language-bash">npm run setup   # rileva l'host, verifica il token live, scrive .env
+npm run deploy  # registra gli slash command
+npm start       # bot (+ dashboard con npm run dashboard)
+</code></pre>
+<p>Requisiti comuni:</p>
+<ul>
+<li><strong>Node.js ≥ 22.12</strong> (consigliato <strong>Node 24</strong>; @discordjs/voice lo richiede)</li>
+<li><strong>Toolchain</strong>: <code>npm</code> per tutto (bot + dashboard Express).</li>
+<li>File <code>.env</code> creato da <code>.env.example</code> con almeno <code>DISCORD_TOKEN</code> e <code>CLIENT_ID</code></li>
+<li>Deploy degli slash command: <code>npm run deploy</code> (dopo ogni aggiunta/modifica di comandi)</li>
+<li>Start: <code>npm start</code> (= <code>node src/index.js</code>) · Test: <code>npm test</code></li>
+</ul>
+<h2 id="matrice-host-rilevata-in-automatico-da-srchost">Matrice host (rilevata in automatico da <code>src/host/</code>)<a class="headerlink" href="#matrice-host-rilevata-in-automatico-da-srchost" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Host</th>
+<th>Disco</th>
+<th>Storage consigliato</th>
+<th>Dashboard</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Render</td>
+<td>effimero</td>
+<td>sqlite su Disk (<code>/app/data</code>)</td>
+<td>✅ via <code>$PORT</code></td>
+<td>Blueprint <code>render.yaml</code></td>
+</tr>
+<tr>
+<td>Railway</td>
+<td>effimero</td>
+<td>sqlite su Volume</td>
+<td>✅ via <code>$PORT</code></td>
+<td><code>railway.toml</code> (Dockerfile root)</td>
+</tr>
+<tr>
+<td>Fly.io</td>
+<td>effimero</td>
+<td>sqlite su Volume (<code>/app/data</code>)</td>
+<td>✅ porta 3000</td>
+<td><code>fly.toml</code> (healthcheck <code>/healthz</code>: imposta le env dashboard)</td>
+</tr>
+<tr>
+<td>Pterodactyl</td>
+<td>persistente</td>
+<td>sqlite</td>
+<td>✅ porta pannello</td>
+<td>Egg NodeJS generico</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>effimero*</td>
+<td>sqlite su volume</td>
+<td>✅ <code>$PORT</code>/<code>3000</code></td>
+<td><code>docker-compose.yml</code> (*persistente con volume)</td>
+</tr>
+<tr>
+<td>VPS / locale</td>
+<td>persistente</td>
+<td>sqlite (Node 22+) o json</td>
+<td>✅</td>
+<td>PM2 consigliato</td>
+</tr>
+<tr>
+<td>Termux</td>
+<td>persistente</td>
+<td>json</td>
+<td>✅</td>
+<td>Sviluppo, non produzione</td>
+</tr>
+<tr>
+<td>Replit</td>
+<td>persistente</td>
+<td>json</td>
+<td>✅</td>
+<td>Sempre-on a pagamento</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Persistenza dati:</strong> di default il bot usa JSON in <code>src/database/*.json</code>
+(<code>DB_BACKEND=json</code>). Per hosting con filesystem effimero (Railway/Render/Docker)
+usa invece SQLite: <code>DB_BACKEND=sqlite</code> + <code>DB_SQLITE_PATH=./data/bot.db</code>
+(richiede <strong>Node ≥ 22</strong>, usa <code>node:sqlite</code>, zero dipendenze extra),
+con la cartella <code>data/</code> su volume/disco persistente.</p>
+</blockquote>
+<hr />
+<h2 id="1-termux-android">1. Termux (Android)<a class="headerlink" href="#1-termux-android" title="Permanent link">&para;</a></h2>
+<pre><code class="language-bash">pkg update &amp;&amp; pkg install -y nodejs git
+git clone &lt;repo&gt; zealbot &amp;&amp; cd zealbot
+npm ci
+cp .env.example .env   # poi compila con il tuo editor
+npm run deploy
+npm start
+</code></pre>
+<p>Note Termux:</p>
+<ul>
+<li>Niente systemd: per tenerlo attivo usa <code>termux-wake-lock</code> + sessione <code>tmux</code>,
+  oppure PM2 (<code>npm i -g pm2 &amp;&amp; pm2 start ecosystem.config.js &amp;&amp; pm2 save</code>).
+  PM2 non riparte da solo al riavvio del telefono: riapri Termux e fai <code>pm2 resurrect</code>.</li>
+<li>Su Termux resta su <code>DB_BACKEND=json</code> (default) a meno di avere Node ≥ 22.</li>
+<li>I log vanno in <code>logs/YYYY-MM-DD.log</code> (<code>LOG_LEVEL=info</code> di default).</li>
+</ul>
+<h2 id="2-vps-debianubuntu-systemd-oppure-pm2">2. VPS (Debian/Ubuntu) — systemd oppure PM2<a class="headerlink" href="#2-vps-debianubuntu-systemd-oppure-pm2" title="Permanent link">&para;</a></h2>
+<pre><code class="language-bash"># Node 24 LTS (nodesource) + clone
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+sudo apt install -y nodejs git
+git clone &lt;repo&gt; /opt/zealbot &amp;&amp; cd /opt/zealbot
+npm ci --omit=dev
+cp .env.example .env   # compila DISCORD_TOKEN, CLIENT_ID, ...
+npm run deploy
+</code></pre>
+<h3 id="opzione-a-systemd-consigliato">Opzione A: systemd (consigliato)<a class="headerlink" href="#opzione-a-systemd-consigliato" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">sudo cp zealbot.service /etc/systemd/system/zealbot.service
+# adatta User/percorsi nel file se non usi utente &quot;bot&quot; o /opt/zealbot
+sudo systemctl daemon-reload
+sudo systemctl enable --now zealbot
+systemctl status zealbot
+journalctl -u zealbot -f   # log live
+</code></pre>
+<p>Il file <code>zealbot.service</code> usa <code>WorkingDirectory=/opt/zealbot</code>,
+<code>EnvironmentFile=/opt/zealbot/.env</code> e <code>Restart=always</code>.</p>
+<h3 id="opzione-b-pm2">Opzione B: PM2<a class="headerlink" href="#opzione-b-pm2" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">sudo npm i -g pm2
+pm2 start ecosystem.config.js   # fork, 1 istanza, log in logs/pm2-*.log
+pm2 save &amp;&amp; pm2 startup         # riavvio automatico al boot
+pm2 logs zealbot
+</code></pre>
+<blockquote>
+<p>Una sola istanza mi raccomando (<code>fork</code>, mai <code>cluster</code>): il bot usa DB su file,
+due istanze scriverebbero gli stessi JSON/SQLite e corromperebbero i dati.</p>
+</blockquote>
+<h2 id="3-docker">3. Docker<a class="headerlink" href="#3-docker" title="Permanent link">&para;</a></h2>
+<pre><code class="language-bash">cp .env.example .env   # compila i valori
+docker compose up -d --build
+docker compose logs -f
+
+# Con dashboard web (profilo opzionale, richiede DASHBOARD_* nel .env):
+docker compose --profile dashboard up -d --build
+</code></pre>
+<ul>
+<li><code>Dockerfile</code>: base <code>node:24-slim</code>, <code>npm ci --omit=dev</code>, utente non-root <code>node</code>,
+  <code>NODE_ENV=production</code>, volumi <code>/app/data /app/logs /app/backups</code>.</li>
+<li><code>docker-compose.yml</code>: servizio <code>bot</code> (<code>restart: unless-stopped</code>, <code>env_file: .env</code>,
+  volumi <code>./data ./logs ./backups</code>); servizio <code>bot-dashboard</code> (solo profilo
+  <code>dashboard</code>) con porta <code>${DASHBOARD_PORT:-3000}</code> pubblicata.</li>
+<li><strong>Healthcheck condizionale</strong> (vedi commento nel Dockerfile): senza <code>DASHBOARD_PORT</code>
+  il bot non espone HTTP, quindi l'healthcheck ritorna subito sano
+  (i crash li copre <code>restart: unless-stopped</code>); con dashboard attiva fa
+  <code>GET /healthz</code> (endpoint pubblico con fallback a <code>/</code>) via <code>node -e ... fetch(...)</code>
+  senza bisogno di <code>curl</code> nell'immagine.</li>
+<li>In container imposta <code>DB_BACKEND=sqlite</code> + <code>DB_SQLITE_PATH=./data/bot.db</code>
+  (il compose lo fa già di default): i JSON di <code>src/database/</code> <strong>non</strong> sono
+  montati come volume perché convivono con i moduli <code>.js</code> (montare la cartella
+  nasconderebbe il codice al container).</li>
+<li>Musica: l'immagine <code>node:24-slim</code> <strong>non</strong> include <code>ffmpeg</code> (serve a
+  <code>discord-player</code>/<code>@discordjs/voice</code>). Se usi i comandi musicali, aggiungi
+  nel Dockerfile prima di <code>USER node</code>:
+  <code>RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends ffmpeg &amp;&amp; rm -rf /var/lib/apt/lists/*</code>.</li>
+</ul>
+<h3 id="immagine-precompilata-ghcr-senza-build">Immagine precompilata (GHCR, senza build)<a class="headerlink" href="#immagine-precompilata-ghcr-senza-build" title="Permanent link">&para;</a></h3>
+<p>Ogni tag <code>vX.Y.Z</code> pubblica <code>ghcr.io/zema-tech/zealbot-discord:latest</code>
+(multi-arch amd64/arm64) via <code>.github/workflows/docker-publish.yml</code>:</p>
+<pre><code class="language-yaml">services:
+  bot:
+    image: ghcr.io/zema-tech/zealbot-discord:latest
+    env_file: .env
+    environment:
+      DB_BACKEND: sqlite
+      DB_SQLITE_PATH: /app/data/bot.db
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+</code></pre>
+<h2 id="4-railway-render">4. Railway / Render<a class="headerlink" href="#4-railway-render" title="Permanent link">&para;</a></h2>
+<p><strong>Via rapida (Render):</strong> il repo include <code>render.yaml</code> (Docker + healthcheck
+<code>/healthz</code> + disco da 1GB): <em>New → Blueprint</em>, poi compila le env segrete
+(<code>DISCORD_TOKEN</code>, <code>CLIENT_ID</code>, <code>CLIENT_SECRET</code>, <code>BASE_URL</code>). Il blueprint
+punta già SQLite su disco (<code>DB_SQLITE_PATH=/app/data/bot.db</code>).</p>
+<p>Procedura manuale (valida per entrambi, filesystem effimero: serve disco persistente):</p>
+<ol>
+<li>Crea il servizio dal repo (Build: <code>npm ci</code>, Start: <code>node src/index.js</code>).</li>
+<li>Imposta le <strong>Environment Variables</strong> dal pannello (copia le chiavi di
+   <code>.env.example</code>): <code>DISCORD_TOKEN</code>, <code>CLIENT_ID</code>, <code>DB_BACKEND=sqlite</code>,
+   <code>DB_SQLITE_PATH=./data/bot.db</code>, ed eventualmente <code>DASHBOARD_*</code>
+   (su Render apri anche la porta con <code>DASHBOARD_PORT</code>).</li>
+<li>Monta un <strong>disco persistente</strong> sul percorso <code>data/</code> (es. Railway Volume →
+   mount <code>/app/data</code>; Render Disk su runtime Docker → mount <code>/app/data</code>,
+   su runtime Node nativo → <code>/opt/render/project/src/data</code>):
+   lì vivono <code>bot.db</code>, <code>logs/</code> e <code>backups/</code>. Senza disco, a ogni deploy
+   riparti da zero (economia, livelli, ticket… persi).</li>
+<li>Esegui <code>npm run deploy</code> una volta (da locale con le stesse env, oppure
+   come <em>one-off job</em>): registra gli slash command su Discord.</li>
+<li>Render free: lo spin-down per inattività <strong>spegne il bot</strong> (il bot deve stare
+   sempre online) — serve istanza sempre attiva o un piano a pagamento.</li>
+</ol>
+<h2 id="5-pterodactyl-nota-egg">5. Pterodactyl — nota egg<a class="headerlink" href="#5-pterodactyl-nota-egg" title="Permanent link">&para;</a></h2>
+<p>Nessun egg ufficiale: usa un egg generico <strong>NodeJS</strong> (versione 20):</p>
+<ul>
+<li><strong>Startup Command:</strong> <code>node src/index.js</code></li>
+<li><strong>Install Script:</strong> <code>npm ci</code> (o <code>npm ci --omit=dev</code>)</li>
+<li><strong>Environment / Variables:</strong> <code>DISCORD_TOKEN</code>, <code>CLIENT_ID</code> (+ <code>DB_BACKEND</code>,
+  <code>AI_*</code>, <code>DASHBOARD_*</code> se servono) — oppure monta/carica un file <code>.env</code>
+  nella root del server.</li>
+<li>I dati restano sul disco del server Pterodactyl (persistenti tra i riavvii);
+  fai backup regolari di <code>src/database/*.json</code> (o di <code>data/bot.db</code> se usi
+  SQLite) con il comando <code>/backup</code> o dal pannello.</li>
+<li>Il deploy comandi (<code>node deploy-commands.js</code>) va lanciato una volta da
+  console dopo aver impostato le variabili.</li>
+</ul>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Sintomo</th>
+<th>Causa probabile e fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Unsupported URL Type "workspace:"</code> su <code>npm install</code></td>
+<td>Resto storico: aggiorna il lock con <code>npm install</code> e riprova (i workspace orfani sono stati rimossi).</td>
+</tr>
+<tr>
+<td><code>DisallowedIntents</code> / bot online ma non risponde</td>
+<td>Abilita nel <a href="https://discord.com/developers/applications">Developer Portal</a> → Bot → <strong>Privileged Gateway Intents</strong>: <strong>Server Members Intent</strong> e <strong>Message Content Intent</strong> (il bot usa <code>GuildMembers</code> + <code>MessageContent</code>, vedi <code>src/index.js</code>). <code>GuildPresences</code> <strong>non</strong> serve.</td>
+</tr>
+<tr>
+<td>Slash command mancanti o vecchi</td>
+<td>Lancia <code>npm run deploy</code> (serve <code>CLIENT_ID</code>; con <code>GUILD_ID</code> i comandi arrivano subito sul server di test, senza devi attendere fino a ~1h per la propagazione globale).</td>
+</tr>
+<tr>
+<td><code>TokenInvalid</code> / <code>TOKEN_INVALID</code></td>
+<td><code>DISCORD_TOKEN</code> errato o rigenerato: aggiorna <code>.env</code> (mai committarlo) e riavvia.</td>
+</tr>
+<tr>
+<td>Bot non ha effetto (ruoli, timeout, canali)</td>
+<td><strong>Permessi</strong>: invita il bot con scope <code>bot</code> + <code>applications.commands</code> e permessi adeguati (Gestire ruoli/canali, Bannare, Moderare membri per i timeout, Connettersi/Parlare per la musica). Il <strong>ruolo del bot deve stare sopra</strong> i ruoli che deve gestire, altrimenti Discord rifiuta in silenzio.</td>
+</tr>
+<tr>
+<td>Dashboard: redirect OAuth fallito</td>
+<td><code>BASE_URL</code> deve corrispondere al Redirect URI registrato nel portale Discord (<code>&lt;BASE_URL&gt;/callback</code>, scope <code>identify</code>+<code>guilds</code>); servono anche <code>CLIENT_SECRET</code> e <code>SESSION_SECRET</code> (≥32 caratteri).</td>
+</tr>
+<tr>
+<td>Porta occupata / dashboard non apre</td>
+<td>Cambia <code>DASHBOARD_PORT</code> nel <code>.env</code>; verifica che la porta sia esposta (firewall/VPS, <code>ports:</code> nel compose, porta aperta su Render).</td>
+</tr>
+<tr>
+<td>Musica che non parte / errori voice</td>
+<td>Servono <code>ffmpeg</code> e dipendenze <code>libsodium</code>/<code>opus</code> (su VPS: <code>apt install ffmpeg</code>; su Docker vedi §3). Senza, gli altri comandi funzionano comunque.</td>
+</tr>
+<tr>
+<td>DB azzerato dopo un redeploy</td>
+<td>Filesystem effimero senza volume: passa a <code>DB_BACKEND=sqlite</code> con <code>data/</code> persistente (§4). In locale fai <code>/backup</code> regolari (finiscono in <code>backups/</code>).</td>
+</tr>
+<tr>
+<td>Crash loop / restart continui</td>
+<td>Leggi <code>logs/YYYY-MM-DD.log</code> (o <code>journalctl</code>/<code>pm2 logs</code>/<code>docker compose logs</code>): quasi sempre è <code>.env</code> incompleto (<code>DISCORD_TOKEN</code> mancante → exit 1 immediato).</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

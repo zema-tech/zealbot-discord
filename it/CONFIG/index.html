@@ -1,0 +1,1497 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Self-hosted multi-server Discord bot — docs (EN/IT).">
+      
+      
+      
+        <link rel="canonical" href="https://zema-tech.github.io/zealbot-discord/it/CONFIG/">
+      
+      
+        <link rel="prev" href="../COMMANDS/">
+      
+      
+        <link rel="next" href="../HOSTING/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Configurazione - ZealBot Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configurazione-variabili-dambiente" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ZealBot Docs" class="md-header__button md-logo" aria-label="ZealBot Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ZealBot Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configurazione
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zema-tech/zealbot-discord" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zema-tech/zealbot-discord
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../en/ARCHITECTURE/" class="md-tabs__link">
+          
+  
+  
+  Guide (EN)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ARCHITECTURE/" class="md-tabs__link">
+          
+  
+  
+  Guide (IT)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ISSUES/" class="md-tabs__link">
+          
+  
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ZealBot Docs" class="md-nav__button md-logo" aria-label="ZealBot Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ZealBot Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zema-tech/zealbot-discord" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zema-tech/zealbot-discord
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide (EN)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide (EN)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/COMMANDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/CONFIG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/HOSTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/MCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Internal API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/AGENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide (IT)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide (IT)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architettura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../COMMANDS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comandi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurazione
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurazione
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lingue-dei-messaggi-i18n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lingue dei messaggi (i18n)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lingue-dei-messaggi-i18n_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lingue dei messaggi (i18n)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HOSTING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hosting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API interne
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AGENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agenti
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ISSUES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lingue-dei-messaggi-i18n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lingue dei messaggi (i18n)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lingue-dei-messaggi-i18n_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lingue dei messaggi (i18n)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="configurazione-variabili-dambiente">Configurazione (variabili d'ambiente)<a class="headerlink" href="#configurazione-variabili-dambiente" title="Permanent link">&para;</a></h1>
+<p>Tutte le env lette dal codice (<code>grep process.env</code> in <code>src/</code>,
+<code>deploy-commands.js</code>) più <code>.env.example</code>. Copia <code>.env.example</code> in <code>.env</code>
+e compila almeno le obbligatorie. Mai committare <code>.env</code>.</p>
+<p>La configurazione per-server (lingua, canali, welcome, automod, ticket, livelli, AI, permessi) avviene esclusivamente dalla dashboard web (<code>&lt;BASE_URL&gt;/app.html</code>, sezioni Generale, Moderazione, Livelli, Ticket e Vocali, AI ed Extra, Permessi). Questo file descrive solo le variabili d'ambiente del processo.</p>
+<table>
+<thead>
+<tr>
+<th>Variabile</th>
+<th>Obbligatoria</th>
+<th>Default</th>
+<th>Dove usata</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DISCORD_TOKEN</code></td>
+<td>sì</td>
+<td>—</td>
+<td><code>src/index.js</code>, <code>deploy-commands.js</code></td>
+<td>Token del bot. Senza, il bot esce con errore.</td>
+</tr>
+<tr>
+<td><code>CLIENT_ID</code></td>
+<td>sì (per deploy comandi e dashboard)</td>
+<td>—</td>
+<td><code>deploy-commands.js</code>, <code>src/dashboard/auth.js</code></td>
+<td>Application ID. <code>deploy-commands.js</code> lo usa senza fallback.</td>
+</tr>
+<tr>
+<td><code>GUILD_ID</code></td>
+<td>no</td>
+<td>— (deploy globale)</td>
+<td><code>deploy-commands.js</code></td>
+<td>Se impostato, registra i comandi solo sul server di test (veloce); altrimenti globale (fino a ~1h).</td>
+</tr>
+<tr>
+<td><code>AI_PROVIDER</code></td>
+<td>no</td>
+<td><code>auto</code></td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td><code>auto</code> sceglie da solo tra le chiavi presenti; valori: <code>openai</code>, <code>anthropic</code>, <code>gemini</code>, <code>groq</code>, <code>openrouter</code>, <code>mistral</code>, <code>deepseek</code>, <code>xai</code>, <code>together</code>, <code>cerebras</code>, <code>ollama</code>, <code>fireworks</code>, <code>novita</code>, <code>huggingface</code>, <code>nvidia</code>, <code>kimi</code>, <code>pollinations</code> (+ alias <code>claude</code>, <code>google</code>, <code>grok</code>, <code>hf</code>); valore ignoto + <code>AI_API_URL</code> = endpoint OpenAI-compatibile custom.</td>
+</tr>
+<tr>
+<td><code>OPENAI_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>gpt-4o-mini</code>.</td>
+</tr>
+<tr>
+<td><code>ANTHROPIC_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>claude-3-5-haiku-20241022</code>.</td>
+</tr>
+<tr>
+<td><code>GEMINI_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>gemini-2.0-flash</code>.</td>
+</tr>
+<tr>
+<td><code>GROQ_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>llama-3.3-70b-versatile</code>.</td>
+</tr>
+<tr>
+<td><code>OPENROUTER_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>openai/gpt-4o-mini</code>.</td>
+</tr>
+<tr>
+<td><code>MISTRAL_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>mistral-small-latest</code>.</td>
+</tr>
+<tr>
+<td><code>DEEPSEEK_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>deepseek-chat</code>.</td>
+</tr>
+<tr>
+<td><code>XAI_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>grok-3-mini</code>.</td>
+</tr>
+<tr>
+<td><code>TOGETHER_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo</code>.</td>
+</tr>
+<tr>
+<td><code>CEREBRAS_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>llama3.1-8b</code> (velocissimo). Chiavi multiple con virgola = pool stile Hermes (<code>sk-a,sk-b</code>: rotazione + failover chiave).</td>
+</tr>
+<tr>
+<td><code>FIREWORKS_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>accounts/fireworks/models/kimi-k2p6</code>.</td>
+</tr>
+<tr>
+<td><code>NOVITA_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>moonshotai/kimi-k2.5</code> (200+ modelli via <code>AI_MODEL</code>).</td>
+</tr>
+<tr>
+<td><code>HF_TOKEN</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Hugging Face Inference Providers, default <code>deepseek-ai/DeepSeek-V3.2</code>.</td>
+</tr>
+<tr>
+<td><code>NVIDIA_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Modello default <code>nvidia/nemotron-3-super-120b-a12b</code>.</td>
+</tr>
+<tr>
+<td><code>KIMI_API_KEY</code></td>
+<td>no (ne basta una)</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Moonshot, default <code>kimi-for-coding</code>.</td>
+</tr>
+<tr>
+<td><code>AI_MODEL</code></td>
+<td>no</td>
+<td>modello default del provider</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Accetta <code>provider:modello</code> stile Hermes (es. <code>groq:llama-3.3-70b-versatile</code>, vince su <code>AI_PROVIDER</code>). Override endpoint via <code>&lt;PREFIX&gt;_BASE_URL</code> (es. <code>GROQ_BASE_URL</code>).</td>
+</tr>
+<tr>
+<td><code>AI_FALLBACKS</code></td>
+<td>no</td>
+<td>— (nessun failover)</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Es. <code>groq,openrouter</code>: se il primario fallisce (rate, timeout, rete, HTTP, chiave), prova in ordine. Se falliscono tutti, l'errore mostrato è del primario.</td>
+</tr>
+<tr>
+<td><code>OLLAMA_HOST</code></td>
+<td>no</td>
+<td><code>http://localhost:11434</code></td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Con <code>AI_PROVIDER=ollama</code>: IA locale (default <code>llama3.1</code>), zero cloud, nessuna chiave.</td>
+</tr>
+<tr>
+<td><code>AI_API_URL</code></td>
+<td>no</td>
+<td><code>https://text.pollinations.ai</code></td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Endpoint OpenAI-compatibile custom; senza chiavi si usa Pollinations gratis, nessuna chiave richiesta.</td>
+</tr>
+<tr>
+<td><code>AI_API_KEY</code></td>
+<td>no</td>
+<td>—</td>
+<td><code>src/utils/aiProviders.js</code></td>
+<td>Chiave per <code>AI_API_URL</code> custom.</td>
+</tr>
+<tr>
+<td><code>AI_DAILY_LIMIT</code></td>
+<td>no</td>
+<td><code>500</code></td>
+<td><code>src/utils/ai.js</code></td>
+<td>Budget giornaliero chiamate AI su chiave condivisa (<code>0</code> = illimitato). Oltre il limite l'AI risponde "Budget giornaliero esaurito".</td>
+</tr>
+<tr>
+<td><code>DB_BACKEND</code></td>
+<td>no</td>
+<td><code>json</code></td>
+<td><code>src/database/store.js</code></td>
+<td><code>json</code> (file <code>src/database/*.json</code>) o <code>sqlite</code> (tabella <code>kv</code> via <code>node:sqlite</code>, Node 22+). Valori diversi da <code>sqlite</code> ricadono su <code>json</code>.</td>
+</tr>
+<tr>
+<td><code>DB_SQLITE_PATH</code></td>
+<td>no</td>
+<td><code>./data/bot.db</code></td>
+<td><code>src/database/store.js</code>, <code>src/jobs/backup.js</code></td>
+<td>Path del database sqlite (directory creata se manca, <code>journal_mode=WAL</code>). Incluso nel backup se il file esiste. Se <code>node:sqlite</code> manca: fallback a json con warning.</td>
+</tr>
+<tr>
+<td><code>LOG_LEVEL</code></td>
+<td>no</td>
+<td><code>info</code></td>
+<td><code>src/utils/logger.js</code></td>
+<td><code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>. Log JSON-lines su console + <code>logs/YYYY-MM-DD.log</code>.</td>
+</tr>
+<tr>
+<td><code>LOG_DIR</code></td>
+<td>no</td>
+<td><code>logs</code></td>
+<td><code>src/utils/logger.js</code></td>
+<td>Directory dei file di log giornalieri.</td>
+</tr>
+<tr>
+<td><code>BACKUP_DIR</code></td>
+<td>no</td>
+<td><code>backups</code></td>
+<td><code>src/jobs/backup.js</code></td>
+<td>Destinazione backup notturni <code>YYYY-MM-DD-HHmm/</code>, retention 7 giorni, journal <code>last.json</code>. Non presente in <code>.env.example</code> (trovata via grep).</td>
+</tr>
+<tr>
+<td><code>SELF_IMPROVE</code></td>
+<td>no</td>
+<td>off</td>
+<td><code>src/jobs/selfImprove.js</code></td>
+<td>Solo <code>=1</code> attiva il self-improvement notturno. Mai commit automatici: revisiona con <code>git diff</code>.</td>
+</tr>
+<tr>
+<td><code>SELF_IMPROVE_TIME</code></td>
+<td>no</td>
+<td><code>22:00</code></td>
+<td><code>src/jobs/selfImprove.js</code></td>
+<td>Ora locale di esecuzione.</td>
+</tr>
+<tr>
+<td><code>SELF_IMPROVE_DRY_RUN</code></td>
+<td>no</td>
+<td>off</td>
+<td><code>src/jobs/selfImprove.js</code></td>
+<td><code>=1</code>: solo report, nessuna patch applicata.</td>
+</tr>
+<tr>
+<td><code>SELF_IMPROVE_GUILD_ID</code></td>
+<td>no</td>
+<td>— (solo log)</td>
+<td><code>src/jobs/selfImprove.js</code></td>
+<td>Server dove inviare il report notturno.</td>
+</tr>
+<tr>
+<td><code>DASHBOARD_PORT</code></td>
+<td>no</td>
+<td>— (dashboard spenta)</td>
+<td><code>src/dashboard/index.js</code></td>
+<td>Richiesta da <code>npm run dashboard</code> (processo separato); senza, la dashboard non parte.</td>
+</tr>
+<tr>
+<td><code>SESSION_SECRET</code></td>
+<td>sì (se dashboard)</td>
+<td>—</td>
+<td><code>src/dashboard/auth.js</code></td>
+<td>Segreto sessione, almeno 32 caratteri casuali.</td>
+</tr>
+<tr>
+<td><code>CLIENT_SECRET</code></td>
+<td>sì (se dashboard)</td>
+<td>—</td>
+<td><code>src/dashboard/auth.js</code></td>
+<td>Client secret dell'app Discord (OAuth2).</td>
+</tr>
+<tr>
+<td><code>BASE_URL</code></td>
+<td>sì (se dashboard)</td>
+<td>—</td>
+<td><code>src/dashboard/auth.js</code>, comando <code>/help</code></td>
+<td>URL pubblico (es. <code>http://localhost:3000</code>); deve combaciare col redirect OAuth2 <code>&lt;BASE_URL&gt;/callback</code>. Usato anche nel footer di <code>/help</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Note:</p>
+<ul>
+<li>Le chiavi AI sono alternative: basta <strong>una</strong> chiave e il provider è
+  scelto in automatico (<code>AI_PROVIDER=auto</code>); senza chiavi funziona gratis
+  via Pollinations (<code>AI_API_URL</code> default).</li>
+<li>Timeout AI fisso 25 s nel codice (<code>src/utils/aiProviders.js</code>), non
+  configurabile via env.</li>
+<li>Backup sempre ore 03:00 locali e retention 7 giorni: costanti nel codice
+  (<code>src/jobs/backup.js</code>), non env.</li>
+</ul>
+<h2 id="lingue-dei-messaggi-i18n">Lingue dei messaggi (i18n)<a class="headerlink" href="#lingue-dei-messaggi-i18n" title="Permanent link">&para;</a></h2>
+<p>I testi di risposta passano da <code>src/utils/i18n.js</code>: <code>t(chiave, lingua, vars)</code>
+con fallback per-chiave all'italiano, <code>getLang(guildId)</code> legge <code>language</code> da
+<code>guildConfig</code> (si cambia con <code>/lingua</code> — niente comando <code>/language</code> separato:
+sarebbe un duplicato). Lingue supportate: <code>it</code>, <code>en</code>
+(<code>SUPPORTED_LANGS</code>, fallback <code>it</code>). Le stringhe canoniche vivono in
+<code>src/locales/&lt;lingua&gt;.json</code> (<code>it.js</code>/<code>en.js</code> le riesportano per compatibilità),
+motore <code>i18next</code> sotto la stessa API (niente fs-backend: i JSON viaggiano col codice).</p>
+<p>Copertura attuale: parziale (una manciata di comandi); nomi e descrizioni
+slash restano in italiano.</p>
+<p>Per aggiungere una lingua (es. <code>es</code>):</p>
+<ol>
+<li>Copia <code>src/locales/en.json</code> in <code>src/locales/es.json</code> e traduci i valori
+   (le chiavi mancanti ricadono sull'italiano automaticamente).</li>
+<li>Aggiungi <code>'es'</code> a <code>SUPPORTED_LANGS</code> in <code>src/utils/i18n.js</code>.</li>
+<li>Usa <code>t('chiave', await getLang(guildId), { vars })</code> nei nuovi testi invece
+   di stringhe hardcoded; non cambiare i testi esistenti senza motivo.</li>
+</ol>
+<h2 id="lingue-dei-messaggi-i18n_1">Lingue dei messaggi (i18n)<a class="headerlink" href="#lingue-dei-messaggi-i18n_1" title="Permanent link">&para;</a></h2>
+<p>I testi di risposta passano da <code>src/utils/i18n.js</code>: <code>t(chiave, lingua, vars)</code>
+con fallback per-chiave all'italiano, <code>getLang(guildId)</code> legge <code>language</code> da
+<code>guildConfig</code> (<code>/lingua imposta</code>). Lingue supportate: <code>it</code>, <code>en</code>
+(<code>SUPPORTED_LANGS</code>, fallback <code>it</code>).</p>
+<p>Copertura attuale: parziale (una manciata di comandi, es. ping/help/serverinfo).
+I nomi/descrizioni slash restano in italiano.</p>
+<p>Per aggiungere una lingua (es. <code>es</code>):</p>
+<ol>
+<li>Crea <code>src/locales/es.js</code> con le stesse chiavi di <code>it.js</code> (le mancanti
+   ricadono sull'italiano automaticamente).</li>
+<li>Aggiungi <code>'es'</code> a <code>SUPPORTED_LANGS</code> in <code>src/utils/i18n.js</code>.</li>
+<li>Usa <code>t('chiave', await getLang(guildId), { vars })</code> nei nuovi testi invece
+   di stringhe hardcoded; non cambiare i testi esistenti senza motivo.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
