@@ -1,12 +1,12 @@
 'use strict';
 /**
- * src/utils/i18n.js — mini-i18n IT/EN (CommonJS, zero dipendenze).
+ * src/utils/i18n.js — mini-i18n EN/IT sopra il motore core (i18next).
  *
- * - `t(key, lang='it', vars={})`: chiavi nested `a.b.c`, interpolazione `{var}`,
+ * - `t(key, lang='en', vars={}): chiavi nested `a.b.c`, interpolazione `{var}`,
  *   fallback a IT se la chiave manca nella lingua richiesta; se manca anche in
  *   IT ritorna la chiave stessa.
- * - `getLang(guildId)`: legge `language` da guildConfig (default 'it', valida
- *   solo 'it'/'en'). guildId nullo (DM) → 'it' senza toccare il DB.
+ * - `getLang(guildId)`: legge `language` da guildConfig (default 'en', valida
+ *   solo 'it'/'en'). guildId nullo (DM) → 'en' senza toccare il DB.
  * - `setLang(guildId, lang)`: scrive via guildConfig.updateGuild; lancia su
  *   lingua non supportata.
  *
@@ -15,7 +15,7 @@
  */
 
 const SUPPORTED_LANGS = ['it', 'en'];
-const FALLBACK_LANG = 'it';
+const FALLBACK_LANG = 'en';
 
 /** JSON canonico (src/locales/<lang>.json), fallback ai legacy .js. */
 function loadLocale(lang) {
@@ -79,7 +79,7 @@ function normalizeLang(lang) {
  * @param {Object} [vars={}] valori per l'interpolazione `{var}`
  * @returns {string|*} stringa tradotta (o il valore non-stringa), mai undefined
  */
-function t(key, lang = 'it', vars = {}) {
+function t(key, lang = 'en', vars = {}) {
   const l = SUPPORTED_LANGS.includes(lang) ? lang : FALLBACK_LANG;
   // Via i18next quando disponibile (stesso fallback IT configurato sopra).
   if (i18n) {

@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, MessageFlags } = require('discord.js');
 const { getWarnings, clearWarnings, removeWarn } = require('../../database/warnings');
 const { hierarchyAllows } = require('../../utils/helpers');
+const { t, getLang } = require('../../utils/i18n');
 
 let theme = null;
 try {
@@ -24,9 +25,9 @@ const paginate = theme?.paginate ?? (async (interaction, pages) => interaction.r
 
 const PAGE_SIZE = 8;
 
-function formatWarnLine(w, i) {
+function formatWarnLine(w, i, lang) {
   const id = typeof w?.id === 'string' && w.id ? w.id : 'sconosciuto';
-  const reason = truncate(typeof w?.reason === 'string' && w.reason ? w.reason : 'Nessun motivo specificato', 200);
+  const reason = truncate(typeof w?.reason === 'string' && w.reason ? w.reason : t('moderation.noReason', lang), 200);
   const mod = typeof w?.modId === 'string' && w.modId ? `<@${w.modId}>` : 'sconosciuto';
   const when = Number.isFinite(w?.at) ? `<t:${Math.floor(w.at / 1000)}:R>` : 'data sconosciuta';
   return `**${i + 1}.** \`${id}\` — ${reason}\n${mod} • ${when}`;
@@ -49,22 +50,23 @@ module.exports = {
   cooldown: 3,
   async execute(interaction) {
     if (!interaction.guild) {
-      return interaction.reply({ embeds: [themeErr('Usa questo comando dentro un server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('common.guildOnly', getLang(interaction.guildId)))], flags: MessageFlags.Ephemeral });
     }
+    const lang = getLang(interaction.guildId);
     const sub = interaction.options.getSubcommand();
     const user = interaction.options.getUser('utente');
     if (!user) {
-      return interaction.reply({ embeds: [themeErr('Utente non valido.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.invalidUser', lang))], flags: MessageFlags.Ephemeral });
     }
     const tag = user.tag ?? user.username ?? user.id;
 
     if (sub === 'lista') {
       const warns = getWarnings(interaction.guild.id, user.id);
-      if (!warns.length) return interaction.reply({ embeds: [ok('✅ Nessun warn', `${truncate(tag, 100)} non ha warn.`)], flags: MessageFlags.Ephemeral });
+      if (!warns.length) return interaction.reply({ embeds: [ok(t('moderation.warnings.none', lang), t('moderation.warnings.noneFor', lang, { tag: truncate(tag, 100) }))], flags: MessageFlags.Ephemeral });
       const pages = [];
       for (let p = 0; p * PAGE_SIZE < warns.length; p++) {
         const slice = warns.slice(p * PAGE_SIZE, p * PAGE_SIZE + PAGE_SIZE);
-        const desc = truncate(slice.map((w, k) => formatWarnLine(w, p * PAGE_SIZE + k)).join('\n\n'), 4000);
+        const desc = truncate(slice.map((w, k) => formatWarnLine(w, p * PAGE_SIZE + k, lang)).join('\n\n'), 4000);
         const embed = info(`⚠️ Warn di ${truncate(tag, 100)} (${warns.length})`, desc, COLORS.warn);
         if (warns.length > PAGE_SIZE) embed.setTitle(truncate(`⚠️ Warn di ${tag} (${warns.length}) — pag. ${p + 1}/${Math.ceil(warns.length / PAGE_SIZE)}`, 256));
         applyFooter(embed, interaction);
@@ -75,19 +77,19 @@ module.exports = {
     // rimuovi / pulisci: operazioni distruttive, verifica gerarchia se il membro è nel server
     const member = interaction.guild.members.cache.get(user.id) ?? await interaction.guild.members.fetch(user.id).catch(() => null);
     if (member && member.id === interaction.guild.ownerId && interaction.user.id !== interaction.guild.ownerId)
-      return interaction.reply({ embeds: [themeErr('Non puoi modificare i warn del proprietario del server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.warnings.owner', lang))], flags: MessageFlags.Ephemeral });
     if (member && !hierarchyAllows(interaction, member))
-      return interaction.reply({ embeds: [themeErr('Ruolo uguale/superiore al tuo.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.hierarchy', lang))], flags: MessageFlags.Ephemeral });
     if (sub === 'rimuovi') {
       const id = interaction.options.getString('id');
-      if (!id) return interaction.reply({ embeds: [themeErr('ID del warn non valido.')], flags: MessageFlags.Ephemeral });
+      if (!id) return interaction.reply({ embeds: [themeErr(t('moderation.warnings.badId', lang))], flags: MessageFlags.Ephemeral });
       const done = removeWarn(interaction.guild.id, user.id, id);
       return interaction.reply({
-        embeds: [done ? applyFooter(ok('✅ Warn rimosso', `Warn \`${truncate(id, 100)}\` di ${truncate(tag, 100)} rimosso.`), interaction) : themeErr(`Warn \`${truncate(id, 100)}\` non trovato.`)],
+        embeds: [done ? applyFooter(ok(t('moderation.warnings.removed', lang), t('moderation.warnings.removedDesc', lang, { id: truncate(id, 100), tag: truncate(tag, 100) })), interaction) : themeErr(`Warn \`${truncate(id, 100)}\` ${t('moderation.warnings.notFound', lang)}`)],
         flags: MessageFlags.Ephemeral,
       });
     }
     clearWarnings(interaction.guild.id, user.id);
-    return interaction.reply({ embeds: [applyFooter(ok('🧹 Warn puliti', `Tutti i warn di ${truncate(tag, 100)} sono stati rimossi.`), interaction)], flags: MessageFlags.Ephemeral });
+    return interaction.reply({ embeds: [applyFooter(ok(t('moderation.warnings.cleared', lang), t('moderation.warnings.clearedDesc', lang, { tag: truncate(tag, 100) })), interaction)], flags: MessageFlags.Ephemeral });
   },
 };

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const { getUser, updateUser, getTuning } = require('../../database/economy');
+const { t, getLang } = require('../../utils/i18n');
 
 // theme.js con fallback inline: mai crash se il require fallisce.
 let _T = null;
@@ -13,7 +14,7 @@ const applyFooter = _T?.applyFooter ?? ((embed, interaction) => {
 const num = _T?.num ?? ((n) => (Number.isFinite(Number(n)) ? Number(n).toLocaleString('it-IT') : 'n/d'));
 const truncate = _T?.truncate ?? ((s, m) => String(s ?? '').slice(0, m));
 
-const jobs = [
+const jobsFallback = [
   { name: 'Programmatore', emoji: '💻', min: 50, max: 150 },
   { name: 'Pizzaiolo', emoji: '🍕', min: 30, max: 100 },
   { name: 'Streamer', emoji: '🎥', min: 40, max: 180 },
@@ -21,6 +22,16 @@ const jobs = [
   { name: 'Insegnante', emoji: '📚', min: 45, max: 120 },
   { name: 'Meccanico', emoji: '🔧', min: 35, max: 110 },
 ];
+
+/** Nomi lavori localizzati (stessi min/max/emoji del fallback). */
+function jobsFor(lang) {
+  const names = t('economy.work.jobs', lang);
+  if (!Array.isArray(names) || !names.length) return jobsFallback;
+  return jobsFallback.map((j, i) => {
+    const parts = String(names[i] || '').split('|');
+    return { ...j, name: parts[0] || j.name, emoji: parts[1] || j.emoji };
+  });
+}
 
 const COOLDOWN = 60 * 60 * 1000; // 1 ora
 
@@ -30,17 +41,19 @@ module.exports = {
     .setDescription('Lavora per guadagnare monete'),
   cooldown: 5,
   async execute(interaction) {
+    const lang = getLang(interaction.guild?.id);
     const userData = getUser(interaction.guild.id, interaction.user.id);
     const now = Date.now();
 
     if (now - (Number(userData.lastWork) || 0) < COOLDOWN) {
       const remaining = (Number(userData.lastWork) || 0) + COOLDOWN;
       return interaction.reply({
-        content: `⏳ Puoi lavorare di nuovo <t:${Math.floor(remaining / 1000)}:R> (<t:${Math.floor(remaining / 1000)}:T>)`,
+        content: t('economy.work.cooldown', lang, { ts: `<t:${Math.floor(remaining / 1000)}:R> (<t:${Math.floor(remaining / 1000)}:T>)` }),
         flags: MessageFlags.Ephemeral,
       });
     }
 
+    const jobs = jobsFor(lang);
     const job = jobs[Math.floor(Math.random() * jobs.length)];
     let earned = Math.floor(Math.random() * (job.max - job.min + 1)) + job.min;
     // Moltiplicatore dal tuning server (dashboard > Economia, default 100%).
@@ -60,10 +73,10 @@ module.exports = {
     const fmt = (n) => num(n);
     const embed = applyFooter(new EmbedBuilder()
       .setColor(COLORS.gold)
-      .setTitle('💼 Lavoro completato!')
+      .setTitle(t('economy.work.done', lang))
       .setThumbnail(interaction.user.displayAvatarURL())
       .setDescription(
-        truncate(`${job.emoji} Hai lavorato come **${job.name}** e hai guadagnato **${fmt(earned)}** 🪙!\n👛 Nuovo saldo: **${fmt(newBalance)}** 🪙`, 4000)
+        truncate(t('economy.work.body', lang, { emoji: job.emoji, job: job.name, n: fmt(earned), bal: fmt(newBalance) }), 4000)
       ), interaction);
 
     await interaction.reply({ embeds: [embed] });

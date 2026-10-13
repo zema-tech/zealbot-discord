@@ -59,22 +59,23 @@ Notes:
 
 ## Bot message languages (i18n)
 
-Reply texts go through `src/utils/i18n.js`: `t(key, lang, vars)` with
-per-key fallback to Italian, `getLang(guildId)` reads `language` from
-`guildConfig` (change it with `/lingua` — no separate `/language` command:
-it would duplicate it). Supported languages: `it`, `en`
-(`SUPPORTED_LANGS`, fallback `it`). Canonical strings live in
-`src/locales/<lang>.json` (`it.js`/`en.js` re-export them for compatibility),
-powered by the `i18next` engine under the same API (no fs-backend: JSONs
-ship with the code).
+Reply texts go through `src/core/i18n.js` (i18next engine with fs-backend
+over `src/locales/<lang>.json`, inline fallback if the backend fails):
+`t(guildId, key, vars)` with per-key fallback to English,
+`getGuildLanguage(guildId)` reads `language` from `guildConfig`
+(change it with `/language`, admins only; `/lingua` points to the dashboard).
+Supported languages: `en`, `it` (fallback `en`).
+`src/utils/i18n.js` keeps the legacy `t(key, lang, vars)` API on the same
+JSONs for existing callers.
 
-Current coverage is partial (a handful of commands); slash names and
-descriptions stay in Italian.
+Current coverage: moderation, economy, tickets, levels commands; slash names
+and descriptions stay in Italian.
 
 To add a language (e.g. `es`):
 
 1. Copy `src/locales/en.json` to `src/locales/es.json` and translate the
-   values (missing keys automatically fall back to Italian).
-2. Add `'es'` to `SUPPORTED_LANGS` in `src/utils/i18n.js`.
-3. Use `t('key', await getLang(guildId), { vars })` in new texts instead of
+   values (missing keys automatically fall back to English).
+2. Add `'es'` to `SUPPORTED` in `src/core/i18n.js` (and `SUPPORTED_LANGS`
+   in `src/utils/i18n.js` for legacy callers).
+3. Use `t(guildId, 'key', { vars })` in new texts instead of
    hardcoded strings; don't churn existing texts without reason.

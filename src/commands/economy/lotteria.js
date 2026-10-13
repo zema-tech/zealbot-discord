@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, MessageFlags } = require('discord.js');
 const { getUser, addBalance } = require('../../database/economy');
 const { getState, addTickets, totalTickets, resetLottery } = require('../../database/lotteria');
+const { t, getLang } = require('../../utils/i18n');
 
 // theme.js con fallback inline se il require fallisse.
 let COLORS = { gold: 0xffd700, success: 0x57f287, purple: 0x9b59b6 };
@@ -45,11 +46,11 @@ function pickWinnerWeighted(entries) {
   return null;
 }
 
-function partyEmbed(winnerId, prize, total, interaction) {
+function partyEmbed(winnerId, prize, total, interaction, lang) {
   const embed = new EmbedBuilder()
     .setColor(COLORS.gold)
-    .setTitle('🎉 ABBIAMO UN VINCITORE! 🎉')
-    .setDescription(`🥳 Congratulazioni <@${winnerId}>!\n\nHai vinto **${num(prize)}** 🪙 con **${num(total)}** biglietti totali in gioco!`)
+    .setTitle(t('economy.lotteria.winner', lang))
+    .setDescription(t('economy.lotteria.winnerDesc', lang, { user: `<@${winnerId}>`, prize: num(prize), total: num(total) }))
     .setTimestamp();
   if (interaction) applyFooter(embed, interaction);
   return embed;
@@ -83,7 +84,8 @@ module.exports = {
   async execute(interaction) {
     const sub = interaction.options.getSubcommand();
     const guildId = interaction.guild?.id;
-    if (!guildId) return safeReply(interaction, { content: '❌ Comando disponibile solo nei server.' });
+    const lang = getLang(guildId);
+    if (!guildId) return safeReply(interaction, { content: t('economy.guildOnly', lang) });
     const userId = interaction.user.id;
 
     if (sub === 'info') {
@@ -92,17 +94,17 @@ module.exports = {
       const mine = state.entries[userId] || 0;
       const embed = new EmbedBuilder()
         .setColor(COLORS.purple)
-        .setTitle('🎰 Lotteria del server')
+        .setTitle(t('economy.lotteria.infoTitle', lang))
         .addFields(
-          { name: '🍯 Piatto', value: `**${num(state.pot)}** 🪙`, inline: true },
-          { name: '🎟️ Prezzo biglietto', value: `**${num(state.ticketPrice)}** 🪙`, inline: true },
-          { name: '📊 Biglietti venduti', value: `**${num(total)}/${num(state.threshold)}**`, inline: true },
-          { name: '🎫 I tuoi biglietti', value: `**${num(mine)}**`, inline: true }
+          { name: t('economy.lotteria.pot', lang), value: `**${num(state.pot)}** 🪙`, inline: true },
+          { name: t('economy.lotteria.price', lang), value: `**${num(state.ticketPrice)}** 🪙`, inline: true },
+          { name: t('economy.lotteria.sold', lang), value: `**${num(total)}/${num(state.threshold)}**`, inline: true },
+          { name: t('economy.lotteria.mine', lang), value: `**${num(mine)}**`, inline: true }
         )
         .setDescription(
           total >= state.threshold
-            ? '🔥 Soglia raggiunta: estrazione imminente!'
-            : `L'estrazione automatica parte a **${num(state.threshold)}** biglietti. Usa \`/lotteria compra\`!`
+            ? t('economy.lotteria.thresholdHit', lang)
+            : t('economy.lotteria.thresholdWait', lang, { n: num(state.threshold) })
         )
         .setTimestamp();
       applyFooter(embed, interaction);
@@ -112,7 +114,7 @@ module.exports = {
     if (sub === 'compra') {
       const n = interaction.options.getInteger('biglietti') ?? 1;
       if (!Number.isInteger(n) || n < 1 || n > MAX_TICKETTI_PER_VOLTA) {
-        return safeReply(interaction, { content: `❌ Puoi comprare da 1 a ${MAX_TICKETTI_PER_VOLTA} biglietti alla volta.`, flags: MessageFlags.Ephemeral });
+        return safeReply(interaction, { content: t('economy.lotteria.badCount', lang, { max: MAX_TICKETTI_PER_VOLTA }), flags: MessageFlags.Ephemeral });
       }
 
       const before = getState(guildId);
@@ -120,7 +122,7 @@ module.exports = {
       const user = getUser(guildId, userId);
       if (!Number.isFinite(user.balance) || user.balance < cost) {
         return safeReply(interaction, {
-          content: `❌ Saldo insufficiente: **${n}** biglietti costano **${num(cost)}** 🪙 (hai **${num(user.balance)}** 🪙).`,
+          content: t('economy.lotteria.noFunds', lang, { n, cost: num(cost), bal: num(user.balance) }),
           flags: MessageFlags.Ephemeral,
         });
       }
@@ -132,7 +134,7 @@ module.exports = {
       } catch (e) {
         // Compensazione: se i biglietti non vengono registrati, rimborsa l'addebito.
         addBalance(guildId, userId, cost);
-        return safeReply(interaction, { content: `❌ Acquisto fallito (${e?.message || 'errore'}). Saldo rimborsato.`, flags: MessageFlags.Ephemeral });
+        return safeReply(interaction, { content: t('economy.lotteria.buyFailed', lang, { err: e?.message || 'errore' }), flags: MessageFlags.Ephemeral });
       }
       const total = Object.values(state.entries).reduce((a, b) => a + (Number(b) || 0), 0);
 
@@ -141,8 +143,8 @@ module.exports = {
           (() => {
             const e = new EmbedBuilder()
               .setColor(COLORS.success)
-              .setTitle('🎟️ Biglietti acquistati!')
-              .setDescription(`${interaction.user} ha comprato **${num(n)}** biglietti per **${num(cost)}** 🪙\n🍯 Piatto: **${num(state.pot)}** 🪙 • 📊 Biglietti: **${num(total)}/${num(state.threshold)}**`)
+              .setTitle(t('economy.lotteria.bought', lang))
+              .setDescription(t('economy.lotteria.boughtDesc', lang, { user: `${interaction.user}`, n: num(n), cost: num(cost), pot: num(state.pot), total: num(total), threshold: num(state.threshold) }))
               .setTimestamp();
             return applyFooter(e, interaction);
           })(),
@@ -154,7 +156,7 @@ module.exports = {
         drawing.add(guildId);
         try {
           const result = await runDraw(guildId);
-          if (result) await safeReply(interaction, { embeds: [partyEmbed(result.winnerId, result.prize, result.total, interaction)] });
+          if (result) await safeReply(interaction, { embeds: [partyEmbed(result.winnerId, result.prize, result.total, interaction, lang)] });
         } finally {
           drawing.delete(guildId);
         }
@@ -164,16 +166,16 @@ module.exports = {
 
     // sub === 'estrai' (staff: controllo interno per lasciare info/compra a tutti).
     if (!interaction.memberPermissions?.has(PermissionFlagsBits.ManageGuild)) {
-      return safeReply(interaction, { content: '❌ Ti serve il permesso **Gestisci server** per estrarre il vincitore.', flags: MessageFlags.Ephemeral });
+      return safeReply(interaction, { content: t('economy.lotteria.needManage', lang), flags: MessageFlags.Ephemeral });
     }
     if (drawing.has(guildId)) {
-      return safeReply(interaction, { content: '⏳ Estrazione già in corso, attendi qualche secondo.', flags: MessageFlags.Ephemeral });
+      return safeReply(interaction, { content: t('economy.lotteria.drawingBusy', lang), flags: MessageFlags.Ephemeral });
     }
     const total = totalTickets(guildId);
     if (total < MIN_TICKETTI_ESTRAZIONE_MANUALE) {
       // Rifiuto SENZA rimborsare: i biglietti restano validi per la prossima estrazione.
       return safeReply(interaction, {
-        content: `❌ Servono almeno **${MIN_TICKETTI_ESTRAZIONE_MANUALE}** biglietti per estrarre (ora: **${num(total)}**). Nessun rimborso: i biglietti già comprati restano validi.`,
+        content: t('economy.lotteria.needMin', lang, { min: MIN_TICKETTI_ESTRAZIONE_MANUALE, n: num(total) }),
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -181,9 +183,9 @@ module.exports = {
     try {
       const result = await runDraw(guildId);
       if (!result) {
-        return safeReply(interaction, { content: '❌ Piatto vuoto: impossibile estrarre.', flags: MessageFlags.Ephemeral });
+        return safeReply(interaction, { content: t('economy.lotteria.emptyPot', lang), flags: MessageFlags.Ephemeral });
       }
-      return safeReply(interaction, { embeds: [partyEmbed(result.winnerId, result.prize, result.total, interaction)] });
+      return safeReply(interaction, { embeds: [partyEmbed(result.winnerId, result.prize, result.total, interaction, lang)] });
     } finally {
       drawing.delete(guildId);
     }

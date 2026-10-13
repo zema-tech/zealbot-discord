@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, MessageFlags } = require('discord.js');
 const { CASE_TYPES, getCase, getUserCases, addNote, removeCase, searchCases } = require('../../database/cases');
+const { t, getLang } = require('../../utils/i18n');
 let theme = null;
 try { theme = require('../../utils/theme'); } catch { theme = null; }
 const COLORS = theme?.COLORS ?? { primary: 0x5865f2, success: 0x57f287, error: 0xed4245 };
@@ -20,22 +21,22 @@ function fmtTime(at, style) {
   return `<t:${Math.floor(ms / 1000)}:${style}>`;
 }
 
-function caseLine(c) {
+function caseLine(c, lang) {
   const emoji = TYPE_EMOJI[c.type] || '📌';
-  const reason = truncate(c.reason || 'Nessun motivo specificato', 120);
+  const reason = truncate(c.reason || t('moderation.noReason', lang), 120);
   return `**#${c.id}** ${emoji} \`${c.type}\` — ${reason}\n<@${c.modId}> • ${fmtTime(c.at, 'R')}`;
 }
 
-function detailEmbed(c, interaction) {
+function detailEmbed(c, interaction, lang) {
   const emoji = TYPE_EMOJI[c.type] || '📌';
   const embed = new EmbedBuilder()
     .setColor(COLORS.primary)
     .setTitle(`${emoji} Caso #${c.id} — ${c.type}`.slice(0, 256))
     .addFields(
-      { name: 'Utente', value: `<@${c.userId}> (${c.userId})`, inline: true },
-      { name: 'Moderatore', value: `<@${c.modId}>`, inline: true },
-      { name: 'Data', value: fmtTime(c.at, 'F'), inline: true },
-      { name: 'Motivo', value: truncate(c.reason || 'Nessun motivo specificato', 1024) || 'Nessun motivo specificato' }
+      { name: t('moderation.caso.user', lang), value: `<@${c.userId}> (${c.userId})`, inline: true },
+      { name: t('moderation.caso.moderator', lang), value: `<@${c.modId}>`, inline: true },
+      { name: t('moderation.caso.date', lang), value: fmtTime(c.at, 'F'), inline: true },
+      { name: t('moderation.caso.reason', lang), value: truncate(c.reason || t('moderation.noReason', lang), 1024) || t('moderation.noReason', lang) }
     )
     .setTimestamp(Number.isFinite(Number(c.at)) ? Number(c.at) : Date.now());
   if (interaction) applyFooter(embed, interaction);
@@ -70,33 +71,34 @@ module.exports = {
   cooldown: 3,
   async execute(interaction) {
     if (!interaction.guild) {
-      return interaction.reply({ embeds: [errEmbed('Usa questo comando dentro un server.')], flags: MessageFlags.Ephemeral }).catch(() => null);
+      return interaction.reply({ embeds: [errEmbed(t('common.guildOnly', getLang(interaction.guildId)))], flags: MessageFlags.Ephemeral }).catch(() => null);
     }
+    const lang = getLang(interaction.guildId);
     const sub = interaction.options.getSubcommand();
     const ephemeral = (payload) => interaction.reply({ ...payload, flags: MessageFlags.Ephemeral }).catch(() => null);
 
     if (sub === 'vedi') {
       const c = getCase(interaction.guild.id, interaction.options.getString('id'));
-      if (!c) return ephemeral({ embeds: [errEmbed('Caso non trovato.')] });
-      return ephemeral({ embeds: [detailEmbed(c, interaction)] });
+      if (!c) return ephemeral({ embeds: [errEmbed(t('moderation.caso.notFound', lang))] });
+      return ephemeral({ embeds: [detailEmbed(c, interaction, lang)] });
     }
 
     if (sub === 'utente') {
       const user = interaction.options.getUser('utente');
-      if (!user) return ephemeral({ embeds: [errEmbed('Utente non valido.')] });
+      if (!user) return ephemeral({ embeds: [errEmbed(t('moderation.invalidUser', lang))] });
       const tipo = interaction.options.getString('tipo');
       const all = tipo
         ? searchCases(interaction.guild.id, { userId: user.id, type: tipo, limit: 100 })
         : getUserCases(interaction.guild.id, user.id, 100);
       if (!all.length) {
-        return ephemeral({ embeds: [okEmbed('✅ Nessun caso', `${user.tag ?? user.username} non ha casi${tipo ? ` di tipo \`${tipo}\`` : ''} registrati.`)] });
+        return ephemeral({ embeds: [okEmbed(t('moderation.caso.none', lang), t('moderation.caso.noCasesFor', lang, { tag: user.tag ?? user.username, tipo: tipo ? ` di tipo \`${tipo}\`` : '', ttype: tipo ? ` \`${tipo}\`` : '' }))] });
       }
       const shown = all.slice(0, 10);
       const rest = all.length - shown.length;
       const embed = new EmbedBuilder()
         .setColor(COLORS.primary)
-        .setTitle(`📋 Storico di ${user.tag ?? user.username} (${all.length})`.slice(0, 256))
-        .setDescription((shown.map(caseLine).join('\n\n') + (rest > 0 ? `\n\n…e altri ${rest}.` : '')).slice(0, 4000))
+        .setTitle(t('moderation.caso.historyOf', lang, { tag: user.tag ?? user.username, n: all.length }).slice(0, 256))
+        .setDescription((shown.map((c) => caseLine(c, lang)).join('\n\n') + (rest > 0 ? `\n\n${t('moderation.caso.more', lang, { n: rest })}` : '')).slice(0, 4000))
         .setTimestamp();
       applyFooter(embed, interaction);
       return ephemeral({ embeds: [embed] });
@@ -104,23 +106,23 @@ module.exports = {
 
     if (sub === 'nota') {
       const user = interaction.options.getUser('utente');
-      if (!user) return ephemeral({ embeds: [errEmbed('Utente non valido.')] });
+      if (!user) return ephemeral({ embeds: [errEmbed(t('moderation.invalidUser', lang))] });
       const testo = truncate(interaction.options.getString('testo') || '', 1024);
-      if (!testo) return ephemeral({ embeds: [errEmbed('Testo della nota mancante.')] });
+      if (!testo) return ephemeral({ embeds: [errEmbed(t('moderation.caso.noText', lang))] });
       const c = addNote(interaction.guild.id, { userId: user.id, modId: interaction.user.id, reason: testo });
-      if (!c) return ephemeral({ embeds: [errEmbed('Impossibile salvare la nota.')] });
-      return ephemeral({ embeds: [okEmbed('📝 Nota salvata', `Nota per ${user.tag ?? user.username} salvata come caso \`#${c.id}\`.`)] });
+      if (!c) return ephemeral({ embeds: [errEmbed(t('moderation.caso.saveFailed', lang))] });
+      return ephemeral({ embeds: [okEmbed(t('moderation.caso.saved', lang), t('moderation.caso.noteSavedDesc', lang, { tag: user.tag ?? user.username, id: c.id })) ] });
     }
 
     if (sub === 'elimina') {
       if (!interaction.memberPermissions?.has(PermissionFlagsBits.ManageGuild)) {
-        return ephemeral({ embeds: [errEmbed('Serve il permesso `ManageGuild` per eliminare un caso.')] });
+        return ephemeral({ embeds: [errEmbed(t('moderation.caso.needManage', lang))] });
       }
       const id = interaction.options.getString('id');
       const ok = removeCase(interaction.guild.id, id);
-      return ephemeral({ embeds: [ok ? okEmbed('🗑️ Caso eliminato', `Caso \`#${id}\` eliminato.`) : errEmbed(`Caso \`#${id}\` non trovato.`)] });
+      return ephemeral({ embeds: [ok ? okEmbed(t('moderation.caso.deleted', lang), t('moderation.caso.deletedDesc', lang, { id })) : errEmbed(t('moderation.caso.notFoundDesc', lang, { id }))] });
     }
 
-    return ephemeral({ embeds: [errEmbed('Sottocomando sconosciuto.')] });
+    return ephemeral({ embeds: [errEmbed(t('moderation.caso.unknownSub', lang))] });
   },
 };

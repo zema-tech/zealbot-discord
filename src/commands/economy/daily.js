@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const { getUser, updateUser, getTuning } = require('../../database/economy');
+const { t, getLang } = require('../../utils/i18n');
 
 let theme = null;
 try {
@@ -55,11 +56,12 @@ module.exports = {
     };
 
     if (!interaction.guild?.id) {
-      await safeReply({ embeds: [themeErr('Comando disponibile solo nei server.')], flags: MessageFlags.Ephemeral });
+      await safeReply({ embeds: [themeErr(t('economy.guildOnly', getLang(interaction.guild?.id)))], flags: MessageFlags.Ephemeral });
       return;
     }
+    const lang = getLang(interaction.guild.id);
     if (!interaction.user?.id) {
-      await safeReply({ embeds: [themeErr('Utente non valido.')], flags: MessageFlags.Ephemeral });
+      await safeReply({ embeds: [themeErr(t('economy.invalidUser', lang))], flags: MessageFlags.Ephemeral });
       return;
     }
 
@@ -101,17 +103,27 @@ module.exports = {
         dailyStreak: streak,
       });
     } catch {
-      await safeReply({ embeds: [themeErr('Errore durante il ritiro del daily, riprova più tardi.')], flags: MessageFlags.Ephemeral });
+      await safeReply({ embeds: [themeErr(t('economy.daily.failed', lang))], flags: MessageFlags.Ephemeral });
       return;
     }
     const nextTs = Math.floor((now + COOLDOWN) / 1000);
     const flames = '🔥'.repeat(Math.min(streak, 10));
     const embed = new EmbedBuilder()
       .setColor(COLORS.gold)
-      .setTitle(themeTruncate('🎁 Ricompensa giornaliera!', 256))
+      .setTitle(themeTruncate(t('economy.daily.title', lang), 256))
       .setDescription(
         themeTruncate(
-          `Hai ricevuto **${themeNum(reward)}** 🪙!${interest > 0 ? `\n🏦 Interessi banca (2%): **+${themeNum(interest)}** 🪙` : '\n🏦 Deposita con `/bank deposita` per guadagnare interessi!'}\n${flames}\n🔥 Streak: **${themeNum(streak)}** ${streak === 1 ? 'giorno' : 'giorni'} (+${themeNum(bonus)} bonus)\n⏳ Prossimo bonus <t:${nextTs}:R> (<t:${nextTs}:T>)`,
+          t('economy.daily.body', lang, {
+            reward: themeNum(reward),
+            interest: interest > 0
+              ? t('economy.daily.interestLine', lang, { interest: themeNum(interest) })
+              : t('economy.daily.noInterestHint', lang),
+            flames,
+            streak: themeNum(streak),
+            giorni: streak === 1 ? t('economy.daily.dayOne', lang) : t('economy.daily.dayMany', lang),
+            bonus: themeNum(bonus),
+            next: `<t:${nextTs}:R> (<t:${nextTs}:T>)`,
+          }),
           4000
         )
       );

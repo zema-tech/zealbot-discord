@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const { getUser } = require('../../database/economy');
+const { t, getLang } = require('../../utils/i18n');
 
 let theme = null;
 try {
@@ -42,9 +43,10 @@ module.exports = {
     .addUserOption((o) => o.setName('utente').setDescription('Utente').setRequired(false)),
   cooldown: 3,
   async execute(interaction) {
+    const lang = getLang(interaction.guild?.id);
     if (!interaction.guild?.id) {
       try {
-        await interaction.reply({ embeds: [themeErr('Comando disponibile solo nei server.')], flags: MessageFlags.Ephemeral });
+        await interaction.reply({ embeds: [themeErr(t('economy.guildOnly', lang))], flags: MessageFlags.Ephemeral });
       } catch {
         // ignora
       }
@@ -53,7 +55,7 @@ module.exports = {
     const user = interaction.options.getUser('utente') || interaction.user;
     if (!user?.id) {
       try {
-        await interaction.reply({ embeds: [themeErr('Utente non valido.')], flags: MessageFlags.Ephemeral });
+        await interaction.reply({ embeds: [themeErr(t('economy.invalidUser', lang))], flags: MessageFlags.Ephemeral });
       } catch {}
       return;
     }
@@ -70,7 +72,7 @@ module.exports = {
     const total = wallet + bank;
     const embed = new EmbedBuilder()
       .setColor(COLORS.gold)
-      .setTitle(themeTruncate(`💰 Saldo di ${user.username ?? user.tag ?? 'Utente'}`, 256));
+      .setTitle(themeTruncate(t('economy.balance.title', lang, { name: user.username ?? user.tag ?? 'Utente' }), 256));
     try {
       const url = user.displayAvatarURL?.();
       if (url) embed.setThumbnail(url);
@@ -79,12 +81,12 @@ module.exports = {
     }
     try {
       embed.addFields(
-        { name: '👛 Portafoglio', value: `**${themeNum(wallet)}** 🪙`, inline: true },
-        { name: '🏦 Banca', value: `**${themeNum(bank)}** 🪙`, inline: true },
-        { name: '💎 Totale', value: `**${themeNum(total)}** 🪙`, inline: true }
+        { name: t('economy.balance.wallet', lang), value: `**${themeNum(wallet)}** 🪙`, inline: true },
+        { name: t('economy.balance.bank', lang), value: `**${themeNum(bank)}** 🪙`, inline: true },
+        { name: t('economy.balance.total', lang), value: `**${themeNum(total)}** 🪙`, inline: true }
       );
     } catch {
-      embed.setDescription(`👛 Portafoglio: **${themeNum(wallet)}** 🪙\n🏦 Banca: **${themeNum(bank)}** 🪙\n💎 Totale: **${themeNum(total)}** 🪙`);
+      embed.setDescription(`${t('economy.balance.wallet', lang)}: **${themeNum(wallet)}** 🪙\n${t('economy.balance.bank', lang)}: **${themeNum(bank)}** 🪙\n${t('economy.balance.total', lang)}: **${themeNum(total)}** 🪙`);
     }
     themeFooter(embed, interaction);
     try {

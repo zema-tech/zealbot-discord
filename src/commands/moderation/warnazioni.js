@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, MessageFlags } = require('discord.js');
 const { getWarnActions, setWarnActions, DEFAULT_ACTIONS } = require('../../database/warnings');
+const { t, getLang } = require('../../utils/i18n');
 
 let theme = null;
 try {
@@ -33,8 +34,9 @@ module.exports = {
   cooldown: 3,
   async execute(interaction) {
     if (!interaction.guild) {
-      return interaction.reply({ embeds: [themeErr('Usa questo comando dentro un server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('common.guildOnly', getLang(interaction.guildId)))], flags: MessageFlags.Ephemeral });
     }
+    const lang = getLang(interaction.guildId);
     const sub = interaction.options.getSubcommand();
     const gid = interaction.guild.id;
 
@@ -51,12 +53,12 @@ module.exports = {
     }
 
     if (!interaction.memberPermissions?.has(PermissionFlagsBits.ManageGuild)) {
-      return interaction.reply({ embeds: [themeErr('Ti serve il permesso **Gestisci Server**.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.warnazioni.needManage', lang))], flags: MessageFlags.Ephemeral });
     }
 
     if (sub === 'reset') {
       setWarnActions(gid, DEFAULT_ACTIONS.map((r) => ({ ...r })));
-      return interaction.reply({ content: '✅ Regole ripristinate: **3 warn → timeout 10 min**.', flags: MessageFlags.Ephemeral }).catch(() => null);
+      return interaction.reply({ content: t('moderation.warnazioni.reset', lang), flags: MessageFlags.Ephemeral }).catch(() => null);
     }
 
     // imposta: "3:timeout:10, 5:kick, 7:ban"
@@ -71,9 +73,9 @@ module.exports = {
     }
     try {
       const saved = setWarnActions(gid, rules);
-      return interaction.reply({ content: `✅ Regole salvate:\n${saved.map(fmtRule).join('\n')}`, flags: MessageFlags.Ephemeral }).catch(() => null);
+      return interaction.reply({ content: `${t('moderation.warnazioni.saved', lang)}:\n${saved.map(fmtRule).join('\n')}`, flags: MessageFlags.Ephemeral }).catch(() => null);
     } catch (e) {
-      return interaction.reply({ embeds: [themeErr(e?.message || 'Regole non valide.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.warnazioni.invalid', lang))], flags: MessageFlags.Ephemeral });
     }
   },
 };

@@ -9,6 +9,7 @@ const {
 } = require('discord.js');
 const { askAI } = require('../../ai/ai');
 const { getTicket, getConfig } = require('../../database/tickets');
+const { t, getLang } = require('../../utils/i18n');
 
 let theme = null;
 try {
@@ -90,20 +91,21 @@ module.exports = {
   cooldown: 10,
   async execute(interaction) {
     if (!interaction.guild) {
-      return interaction.reply({ embeds: [themeErr('Usa questo comando dentro un server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('common.guildOnly', getLang(interaction.guildId)))] , flags: MessageFlags.Ephemeral });
     }
+    const lang = getLang(interaction.guild.id);
 
     const aiConfig = getAIConfig(interaction.guild.id);
     if (!aiConfig.ticketAI) {
-      return interaction.reply({ embeds: [themeErr('AI disabilitata per i ticket in questo server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('tickets.ai.disabled', lang))], flags: MessageFlags.Ephemeral });
     }
 
     const ticket = getTicket(interaction.guild.id, interaction.channelId);
     if (!ticket) {
-      return interaction.reply({ embeds: [themeErr('Usa questo comando dentro un canale ticket.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('tickets.needTicketChannel', lang))], flags: MessageFlags.Ephemeral });
     }
     if (ticket.status !== 'open') {
-      return interaction.reply({ embeds: [themeErr('Il ticket è chiuso.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('tickets.ai.isClosed', lang))], flags: MessageFlags.Ephemeral });
     }
 
     const sub = interaction.options.getSubcommand();
@@ -116,12 +118,12 @@ module.exports = {
     try {
       messages = await interaction.channel.messages.fetch({ limit: MAX_HISTORY });
     } catch {
-      return interaction.editReply({ embeds: [themeErr('Impossibile leggere i messaggi del ticket.')] }).catch(() => {});
+      return interaction.editReply({ embeds: [themeErr(t('tickets.ai.cantRead', lang))] }).catch(() => {});
     }
 
     const conversazione = formatHistory(messages);
     if (!conversazione) {
-      return interaction.editReply({ embeds: [themeErr('Nessun messaggio di testo da analizzare nel ticket.')] }).catch(() => {});
+      return interaction.editReply({ embeds: [themeErr(t('tickets.ai.emptyHistory', lang))] }).catch(() => {});
     }
 
     if (sub === 'riassumi') {
@@ -134,11 +136,11 @@ module.exports = {
             (brain.system ? `\n\n${brain.system}` : '')
         );
       } catch {
-        return interaction.editReply({ embeds: [themeErr('AI non disponibile, riprova più tardi.')] }).catch(() => {});
+        return interaction.editReply({ embeds: [themeErr(t('tickets.ai.unavailable', lang))] }).catch(() => {});
       }
       riassunto = String(riassunto ?? '').trim();
       if (!riassunto) {
-        return interaction.editReply({ embeds: [themeErr('AI non disponibile, riprova più tardi.')] }).catch(() => {});
+        return interaction.editReply({ embeds: [themeErr(t('tickets.ai.unavailable', lang))] }).catch(() => {});
       }
       const embed = new EmbedBuilder()
         .setColor(COLORS.primary)
@@ -158,11 +160,11 @@ module.exports = {
           (brainSugg.system ? `\n\n${brainSugg.system}` : '')
       );
     } catch {
-      return interaction.editReply({ embeds: [themeErr('AI non disponibile, riprova più tardi.')] }).catch(() => {});
+      return interaction.editReply({ embeds: [themeErr(t('tickets.ai.unavailable', lang))] }).catch(() => {});
     }
     bozza = String(bozza ?? '').slice(0, MAX_DRAFT_CHARS).trim();
     if (!bozza) {
-      return interaction.editReply({ embeds: [themeErr('AI non disponibile, riprova più tardi.')] }).catch(() => {});
+      return interaction.editReply({ embeds: [themeErr(t('tickets.ai.unavailable', lang))] }).catch(() => {});
     }
 
     const publishBtn = new ButtonBuilder()
@@ -199,15 +201,15 @@ module.exports = {
 
     collector.on('collect', async (i) => {
       if (!isStaff(i.member, ticketConfig)) {
-        return i.reply({ embeds: [themeErr('Solo lo staff può pubblicare la bozza.')], flags: MessageFlags.Ephemeral });
+        return i.reply({ embeds: [themeErr(t('tickets.ai.staffOnlyPublish', lang))], flags: MessageFlags.Ephemeral });
       }
       try {
         await interaction.channel.send(`📩 **Risposta dello staff** (bozza AI, pubblicata da ${i.user}):\n${bozza}`.slice(0, 2000));
       } catch {
-        return i.reply({ embeds: [themeErr('Non riesco a scrivere nel canale.')], flags: MessageFlags.Ephemeral });
+        return i.reply({ embeds: [themeErr(t('tickets.ai.cantWrite', lang))], flags: MessageFlags.Ephemeral });
       }
       const disabled = new ActionRowBuilder().addComponents(publishBtn.setDisabled(true));
-      await i.update({ content: '✅ Bozza pubblicata nel ticket.', embeds: [], components: [disabled] }).catch(() => {});
+      await i.update({ content: t('tickets.ai.draftPublished', lang), embeds: [], components: [disabled] }).catch(() => {});
     });
 
     collector.on('end', async (collected) => {

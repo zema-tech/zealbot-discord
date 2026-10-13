@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, MessageFlags, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { t, getLang } = require('../../utils/i18n');
 
 // theme.js condiviso, con fallback inline se il require fallisse (mai nomi/opzioni diversi).
 let err, info, applyFooter;
@@ -19,24 +20,25 @@ module.exports = {
   cooldown: 10,
   async execute(interaction) {
     if (!interaction.guild) {
-      return interaction.reply({ embeds: [err('Usa questo comando dentro un server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [err(t('common.guildOnly', getLang(interaction.guildId)))], flags: MessageFlags.Ephemeral });
     }
+    const lang = getLang(interaction.guildId);
     if (!interaction.channel?.isTextBased?.() || typeof interaction.channel.clone !== 'function') {
-      return interaction.reply({ embeds: [err('Usa questo comando in un canale testuale del server (i thread non si possono rigenerare).')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [err(t('moderation.nuke.notText', lang))], flags: MessageFlags.Ephemeral });
     }
     // Fallisce subito con messaggio chiaro invece di fallire al click del bottone.
     const me = interaction.guild.members.me;
     if (me && !me.permissions.has(PermissionFlagsBits.ManageChannels)) {
-      return interaction.reply({ embeds: [err('Non ho il permesso **Gestisci Canali**: impossibile rigenerare questo canale.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [err(t('moderation.nuke.noPerms', lang))], flags: MessageFlags.Ephemeral });
     }
     if (interaction.channel && 'manageable' in interaction.channel && !interaction.channel.manageable) {
-      return interaction.reply({ embeds: [err('Non posso gestire questo canale (gerarchia ruoli o permessi insufficienti).')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [err(t('moderation.nuke.notManageable', lang))], flags: MessageFlags.Ephemeral });
     }
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder().setCustomId(`nuke_confirm:${interaction.channelId}`).setLabel('CONFERMA NUKE').setStyle(ButtonStyle.Danger),
-      new ButtonBuilder().setCustomId('nuke_cancel').setLabel('Annulla').setStyle(ButtonStyle.Secondary)
+      new ButtonBuilder().setCustomId('nuke_cancel').setLabel(t('moderation.nuke.cancel', lang)).setStyle(ButtonStyle.Secondary)
     );
-    const embed = applyFooter(info('⚠️ Conferma nuke', `Tutti i messaggi di ${interaction.channel} verranno eliminati.\nPremi **CONFERMA NUKE** per rigenerare il canale, oppure **Annulla**.`, 0xfee75c), interaction);
+    const embed = applyFooter(info(t('moderation.nuke.confirmTitle', lang), `Tutti i messaggi di ${interaction.channel} verranno eliminati.\nPremi **CONFERMA NUKE** per rigenerare il canale, oppure **Annulla**.`, 0xfee75c), interaction);
     await interaction.reply({ embeds: [embed], components: [row], flags: MessageFlags.Ephemeral });
   },
 };

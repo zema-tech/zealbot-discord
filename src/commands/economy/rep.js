@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const { getRep, getLastGiven, canGive, giveRep, getLeaderboard, getCooldown } = require('../../database/rep');
+const { t, getLang } = require('../../utils/i18n');
 
 // theme.js con fallback inline se il require fallisse.
 let COLORS = { gold: 0xffd700, warn: 0xfee75c, success: 0x57f287 };
@@ -41,19 +42,20 @@ module.exports = {
   async execute(interaction) {
     const sub = interaction.options.getSubcommand();
     const guildId = interaction.guild?.id;
-    if (!guildId) return safeReply(interaction, { content: '❌ Comando disponibile solo nei server.' });
+    const lang = getLang(guildId);
+    if (!guildId) return safeReply(interaction, { content: t('economy.guildOnly', lang) });
 
     if (sub === 'dai') {
       const target = interaction.options.getUser('utente');
       const giverId = interaction.user.id;
       if (!target) {
-        return safeReply(interaction, { content: '❌ Utente non valido.', flags: MessageFlags.Ephemeral });
+        return safeReply(interaction, { content: t('economy.rep.invalidUser', lang), flags: MessageFlags.Ephemeral });
       }
       if (target.id === giverId) {
-        return safeReply(interaction, { content: '❌ Non puoi dare rep a te stesso!', flags: MessageFlags.Ephemeral });
+        return safeReply(interaction, { content: t('economy.rep.self', lang), flags: MessageFlags.Ephemeral });
       }
       if (target.bot) {
-        return safeReply(interaction, { content: '❌ Non puoi dare rep a un bot!', flags: MessageFlags.Ephemeral });
+        return safeReply(interaction, { content: t('economy.rep.isBot', lang), flags: MessageFlags.Ephemeral });
       }
       const now = Date.now();
       if (!canGive(guildId, giverId, target.id, now)) {
@@ -63,8 +65,8 @@ module.exports = {
       const updated = giveRep(guildId, giverId, target.id, now);
       const embed = new EmbedBuilder()
         .setColor(COLORS.success)
-        .setTitle('⭐ Rep assegnata!')
-        .setDescription(`⭐ ${interaction.user} ha dato +1 rep a ${target}! (Totale: **${num(updated.count)}**)`)
+        .setTitle(t('economy.rep.given', lang))
+        .setDescription(t('economy.rep.givenDesc', lang, { giver: `${interaction.user}`, target: `${target}`, n: num(updated.count) }))
         .setTimestamp();
       applyFooter(embed, interaction);
       return safeReply(interaction, { embeds: [embed] });
@@ -75,9 +77,9 @@ module.exports = {
       const rep = getRep(guildId, target.id);
       const embed = new EmbedBuilder()
         .setColor(COLORS.warn)
-        .setTitle(truncate(`⭐ Reputazione di ${target.tag}`, 256))
+        .setTitle(truncate(t('economy.rep.showTitle', lang, { tag: target.tag }), 256))
         .setThumbnail(target.displayAvatarURL({ size: 128 }))
-        .setDescription(`**${num(rep.count)}** rep ricevute`)
+        .setDescription(t('economy.rep.showDesc', lang, { n: num(rep.count) }))
         .setTimestamp();
       applyFooter(embed, interaction);
       return safeReply(interaction, { embeds: [embed] });
@@ -85,20 +87,20 @@ module.exports = {
 
     // classifica
     const top = getLeaderboard(guildId, 10);
-    if (!top.length) return safeReply(interaction, { content: '📭 Nessuna rep assegnata ancora. Usa `/rep dai`!' });
+    if (!top.length) return safeReply(interaction, { content: t('economy.rep.empty', lang) });
     const lines = await Promise.all(
       top.map(async (e, i) => {
         const user = await interaction.client.users.fetch(e.id).catch(() => null);
         const member = user ? await interaction.guild.members.fetch(e.id).catch(() => null) : null;
         const display = member ? member.displayName : user ? user.username : null;
         // Utenti usciti: mai crash, mai ID grezzi come nome principale.
-        const name = display ? truncate(display, 32) : '*Utente uscito*';
+        const name = display ? truncate(display, 32) : t('economy.rep.leftUser', lang);
         return `${medal(i)} ${name} — **${num(e.count)}** ⭐`;
       })
     );
     const embed = new EmbedBuilder()
       .setColor(COLORS.warn)
-      .setTitle(truncate(`⭐ Classifica rep — ${interaction.guild.name}`, 256))
+      .setTitle(truncate(t('economy.rep.topTitle', lang, { server: interaction.guild.name }), 256))
       .setDescription(truncate(lines.join('\n'), 4096))
       .setTimestamp();
     applyFooter(embed, interaction);

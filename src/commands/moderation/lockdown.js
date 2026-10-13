@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, MessageFlags } = require('discord.js');
 const PFB = PermissionFlagsBits;
 const { getLockdown, setLockdown, clearLockdown } = require('../../database/lockdown');
+const { t, getLang } = require('../../utils/i18n');
 
 // theme.js condiviso, con fallback inline se il require fallisse (mai nomi/opzioni diversi).
 let COLORS, err, info, applyFooter, truncate;
@@ -40,18 +41,19 @@ module.exports = {
     const sub = interaction.options.getSubcommand();
     const { guild } = interaction;
     if (!guild) {
-      return interaction.reply({ embeds: [err('Usa questo comando dentro un server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [err(t('common.guildOnly', getLang(interaction.guildId)))], flags: MessageFlags.Ephemeral });
     }
+    const lang = getLang(interaction.guildId);
     const everyoneId = guild.roles.everyone.id;
     const channels = guild.channels.cache.filter((c) => typeof c.isTextBased === 'function' && c.isTextBased() && (typeof c.isThread !== 'function' || !c.isThread()));
 
     if (sub === 'on') {
-      const motivo = truncate(interaction.options.getString('motivo') || 'Nessun motivo specificato', 500);
+      const motivo = truncate(interaction.options.getString('motivo') || t('moderation.noReason', lang), 500);
       if (getLockdown(guild.id)) {
-        return interaction.reply({ embeds: [err('Lockdown già attivo su questo server. Usa `/lockdown off` per ripristinare prima.')], flags: MessageFlags.Ephemeral });
+        return interaction.reply({ embeds: [err(t('moderation.lockdown.already', lang))], flags: MessageFlags.Ephemeral });
       }
       if (channels.size === 0) {
-        return interaction.reply({ embeds: [err('Nessun canale testuale trovato.')], flags: MessageFlags.Ephemeral });
+        return interaction.reply({ embeds: [err(t('moderation.lockdown.noChannels', lang))], flags: MessageFlags.Ephemeral });
       }
       await interaction.deferReply().catch(() => null);
       if (!interaction.deferred && !interaction.replied) {
@@ -85,14 +87,14 @@ module.exports = {
       let desc = `Bloccati **${okCount}/${channels.size}** canali.\n📝 Motivo: ${motivo}`;
       if (failed.length > 0) desc += `\n⚠️ Non bloccati (${failed.length}): ${truncate(failed.slice(0, 10).join(', '), 500)}`;
       desc += '\nPer ripristinare: `/lockdown off`.';
-      const embed = applyFooter(info('🔒 Lockdown attivato', truncate(desc, 4000)), interaction);
+      const embed = applyFooter(info(t('moderation.lockdown.on', lang), truncate(desc, 4000)), interaction);
       return interaction.editReply({ embeds: [embed] }).catch(() => {});
     }
 
     // sub === 'off'
     const snap = getLockdown(guild.id);
     if (!snap) {
-      return interaction.reply({ embeds: [err('Nessun lockdown attivo su questo server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [err(t('moderation.lockdown.none', lang))], flags: MessageFlags.Ephemeral });
     }
     await interaction.deferReply().catch(() => null);
     if (!interaction.deferred && !interaction.replied) {
@@ -133,7 +135,7 @@ module.exports = {
     let desc = `Ripristinati **${okCount}/${total}** canali.`;
     if (failed.length > 0) desc += `\n⚠️ Non ripristinati (${failed.length}): ${truncate(failed.slice(0, 10).join(', '), 500)}`;
     if (missing.length > 0) desc += `\nℹ️ Canali eliminati durante il lockdown (${missing.length}): non ripristinabili.`;
-    const offEmbed = applyFooter(info('🔓 Lockdown terminato', truncate(desc, 4000), COLORS.success), interaction);
+    const offEmbed = applyFooter(info(t('moderation.lockdown.off', lang), truncate(desc, 4000), COLORS.success), interaction);
     return interaction.editReply({ embeds: [offEmbed] }).catch(() => {});
   },
 };

@@ -145,6 +145,12 @@ process.on('uncaughtException', (e) => {
 
 client.login(env.DISCORD_TOKEN);
 
+// i18n engine (fs-backend sopra src/locales/*.json): mai fatale, t() ha
+// comunque il fallback inline. Avviato qui, prima di servire interazioni.
+try {
+  require('./core/i18n').initI18n().catch(() => {});
+} catch {}
+
 // NOTA: la dashboard web gira in un processo SEPARATO (npm run dashboard,
 // vedi src/dashboard/index.js) e condivide solo lo store DB + il roster
 // presence. Questo file resta solo-bot: nessuna logica dashboard qui.

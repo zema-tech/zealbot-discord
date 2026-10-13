@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { getLeaderboard } = require('../../database/economy');
+const { t, getLang } = require('../../utils/i18n');
 
 // theme.js con fallback inline se il require fallisse.
 let COLORS = { gold: 0xffd700, error: 0xed4245 };
@@ -33,11 +34,12 @@ module.exports = {
   cooldown: 5,
   async execute(interaction) {
     const guild = interaction.guild;
-    if (!guild?.id) return safeReply(interaction, { content: '❌ Comando disponibile solo nei server.' });
+    const lang = getLang(guild?.id);
+    if (!guild?.id) return safeReply(interaction, { content: t('economy.guildOnly', lang) });
     const top = getLeaderboard(guild.id, 10);
     if (!top.length) {
-      const e = err ? err('Nessun dato economico ancora. Usa `/daily` o `/work`!') : null;
-      return safeReply(interaction, e ? { embeds: [e] } : { content: '📭 Nessun dato economico ancora. Usa `/daily` o `/work`!' });
+      const e = err ? err(t('economy.leaderboard.empty', lang)) : null;
+      return safeReply(interaction, e ? { embeds: [e] } : { content: t('economy.leaderboard.empty', lang) });
     }
     const lines = await Promise.all(
       top.map(async (e, i) => {
@@ -45,13 +47,13 @@ module.exports = {
         const member = user ? await guild.members.fetch(e.id).catch(() => null) : null;
         const display = member ? member.displayName : user ? user.username : null;
         // Utenti usciti: mai crash, mai ID esposti come nome principale.
-        const name = display ? `**${truncate(display, 32)}**` : '*Utente uscito*';
+        const name = display ? `**${truncate(display, 32)}**` : t('economy.leaderboard.leftUser', lang);
         return `${medal(i)} ${name} — **${num(e.balance)}** 🪙`;
       })
     );
     const embed = new EmbedBuilder()
       .setColor(COLORS.gold)
-      .setTitle(truncate(`🏆 Classifica più ricchi — ${guild.name}`, 256))
+      .setTitle(truncate(t('economy.leaderboard.title', lang, { server: guild.name }), 256))
       .setThumbnail(guild.iconURL() || interaction.user.displayAvatarURL())
       .setDescription(truncate(lines.join('\n'), 4096));
     applyFooter(embed, interaction);

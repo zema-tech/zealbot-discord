@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { getLevel, xpForLevel, totalXp, getRankPosition } = require('../../database/levels');
+const { t, getLang } = require('../../utils/i18n');
 
 // theme.js con fallback inline: mai crash se il require fallisce.
 let _T = null;
@@ -30,6 +31,7 @@ module.exports = {
   async execute(interaction) {
     const user = interaction.options.getUser('utente') || interaction.user;
     const gid = interaction.guild?.id;
+    const lang = getLang(gid);
     const d = getLevel(gid, user.id);
     // Sanitizza: record corrotti (livello negativo) mandavano in crash String.repeat
     const level = Number.isFinite(d.level) ? Math.max(0, Math.floor(d.level)) : 0;
@@ -52,16 +54,16 @@ module.exports = {
     try {
       const { listRewards } = require('../../database/levelRewards');
       const up = (gid ? listRewards(gid) : []).filter((r) => r.level > level).sort((a, b) => a.level - b.level)[0];
-      if (up) nextReward = `\n🎁 Prossimo premio: <@&${up.roleId}> al livello **${num(up.level)}**`;
+      if (up) nextReward = t('levels.rank.nextReward', lang, { role: `<@&${up.roleId}>`, lvl: num(up.level) });
     } catch {}
     const medal = pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : '🏅';
     const color = COLORS.purple ?? COLORS.primary ?? 0x9b59b6;
     const embed = applyFooter(new EmbedBuilder()
       .setColor(color)
-      .setTitle(truncate(`⭐ Rank di ${user.username}`, 256))
+      .setTitle(truncate(t('levels.rank.title', lang, { name: user.username }), 256))
       .setThumbnail(user.displayAvatarURL())
       .setDescription(
-        truncate(`**Livello ${num(level)}** • **${num(percent)}%**${pos ? ` • ${medal} **#${num(pos)}**` : ''}\n\`${progress}\`\n✨ **${num(xp)}** / **${num(need)}** XP (totale **${num(total)}**)\n💬 Messaggi: **${num(msgCount)}** • 🎙️ Vocali: **${num(voiceMin)} min**${nextReward}`, 4000)
+        truncate(t('levels.rank.levelLine', lang, { lvl: num(level), pct: num(percent) }) + `${pos ? ` • ${medal} **#${num(pos)}**` : ''}\n\`${progress}\`\n` + t('levels.rank.xpLine', lang, { xp: num(xp), need: num(need) }) + ` ${t('levels.rank.total', lang, { n: num(total) })}\n` + t('levels.rank.messages', lang, { n: num(msgCount) }) + ` • ` + t('levels.rank.voice', lang, { n: num(voiceMin) }) + `${nextReward}`, 4000)
       ), interaction);
     await interaction.reply({ embeds: [embed] });
   },

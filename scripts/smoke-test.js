@@ -1359,8 +1359,8 @@ try {
           }
         }
         if (typeof iu.getLang === 'function') {
-          if (iu.getLang(null) !== 'it' || iu.getLang(undefined) !== 'it') {
-            fail('i18n: getLang(null/DM) atteso "it"');
+          if (iu.getLang(null) !== 'en' || iu.getLang(undefined) !== 'en') {
+            fail('i18n: getLang(null/DM) atteso "en" (default inglese)');
           }
         }
         if (typeof iu.setLang === 'function' && typeof iu.getLang === 'function') {

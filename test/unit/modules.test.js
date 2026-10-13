@@ -154,8 +154,39 @@ describe('i18n fallback', () => {
     assert.equal(t('common.ok', 'en'), '✅');
     assert.equal(t('lingua.title', 'en').includes('language') || t('lingua.title', 'en').length > 0, true);
     assert.equal(t('inesistente.xyz', 'en'), 'inesistente.xyz');
-    assert.equal(getLang(null), 'it');
+    assert.equal(getLang(null), 'en');
     assert.deepEqual([...SUPPORTED_LANGS].sort(), ['en', 'it']);
+  });
+});
+
+describe('core i18n engine', () => {
+  const core = require(path.join(__dirname, '..', '..', 'src', 'core', 'i18n.js'));
+  it('init, default en, set/get, t con vars e fallback', async () => {
+    assert.deepEqual(core.SUPPORTED, ['en', 'it']);
+    assert.equal(core.FALLBACK, 'en');
+    await core.initI18n();
+    assert.equal(core.getGuildLanguage(null), 'en');
+    assert.equal(core.getGuildLanguage('nonexistent-guild-xyz'), 'en');
+    assert.throws(() => core.setGuildLanguage('g', 'xx'), /non supportata|not supported/i);
+    assert.throws(() => core.setGuildLanguage(null, 'it'), /mancante|missing/i);
+    assert.equal(core.t('g', 'moderation.ban.title', {}), '🚫 User banned');
+    assert.equal(core.t('g', 'moderation.ban.title', {}), core.t('g', 'moderation.ban.title', {}));
+    assert.equal(core.t('g', 'chiave.che.non.esiste', {}), 'chiave.che.non.esiste');
+    assert.equal(core.t('g', 'economy.pay.insufficient', { n: '1.000' }).includes('1.000'), true);
+  });
+  it('set/get roundtrip con cleanup', () => {
+    const GQ = 'qatest_lang';
+    try {
+      assert.equal(core.setGuildLanguage(GQ, 'it'), 'it');
+      assert.equal(core.getGuildLanguage(GQ), 'it');
+      assert.equal(core.t(GQ, 'moderation.ban.title', {}), '🚫 Utente bannato');
+    } finally {
+      const { load, save, dbFile } = require(path.join(DB, 'jsonDb.js'));
+      const f = dbFile('guildConfig');
+      const db = load(f);
+      delete db[GQ];
+      save(f, db);
+    }
   });
 });
 

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const { sendLog } = require('../../utils/helpers');
+const { t, getLang } = require('../../utils/i18n');
 
 let theme = null;
 try {
@@ -22,38 +23,39 @@ module.exports = {
   cooldown: 60,
   async execute(interaction) {
     if (!interaction.guild) {
-      return interaction.reply({ embeds: [themeErr('Usa questo comando dentro un server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('common.guildOnly', getLang(interaction.guildId)))], flags: MessageFlags.Ephemeral });
     }
+    const lang = getLang(interaction.guildId);
     const target = interaction.options.getUser('utente');
     const reason = truncate((interaction.options.getString('motivo') || '').trim(), 500);
-    if (!target) return interaction.reply({ embeds: [themeErr('Utente non valido.')], flags: MessageFlags.Ephemeral });
-    if (!reason) return interaction.reply({ embeds: [themeErr('Descrivi il motivo.')], flags: MessageFlags.Ephemeral });
+    if (!target) return interaction.reply({ embeds: [themeErr(t('moderation.invalidUser', lang))], flags: MessageFlags.Ephemeral });
+    if (!reason) return interaction.reply({ embeds: [themeErr(t('moderation.segnala.noReason', lang))], flags: MessageFlags.Ephemeral });
     if (target.id === interaction.user.id) {
-      return interaction.reply({ embeds: [themeErr('Non puoi segnalare te stesso.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.segnala.self', lang))], flags: MessageFlags.Ephemeral });
     }
     if (target.bot) {
-      return interaction.reply({ embeds: [themeErr('Non puoi segnalare un bot.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.segnala.isBot', lang))], flags: MessageFlags.Ephemeral });
     }
     const embed = new EmbedBuilder()
       .setColor(COLORS.primary)
       .setTitle(`🚨 Segnalazione — ${truncate(target.tag ?? target.username, 200)}`.slice(0, 256))
       .addFields(
-        { name: 'Segnalato', value: `${target} (\`${target.id}\`)`, inline: true },
-        { name: 'Da', value: `${interaction.user} (\`${interaction.user.id}\`)`, inline: true },
-        { name: 'Canale', value: `${interaction.channel}`, inline: true },
-        { name: 'Motivo', value: reason }
+        { name: t('moderation.segnala.reported', lang), value: `${target} (\`${target.id}\`)`, inline: true },
+        { name: t('moderation.segnala.from', lang), value: `${interaction.user} (\`${interaction.user.id}\`)`, inline: true },
+        { name: t('moderation.segnala.channel', lang), value: `${interaction.channel}`, inline: true },
+        { name: t('moderation.segnala.reason', lang), value: reason }
       )
       .setTimestamp();
     // sendLog non lancia mai: verifica prima che il canale log esista davvero.
     try {
       const { getGuild } = require('../../database/guildConfig');
       if (!getGuild(interaction.guild.id)?.logChannelId) {
-        return interaction.reply({ embeds: [themeErr('Canale log non configurato: chiedi allo staff di impostarlo.')], flags: MessageFlags.Ephemeral });
+        return interaction.reply({ embeds: [themeErr(t('moderation.segnala.noLog', lang))], flags: MessageFlags.Ephemeral });
       }
     } catch {
-      return interaction.reply({ embeds: [themeErr('Canale log non configurato: chiedi allo staff di impostarlo.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.segnala.noLog', lang))], flags: MessageFlags.Ephemeral });
     }
     await sendLog(interaction.guild, { content: '🚨 Nuova segnalazione', embeds: [embed] }).catch(() => {});
-    return interaction.reply({ content: '✅ Segnalazione inviata allo staff. Grazie!', flags: MessageFlags.Ephemeral }).catch(() => null);
+    return interaction.reply({ content: t('moderation.segnala.sent', lang), flags: MessageFlags.Ephemeral }).catch(() => null);
   },
 };

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, MessageFlags, EmbedBuilder } = require('discord.js');
 const { listRewards } = require('../../database/levelRewards');
+const { t, getLang } = require('../../utils/i18n');
 
 // theme.js con fallback inline: mai crash se il require fallisce.
 let _T = null;
@@ -39,20 +40,21 @@ module.exports = {
   async execute(interaction) {
     const sub = interaction.options.getSubcommand();
     const guildId = interaction.guild.id;
+    const lang = getLang(guildId);
 
     if (sub === 'lista') {
       const list = listRewards(guildId);
       if (!list.length) {
-        return interaction.reply({ content: '📭 Nessun premio livello configurato. Usa la dashboard (sezione Ricompense livello).', flags: MessageFlags.Ephemeral });
+        return interaction.reply({ content: t('levels.rewards.empty', lang), flags: MessageFlags.Ephemeral });
       }
       // Micro-fix: con tanti premi la description supererebbe il limite 4096 char.
       const ordinati = [...list].sort((a, b) => a.level - b.level);
       const MAX = 25;
-      const righe = ordinati.slice(0, MAX).map((r) => `⭐ Livello **${r.level}** → <@&${r.roleId}>`);
-      if (ordinati.length > MAX) righe.push(`…e altri **${ordinati.length - MAX}** premi.`);
+      const righe = ordinati.slice(0, MAX).map((r) => t('levels.rewards.row', lang, { lvl: r.level, role: `<@&${r.roleId}>` }));
+      if (ordinati.length > MAX) righe.push(t('levels.rewards.more', lang, { n: ordinati.length - MAX }));
       const embed = applyFooter(new EmbedBuilder()
         .setColor(COLORS.purple)
-        .setTitle('🏆 Premi livello')
+        .setTitle(t('levels.rewards.title', lang))
         .setThumbnail(interaction.guild.iconURL() || interaction.user.displayAvatarURL())
         .setDescription(truncate(righe.join('\n'), 4096)), interaction);
       return interaction.reply({ embeds: [embed] });
@@ -63,6 +65,6 @@ module.exports = {
       return interaction.reply({ content: dashboardMsg(guildId, 'Ricompense livello'), flags: MessageFlags.Ephemeral });
     }
 
-    return interaction.reply({ content: '❌ Sottocomando sconosciuto.', flags: MessageFlags.Ephemeral });
+    return interaction.reply({ content: t('levels.rewards.unknownSub', lang), flags: MessageFlags.Ephemeral });
   },
 };

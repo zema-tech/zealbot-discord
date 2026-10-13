@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, MessageFlags } = require('discord.js');
+const { t, getLang } = require('../../utils/i18n');
 let theme = null;
 try { theme = require('../../utils/theme'); } catch { theme = null; }
 const okEmbed = theme?.ok ?? ((t, d) => new EmbedBuilder().setColor(0x57f287).setTitle(String(t)).setDescription(String(d ?? '')).setTimestamp());
@@ -23,13 +24,14 @@ module.exports = {
     const onlyBots = interaction.options.getBoolean('solo-bot') === true;
     const withLinks = interaction.options.getBoolean('con-link') === true;
     const contains = (interaction.options.getString('contiene') || '').toLowerCase();
+    const lang = getLang(interaction.guildId);
     const fail = (embed) => {
       if (interaction.deferred || interaction.replied) return interaction.editReply({ embeds: [embed] }).catch(() => {});
       return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral }).catch(() => null);
     };
-    if (!qty) return fail(errEmbed('Quantità non valida (1-100).'));
+    if (!qty) return fail(errEmbed(t('moderation.clear.badQty', lang)));
     if (!interaction.channel?.isTextBased?.() || typeof interaction.channel.bulkDelete !== 'function') {
-      return fail(errEmbed('Usa questo comando in un canale testuale del server.'));
+      return fail(errEmbed(t('moderation.clear.notText', lang)));
     }
     await interaction.deferReply({ flags: MessageFlags.Ephemeral }).catch(() => null);
     if (!interaction.deferred && !interaction.replied) {
@@ -50,19 +52,19 @@ module.exports = {
       }
       const empty = !messages || (typeof messages.size === 'number' ? messages.size === 0 : messages.length === 0);
       if (empty) {
-        return interaction.editReply({ embeds: [errEmbed('Nessun messaggio da cancellare.')] }).catch(() => {});
+        return interaction.editReply({ embeds: [errEmbed(t('moderation.clear.empty', lang))] }).catch(() => {});
       }
       const deleted = await interaction.channel.bulkDelete(messages, true);
       if (!deleted || deleted.size === 0) {
-        return interaction.editReply({ embeds: [errEmbed('Nessun messaggio cancellato (solo messaggi degli ultimi 14 giorni si possono eliminare in blocco).')] }).catch(() => {});
+        return interaction.editReply({ embeds: [errEmbed(t('moderation.clear.tooOld', lang))] }).catch(() => {});
       }
       const what = [
-        user ? `di ${user.tag ?? user.username}` : '',
-        onlyBots ? 'dei bot' : '',
-        withLinks ? 'con link' : '',
-        contains ? `con "${contains.slice(0, 40)}"` : '',
+        user ? t('moderation.clear.ofUser', lang, { tag: user.tag ?? user.username }) : '',
+        onlyBots ? t('moderation.clear.ofBots', lang) : '',
+        withLinks ? t('moderation.clear.withLinks', lang) : '',
+        contains ? t('moderation.clear.withText', lang, { text: contains.slice(0, 40) }) : '',
       ].filter(Boolean).join(' ');
-      const done = okEmbed('🧹 Pulizia completata', `Cancellati **${deleted.size}** messaggi${what ? ` ${what}` : ''}.`);
+      const done = okEmbed(t('moderation.clear.done', lang), t('moderation.clear.doneDesc', lang, { n: deleted.size, what: what ? ` ${what}` : '' }));
       applyFooter(done, interaction);
       await interaction.editReply({ embeds: [done] }).catch(() => {});
       try {
@@ -72,9 +74,9 @@ module.exports = {
     } catch (e) {
       console.error(e);
       if (e?.code === 50034 || e?.message?.includes('14')) {
-        await interaction.editReply({ embeds: [errEmbed('Impossibile cancellare (messaggi più vecchi di 14 giorni non si possono eliminare in blocco).')] }).catch(() => {});
+        await interaction.editReply({ embeds: [errEmbed(t('moderation.clear.oldError', lang))] }).catch(() => {});
       } else {
-        await interaction.editReply({ embeds: [errEmbed('Impossibile cancellare i messaggi. Verifica i miei permessi (Gestisci Messaggi, Leggere Cronologia).')] }).catch(() => {});
+        await interaction.editReply({ embeds: [errEmbed(t('moderation.clear.permError', lang))] }).catch(() => {});
       }
     }
   },

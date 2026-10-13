@@ -124,5 +124,471 @@
       "Le prospettive non sono così buone.",
       "Molto dubbioso."
     ]
+  },
+  "moderation": {
+    "invalidUser": "❌ Utente non valido.",
+    "noReason": "Nessun motivo specificato",
+    "selfAction": "Non puoi farlo a te stesso!",
+    "botAction": "Non puoi farlo a me!",
+    "ownerAction": "Non puoi moderare il proprietario del server.",
+    "hierarchy": "Ruolo uguale/superiore al tuo.",
+    "failed": "❌ Errore durante l'operazione.",
+    "notInGuild": "Utente non nel server.",
+    "ban": {
+      "self": "Non puoi bannare te stesso!",
+      "bot": "Non puoi bannare me!",
+      "owner": "Non puoi bannare il proprietario del server.",
+      "noPerms": "Non ho i permessi per bannare questo utente.",
+      "title": "🚫 Utente bannato",
+      "user": "Utente",
+      "moderator": "Moderatore",
+      "deletedMessages": "Messaggi eliminati",
+      "reason": "Motivo",
+      "failed": "Errore durante il ban."
+    },
+    "kick": {
+      "self": "Non puoi espellere te stesso!",
+      "bot": "Non puoi espellere me!",
+      "owner": "Non puoi espellere il proprietario del server.",
+      "notFound": "Utente non trovato nel server.",
+      "noPerms": "Non ho i permessi per espellere questo utente.",
+      "title": "👢 Utente espulso",
+      "user": "Utente",
+      "moderator": "Moderatore",
+      "reason": "Motivo",
+      "failed": "Errore durante il kick."
+    },
+    "timeout": {
+      "badDuration": "Durata non valida. Usa formati come `30s`, `10m`, `2h`, `1d` (min 5s, max 28g).",
+      "notInGuild": "Utente non nel server.",
+      "self": "Non puoi silenziare te stesso!",
+      "bot": "Non puoi silenziare me!",
+      "isBot": "Non puoi mettere in timeout un bot.",
+      "owner": "Non puoi silenziare il proprietario del server.",
+      "noPerms": "Non posso moderare questo utente (permessi miei o gerarchia ruoli insufficienti).",
+      "title": "⏱️ Timeout applicato",
+      "failed": "Errore timeout: verifica i miei permessi (Modera Membri) e la gerarchia ruoli."
+    },
+    "untimeout": {
+      "notInGuild": "Utente non nel server.",
+      "noPerms": "Non posso moderare questo utente (ruolo del bot troppo basso o permessi mancanti).",
+      "owner": "Non puoi moderare il proprietario del server.",
+      "notTimedOut": "{tag} non è attualmente in timeout.",
+      "title": "✅ Timeout rimosso",
+      "failed": "Errore durante la rimozione del timeout.",
+      "defaultReason": "Timeout rimosso"
+    },
+    "unban": {
+      "badId": "ID non valido: deve essere un ID utente numerico (17–20 cifre).",
+      "notBanned": "Utente non bannato (o ID inesistente): niente da sbannare.",
+      "title": "✅ Utente sbannato",
+      "failed": "Errore durante lo sbannamento: verifica i miei permessi (Banna Membri)."
+    },
+    "slowmode": {
+      "badValue": "Valore non valido: usa 0–21600 secondi (0 = disattiva).",
+      "notText": "Lo slowmode funziona solo nei canali testuali (i vocali non lo supportano).",
+      "off": "🐢 Slowmode disattivato",
+      "on": "🐢 Slowmode aggiornato",
+      "failed": "Errore: verifica i miei permessi (Gestisci Canali) e la gerarchia ruoli."
+    },
+    "lock": {
+      "notText": "Usa questo comando in un canale testuale del server.",
+      "noEveryone": "Ruolo @everyone non trovato.",
+      "on": "🔒 Canale bloccato",
+      "onDesc": "Solo lo staff può scrivere in questo canale.",
+      "off": "🔓 Canale sbloccato",
+      "offDesc": "Tutti possono di nuovo scrivere in questo canale.",
+      "failed": "Errore permessi: verifica che io possa gestire il canale."
+    },
+    "lockdown": {
+      "already": "Lockdown già attivo su questo server. Usa `/lockdown off` per ripristinare prima.",
+      "noChannels": "Nessun canale testuale trovato.",
+      "none": "Nessun lockdown attivo su questo server.",
+      "on": "🔒 Lockdown attivato",
+      "off": "🔓 Lockdown terminato"
+    },
+    "nuke": {
+      "notText": "Usa questo comando in un canale testuale del server (i thread non si possono rigenerare).",
+      "noPerms": "Non ho il permesso **Gestisci Canali**: impossibile rigenerare questo canale.",
+      "notManageable": "Non posso gestire questo canale (gerarchia ruoli o permessi insufficienti).",
+      "confirmTitle": "⚠️ Conferma nuke",
+      "cancel": "Annulla"
+    },
+    "segnala": {
+      "noReason": "Descrivi il motivo.",
+      "self": "Non puoi segnalare te stesso.",
+      "isBot": "Non puoi segnalare un bot.",
+      "noLog": "Canale log non configurato: chiedi allo staff di impostarlo.",
+      "sent": "✅ Segnalazione inviata allo staff. Grazie!",
+      "reported": "Segnalato",
+      "from": "Da",
+      "channel": "Canale",
+      "reason": "Motivo"
+    },
+    "warn": {
+      "noReason": "Nessun motivo specificato",
+      "isBot": "Non puoi avvisare un bot.",
+      "owner": "Non puoi avvisare il proprietario del server.",
+      "failed": "Errore durante l'avviso.",
+      "escalatedTimeout": "⚠️ **{n} warn raggiunti: timeout automatico di {minutes} minuti.**",
+      "escalatedKick": "⚠️ **{n} warn raggiunti: espulsione automatica.**",
+      "escalatedBan": "⚠️ **{n} warn raggiunti: ban automatico.**",
+      "auditSuffix": "{n} warn raggiunti",
+      "title": "⚠️ Warn #{n} — {tag}",
+      "reason": "Motivo",
+      "moderator": "Moderatore",
+      "warnId": "ID warn",
+      "dmTitle": "⚠️ Hai ricevuto un warn in {server}",
+      "dmTotal": "Totale warn"
+    },
+    "warnazioni": {
+      "invalid": "Regole non valide.",
+      "saved": "✅ Regole salvate",
+      "reset": "✅ Regole ripristinate: **3 warn → timeout 10 min**.",
+      "needManage": "Ti serve il permesso **Gestisci Server**."
+    },
+    "warnings": {
+      "owner": "Non puoi modificare i warn del proprietario del server.",
+      "badId": "ID del warn non valido.",
+      "none": "✅ Nessun warn",
+      "removed": "✅ Warn rimosso",
+      "notFound": "non trovato.",
+      "cleared": "🧹 Warn puliti",
+      "noneFor": "{tag} non ha warn.",
+      "removedDesc": "Warn `{id}` di {tag} rimosso.",
+      "clearedDesc": "Tutti i warn di {tag} sono stati rimossi."
+    },
+    "caso": {
+      "notFound": "Caso non trovato.",
+      "none": "✅ Nessun caso",
+      "noText": "Testo della nota mancante.",
+      "saveFailed": "Impossibile salvare la nota.",
+      "needManage": "Serve il permesso `ManageGuild` per eliminare un caso.",
+      "deleted": "🗑️ Caso eliminato",
+      "saved": "📝 Nota salvata",
+      "unknownSub": "Sottocomando sconosciuto.",
+      "user": "Utente",
+      "moderator": "Moderatore",
+      "date": "Data",
+      "reason": "Motivo",
+      "noCasesFor": "{tag} non ha casi{tipo} registrati.",
+      "historyOf": "📋 Storico di {tag} ({n})",
+      "more": "…e altri {n}.",
+      "noteSavedDesc": "Nota per {tag} salvata come caso `#{id}`.",
+      "deletedDesc": "Caso `#{id}` eliminato.",
+      "notFoundDesc": "Caso `#{id}` non trovato."
+    },
+    "clear": {
+      "badQty": "Quantità non valida (1-100).",
+      "notText": "Usa questo comando in un canale testuale del server.",
+      "empty": "Nessun messaggio da cancellare.",
+      "tooOld": "Nessun messaggio cancellato (solo messaggi degli ultimi 14 giorni si possono eliminare in blocco).",
+      "oldError": "Impossibile cancellare (messaggi più vecchi di 14 giorni non si possono eliminare in blocco).",
+      "permError": "Impossibile cancellare i messaggi. Verifica i miei permessi (Gestisci Messaggi, Leggere Cronologia).",
+      "done": "🧹 Pulizia completata",
+      "doneDesc": "Cancellati **{n}** messaggi{what}.",
+      "ofUser": "di {tag}",
+      "ofBots": "dei bot",
+      "withLinks": "con link",
+      "withText": "con \"{text}\""
+    }
+  },
+  "economy": {
+    "guildOnly": "Comando disponibile solo nei server.",
+    "invalidUser": "Utente non valido.",
+    "balance": {
+      "title": "💰 Saldo di {name}",
+      "wallet": "👛 Portafoglio",
+      "bank": "🏦 Banca",
+      "total": "💎 Totale"
+    },
+    "pay": {
+      "badAmount": "❌ Importo non valido.",
+      "isBot": "❌ Non puoi pagare un bot.",
+      "self": "❌ Non puoi pagare te stesso.",
+      "insufficient": "❌ Saldo insufficiente (hai **{n}** 🪙).",
+      "sent": "💸 Pagamento inviato"
+    },
+    "bank": {
+      "badSub": "Sottocomando non valido. Usa `/bank deposita` o `/bank preleva`.",
+      "badAmount": "Importo non valido: inserisci un numero intero ≥ 1.",
+      "noWallet": "Fondi insufficienti nel portafoglio.",
+      "depositFailed": "Errore durante il deposito, riprova più tardi.",
+      "depositTitle": "Deposito in banca",
+      "noBank": "Fondi insufficienti in banca.",
+      "withdrawFailed": "Errore durante il prelievo, riprova più tardi.",
+      "withdrawTitle": "Prelievo dalla banca",
+      "depositBody": "Depositati **{a}** 🪙 al sicuro dai furti!\n👛 Portafoglio: **{w}** 🪙\n🏦 Banca: **{b}** 🪙",
+      "withdrawBody": "Prelevati **{a}** 🪙 dalla banca.\n👛 Portafoglio: **{w}** 🪙\n🏦 Banca: **{b}** 🪙"
+    },
+    "daily": {
+      "failed": "Errore durante il ritiro del daily, riprova più tardi.",
+      "title": "🎁 Ricompensa giornaliera!",
+      "noInterestHint": "\n🏦 Deposita con `/bank deposita` per guadagnare interessi!",
+      "body": "Hai ricevuto **{reward}** 🪙!{interest}\n{flames}\n🔥 Streak: **{streak}** {giorni} (+\\{bonus} bonus)\n⏳ Prossimo bonus {next}",
+      "interestLine": "\n🏦 Interessi banca (2%): **+{interest}** 🪙",
+      "dayOne": "giorno",
+      "dayMany": "giorni"
+    },
+    "leaderboard": {
+      "empty": "📭 Nessun dato economico ancora. Usa `/daily` o `/work`!",
+      "title": "🏆 Classifica più ricchi — {server}",
+      "leftUser": "*Utente uscito*"
+    },
+    "work": {
+      "cooldown": "⏳ Puoi lavorare di nuovo {ts}",
+      "done": "💼 Lavoro completato!",
+      "jobs": [
+        "Programmatore|💻",
+        "Pizzaiolo|🍕",
+        "Streamer|🎥",
+        "Corriere|📦",
+        "Insegnante|📚",
+        "Meccanico|🔧"
+      ],
+      "body": "{emoji} Hai lavorato come **{job}** e hai guadagnato **{n}** 🪙!\n👛 Nuovo saldo: **{bal}** 🪙"
+    },
+    "rob": {
+      "badTarget": "❌ Bersaglio non valido.",
+      "tooPoor": "❌ La vittima è troppo povera (min 100 🪙 nel portafoglio).",
+      "failTitle": "🚨 Furto fallito!",
+      "failBody": "Colto in flagrante mentre cercavi di derubare {target}!\n💸 Multa pagata: **{fine}** 🪙\n🛡️ La banca resta al sicuro dai furti: usa `/bank deposita`!",
+      "winTitle": "🥷 Furto riuscito!",
+      "winBody": "{thief} 🆚 {target}\n💰 Bottino: **{n}** 🪙 rubati dal portafoglio!\n🛡️ Ricorda: i soldi in banca non si possono rubare."
+    },
+    "slots": {
+      "badBet": "❌ Puntata non valida: usa un intero tra 10 e 10.000 🪙.",
+      "overCap": "❌ Puntata oltre il tetto del server (**{n}** 🪙).",
+      "noFunds": "❌ Saldo insufficiente (hai **{n}** 🪙).",
+      "nextSpin": "⏳ Prossimo spin {ts}.",
+      "title": "🎰 Slot Machine",
+      "noCombo": "Nessuna combinazione",
+      "trio": "Tris di {s} (x{n})",
+      "pair": "Coppia (x1.5)",
+      "win": "🎉 **VINCITA!** +**{n}** 🪙 (x{mult})\n📍 {combo}",
+      "lose": "😢 Hai perso **{n}** 🪙.\n📍 {combo} — ritenta!",
+      "bet": "💰 Puntata: **{n}** 🪙",
+      "paytable": "📖 Tabella payout",
+      "paytableBody": "7️⃣7️⃣7️⃣ → **x10**\n💎💎💎 → **x6**\nTris → **x4**\nCoppia → **x1.5**"
+    },
+    "rep": {
+      "invalidUser": "Utente non valido.",
+      "self": "Non puoi dare rep a te stesso!",
+      "isBot": "Non puoi dare rep a un bot!",
+      "given": "⭐ Rep assegnata!",
+      "givenDesc": "⭐ {giver} ha dato +1 rep a {target}! (Totale: **{n}**)",
+      "showTitle": "⭐ Reputazione di {tag}",
+      "topTitle": "⭐ Classifica rep — {server}",
+      "leftUser": "Utente uscito",
+      "empty": "📭 Nessuna rep assegnata ancora. Usa `/rep dai`!",
+      "showDesc": "**{n}** rep ricevute"
+    },
+    "lotteria": {
+      "winner": "🎉 ABBIAMO UN VINCITORE! 🎉",
+      "winnerDesc": "🥳 Congratulazioni {user}!\n\nHai vinto **{prize}** 🪙 con **{total}** biglietti totali in gioco!",
+      "infoTitle": "🎰 Lotteria del server",
+      "pot": "🍯 Piatto",
+      "price": "🎟️ Prezzo biglietto",
+      "sold": "📊 Biglietti venduti",
+      "mine": "🎫 I tuoi biglietti",
+      "thresholdHit": "🔥 Soglia raggiunta: estrazione imminente!",
+      "thresholdWait": "L'estrazione automatica parte a **{n}** biglietti. Usa `/lotteria compra`!",
+      "badCount": "Puoi comprare da 1 a {max} biglietti alla volta.",
+      "noFunds": "Saldo insufficiente: **{n}** biglietti costano **{cost}** 🪙 (hai **{bal}** 🪙).",
+      "buyFailed": "Acquisto fallito ({err}). Saldo rimborsato.",
+      "bought": "🎟️ Biglietti acquistati!",
+      "boughtDesc": "{user} ha comprato **{n}** biglietti per **{cost}** 🪙\n🍯 Piatto: **{pot}** 🪙 • 📊 Biglietti: **{total}/{threshold}**",
+      "needManage": "Ti serve il permesso **Gestisci server** per estrarre il vincitore.",
+      "drawingBusy": "⏳ Estrazione già in corso, attendi qualche secondo.",
+      "needMin": "Servono almeno **{min}** biglietti per estrarre (ora: **{n}**). Nessun rimborso: i biglietti già comprati restano validi.",
+      "emptyPot": "❌ Piatto vuoto: impossibile estrarre."
+    },
+    "shop": {
+      "needManageRoles": "❌ Ti serve il permesso **Gestisci ruoli** per usare questo comando.",
+      "empty": "📭 Nessun ruolo in vendita. Torna più tardi!",
+      "title": "🛒 Negozio ruoli",
+      "more": "…e altri **{n}** ruoli.",
+      "notForSale": "❌ {role} non è in vendita. Guarda `/shop lista`.",
+      "cantSellEveryone": "❌ Non puoi vendere il ruolo @everyone.",
+      "cantSellManaged": "❌ Quel ruolo è gestito da un'integrazione e non può essere venduto.",
+      "cantSellHigher": "❌ Non posso gestire quel ruolo: è sopra il mio ruolo più alto. Sposta il mio ruolo più in alto nella gerarchia.",
+      "alreadyOwn": "❌ Possiedi già {role}.",
+      "noFunds": "❌ Saldo insufficiente: {role} costa **{price}** 🪙 (hai **{bal}** 🪙).",
+      "assignFailed": "❌ Non sono riuscito ad assegnarti il ruolo. Sei stato rimborsato.",
+      "bought": "🛒 Acquisto completato!",
+      "boughtDesc": "{user} ha acquistato {role} per **{price}** 🪙",
+      "unknownSub": "❌ Sottocomando sconosciuto."
+    }
+  },
+  "tickets": {
+    "needManage": "Ti serve il permesso **Gestisci Server**.",
+    "onlyStaff": "Solo lo staff.",
+    "ownerOrStaff": "Solo il proprietario o lo staff.",
+    "needTicketChannel": "Usa questo sotto-comando dentro un canale ticket.",
+    "alreadyClosed": "Ticket già chiuso.",
+    "alreadyOpen": "Il ticket è già aperto.",
+    "panel": {
+      "badChannel": "Canale di testo non valido.",
+      "badTypes": "Tipi non validi. Usa: {types}.",
+      "cantWrite": "Non riesco a scrivere in quel canale.",
+      "registerFailed": "Pannello pubblicato ma non registrato.",
+      "published": "✅ Pannello pubblicato in {channel} ({n} sezioni).",
+      "noQuestions": "ℹ️ Nessuna domanda pre-apertura per **{type}**: il ticket si apre subito.",
+      "questionsSet": "✅ Domande per **{type}** impostate ({n}):\n{list}",
+      "questionsReset": "✅ Domande per **{type}** rimosse: il ticket si apre subito."
+    },
+    "member": {
+      "isOwner": "È il proprietario del ticket.",
+      "added": "✅ Utente aggiunto",
+      "addedDesc": "{user} aggiunto al ticket #{n}.",
+      "removed": "✅ Utente rimosso",
+      "removedDesc": "{user} rimosso dal ticket #{n}.",
+      "channelPermError": "Errore permessi canale."
+    },
+    "claim": {
+      "taken": "🖐️ Presa in carico",
+      "takenDesc": "Ticket #{n} preso in carico da {user}!",
+      "releasedDesc": "{user} ha rilasciato il ticket #{n}."
+    },
+    "close": {
+      "failed": "Errore durante la chiusura del ticket.",
+      "done": "✅ Ticket chiuso",
+      "doneDesc": "Transcript inviato nei log e al proprietario."
+    },
+    "reopen": {
+      "done": "🔓 Ticket riaperto",
+      "doneDesc": "Ticket **#{n}** riaperto."
+    },
+    "priority": {
+      "invalid": "Priorità non valida.",
+      "done": "⚡ Priorità aggiornata",
+      "doneDesc": "Ticket #{n}: {label}."
+    },
+    "assign": {
+      "badStaff": "Staffer non valido.",
+      "done": "🖐️ Ticket assegnato",
+      "doneDesc": "Ticket #{n} assegnato a {user}."
+    },
+    "subject": {
+      "done": "📝 Oggetto aggiornato",
+      "doneDesc": "Ticket #{n}: \"{text}\".",
+      "removedDesc": "Oggetto del ticket #{n} rimosso."
+    },
+    "note": {
+      "done": "📌 Nota salvata",
+      "doneDesc": "Nota #{n} sul ticket #{t} (visibile solo nei log staff).",
+      "invalid": "Nota non valida."
+    },
+    "transcript": {
+      "noAccess": "Non hai accesso.",
+      "failed": "Errore nella generazione del transcript.",
+      "caption": "📝 Transcript del ticket #{n}:"
+    },
+    "rename": {
+      "done": "✏️ Rinomina",
+      "doneDesc": "Canale rinominato in **{name}**.",
+      "failed": "Non riesco a rinominare: verifica i miei permessi."
+    },
+    "type": {
+      "invalid": "Tipo non valido.",
+      "done": "🔄 Tipo cambiato",
+      "doneDesc": "Ticket #{n} ora è **{type}**."
+    },
+    "transfer": {
+      "alreadyOwner": "È già il proprietario.",
+      "failed": "Trasferimento fallito.",
+      "done": "🔄 Ticket trasferito",
+      "doneDesc": "Ticket #{n} ora appartiene a {user}."
+    },
+    "protect": {
+      "notFound": "Ticket non trovato.",
+      "on": "📌 Ticket protetto",
+      "onDesc": "Il ticket #{n} resiste ad auto-chiusura ed eliminazione.",
+      "off": "📌 Protezione rimossa",
+      "offDesc": "Il ticket #{n} segue di nuovo le regole automatiche."
+    },
+    "blacklist": {
+      "empty": "⛔ Blacklist vuota.",
+      "needUser": "Specifica un utente.",
+      "isBot": "Non puoi bloccare un bot.",
+      "added": "⛔ {user} non potrà più aprire ticket.",
+      "alreadyListed": "ℹ️ {user} era già in blacklist.",
+      "removed": "✅ {user} rimosso dalla blacklist.",
+      "notListed": "ℹ️ {user} non era in blacklist.",
+      "failed": "Operazione blacklist fallita."
+    },
+    "autodelete": {
+      "on": "🗑️ I ticket chiusi verranno eliminati dopo **{n} giorni** (i 📌 protetti resistono).",
+      "off": "🗑️ Auto-eliminazione disattivata."
+    },
+    "move": {
+      "badCategory": "Categoria non valida.",
+      "done": "📁 Ticket spostato",
+      "doneDesc": "Ticket #{n} spostato in **{cat}**.",
+      "failed": "Spostamento fallito: verifica i miei permessi."
+    },
+    "tag": {
+      "empty": "ℹ️ Nessun tag. Creane uno con `/ticket tag azione:Crea`.",
+      "notFound": "Tag non trovato. Vedi la lista con `/ticket tag azione:Lista`.",
+      "needName": "Specifica il nome del tag.",
+      "needText": "Specifica il testo del tag.",
+      "saved": "✅ Tag **{name}** salvato ({n} caratteri).",
+      "removed": "✅ Tag **{name}** eliminato.",
+      "sent": "✅ Tag **{name}** inviato.",
+      "cantWrite": "Non riesco a scrivere nel canale.",
+      "invalid": "Dati tag non validi."
+    },
+    "archive": {
+      "empty": "🗃️ Nessun ticket chiuso in archivio.",
+      "title": "🗃️ Archivio ticket chiusi ({n})",
+      "footer": "Transcript completi nel canale log"
+    },
+    "stats": {
+      "open": "📂 Aperti",
+      "closed": "🔒 Chiusi",
+      "total": "📊 Totali",
+      "byType": "Per tipo",
+      "avgClose": "⏱️ Chiusura media",
+      "avgRating": "⭐ Valutazione media",
+      "topStaff": "🏆 Top staff",
+      "avgCloseUnit": "{n} min",
+      "avgRatingVal": "{n}/5 ({c} voti)",
+      "staffClosed": "chiusure"
+    },
+    "statsTitle": "🎫 Statistiche ticket — {server}",
+    "ai": {
+      "disabled": "AI disabilitata per i ticket in questo server.",
+      "isClosed": "Il ticket è chiuso.",
+      "cantRead": "Impossibile leggere i messaggi del ticket.",
+      "emptyHistory": "Nessun messaggio di testo da analizzare nel ticket.",
+      "unavailable": "AI non disponibile, riprova più tardi.",
+      "staffOnlyPublish": "Solo lo staff può pubblicare la bozza.",
+      "cantWrite": "Non riesco a scrivere nel canale.",
+      "draftPublished": "✅ Bozza pubblicata nel ticket."
+    }
+  },
+  "levels": {
+    "top": {
+      "empty": "📭 Nessun XP ancora. Scrivi in chat per salire di livello!",
+      "title": "⭐ Top livelli — {server}",
+      "leftUser": "*Utente uscito*",
+      "line": "Liv. **{lvl}** ({xp} XP)"
+    },
+    "rewards": {
+      "empty": "📭 Nessun premio livello configurato. Usa la dashboard (sezione Ricompense livello).",
+      "title": "🏆 Premi livello",
+      "row": "⭐ Livello **{lvl}** → <@&{role}>",
+      "more": "…e altri **{n}** premi.",
+      "unknownSub": "❌ Sottocomando sconosciuto."
+    },
+    "rank": {
+      "title": "⭐ Rank di {name}",
+      "levelLine": "**Livello {lvl}** • **{pct}%**",
+      "xpLine": "✨ **{xp}** / **{need}** XP",
+      "messages": "💬 Messaggi: **{n}**",
+      "voice": "🎙️ Vocali: **{n} min**",
+      "nextReward": "\n🎁 Prossimo premio: {role} al livello **{lvl}**",
+      "total": "(totale **{n}**)"
+    }
   }
 }

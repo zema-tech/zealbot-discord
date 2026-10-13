@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, MessageFlags } = require('discord.js');
 const { sendLog, hierarchyAllows } = require('../../utils/helpers');
+const { t, getLang } = require('../../utils/i18n');
 
 let theme = null;
 try {
@@ -27,27 +28,28 @@ module.exports = {
   cooldown: 3,
   async execute(interaction) {
     if (!interaction.guild) {
-      return interaction.reply({ embeds: [themeErr('Usa questo comando dentro un server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('common.guildOnly', getLang(interaction.guildId)))], flags: MessageFlags.Ephemeral });
     }
+    const lang = getLang(interaction.guildId);
     const user = interaction.options.getUser('utente');
     if (!user) {
-      return interaction.reply({ embeds: [themeErr('Utente non valido.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.invalidUser', lang))], flags: MessageFlags.Ephemeral });
     }
-    const reason = truncate(interaction.options.getString('motivo') || 'Timeout rimosso', 512);
+    const reason = truncate(interaction.options.getString('motivo') || t('moderation.untimeout.defaultReason', lang), 512);
     const member = await interaction.guild.members.fetch(user.id).catch(() => null);
-    if (!member) return interaction.reply({ embeds: [themeErr('Utente non nel server.')], flags: MessageFlags.Ephemeral });
+    if (!member) return interaction.reply({ embeds: [themeErr(t('moderation.untimeout.notInGuild', lang))], flags: MessageFlags.Ephemeral });
     if (!member.moderatable)
-      return interaction.reply({ embeds: [themeErr('Non posso moderare questo utente (ruolo del bot troppo basso o permessi mancanti).')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.untimeout.noPerms', lang))], flags: MessageFlags.Ephemeral });
     if (member.id === interaction.guild.ownerId && interaction.user.id !== interaction.guild.ownerId)
-      return interaction.reply({ embeds: [themeErr('Non puoi moderare il proprietario del server.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.untimeout.owner', lang))], flags: MessageFlags.Ephemeral });
     if (!hierarchyAllows(interaction, member))
-      return interaction.reply({ embeds: [themeErr('Ruolo uguale/superiore al tuo.')], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.hierarchy', lang))], flags: MessageFlags.Ephemeral });
     if (!member.communicationDisabledUntilTimestamp || member.communicationDisabledUntilTimestamp <= Date.now())
-      return interaction.reply({ embeds: [themeErr(`${user.tag ?? user.username} non è attualmente in timeout.`)], flags: MessageFlags.Ephemeral });
+      return interaction.reply({ embeds: [themeErr(t('moderation.untimeout.notTimedOut', lang, { tag: user.tag ?? user.username }))], flags: MessageFlags.Ephemeral });
     try {
       await member.timeout(null, `${reason} | Mod: ${interaction.user.tag}`.slice(0, 512));
       const embed = applyFooter(
-        ok('✅ Timeout rimosso', `${truncate(user.tag ?? user.username, 100)} può di nuovo parlare.\n**Motivo:** ${reason}`),
+        ok(t('moderation.untimeout.title', lang), `${truncate(user.tag ?? user.username, 100)} può di nuovo parlare.\n**Motivo:** ${reason}`),
         interaction
       );
       await interaction.reply({ embeds: [embed] });
@@ -55,9 +57,9 @@ module.exports = {
     } catch (e) {
       console.error(e);
       if (interaction.replied || interaction.deferred) {
-        await interaction.followUp({ embeds: [themeErr('Errore durante la rimozione del timeout.')], flags: MessageFlags.Ephemeral }).catch(() => {});
+        await interaction.followUp({ embeds: [themeErr(t('moderation.untimeout.failed', lang))], flags: MessageFlags.Ephemeral }).catch(() => {});
       } else {
-        await interaction.reply({ embeds: [themeErr('Errore durante la rimozione del timeout.')], flags: MessageFlags.Ephemeral }).catch(() => {});
+        await interaction.reply({ embeds: [themeErr(t('moderation.untimeout.failed', lang))], flags: MessageFlags.Ephemeral }).catch(() => {});
       }
     }
   },

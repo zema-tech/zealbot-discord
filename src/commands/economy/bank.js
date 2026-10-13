@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const { getUser, updateUser } = require('../../database/economy');
+const { t, getLang } = require('../../utils/i18n');
 
 let theme = null;
 try {
@@ -56,27 +57,28 @@ module.exports = {
     };
 
     if (!interaction.guild?.id) {
-      await safeReply({ embeds: [themeErr('Comando disponibile solo nei server.')], flags: MessageFlags.Ephemeral });
+      await safeReply({ embeds: [themeErr(t('economy.guildOnly', getLang(interaction.guild?.id)))], flags: MessageFlags.Ephemeral });
       return;
     }
+    const lang = getLang(interaction.guild.id);
 
     let sub;
     try {
       sub = interaction.options.getSubcommand();
     } catch {
-      await safeReply({ embeds: [themeErr('Sottocomando non valido. Usa `/bank deposita` o `/bank preleva`.')], flags: MessageFlags.Ephemeral });
+      await safeReply({ embeds: [themeErr(t('economy.bank.badSub', lang))], flags: MessageFlags.Ephemeral });
       return;
     }
     const amount = interaction.options.getInteger('importo');
     if (!Number.isFinite(amount) || amount < 1) {
-      await safeReply({ embeds: [themeErr('Importo non valido: inserisci un numero intero ≥ 1.')], flags: MessageFlags.Ephemeral });
+      await safeReply({ embeds: [themeErr(t('economy.bank.badAmount', lang))], flags: MessageFlags.Ephemeral });
       return;
     }
 
     const gid = interaction.guild.id;
     const uid = interaction.user?.id;
     if (!uid) {
-      await safeReply({ embeds: [themeErr('Utente non valido.')], flags: MessageFlags.Ephemeral });
+      await safeReply({ embeds: [themeErr(t('economy.invalidUser', lang))], flags: MessageFlags.Ephemeral });
       return;
     }
 
@@ -104,36 +106,36 @@ module.exports = {
 
     if (sub === 'deposita') {
       if (balance < amount) {
-        await safeReply({ embeds: [themeErr('Fondi insufficienti nel portafoglio.')], flags: MessageFlags.Ephemeral });
+        await safeReply({ embeds: [themeErr(t('economy.bank.noWallet', lang))], flags: MessageFlags.Ephemeral });
         return;
       }
       try {
         updateUser(gid, uid, { balance: balance - amount, bank: bank + amount });
       } catch {
-        await safeReply({ embeds: [themeErr('Errore durante il deposito, riprova più tardi.')], flags: MessageFlags.Ephemeral });
+        await safeReply({ embeds: [themeErr(t('economy.bank.depositFailed', lang))], flags: MessageFlags.Ephemeral });
         return;
       }
       await safeReply({
-        embeds: [scheda('Deposito in banca', '🏦', `Depositati **${themeNum(amount)}** 🪙 al sicuro dai furti!\n👛 Portafoglio: **${themeNum(balance - amount)}** 🪙\n🏦 Banca: **${themeNum(bank + amount)}** 🪙`)],
+        embeds: [scheda(t('economy.bank.depositTitle', lang), '🏦', t('economy.bank.depositBody', lang, { a: themeNum(amount), w: themeNum(balance - amount), b: themeNum(bank + amount) }))],
       });
       return;
     }
     if (sub === 'preleva') {
       if (bank < amount) {
-        await safeReply({ embeds: [themeErr('Fondi insufficienti in banca.')], flags: MessageFlags.Ephemeral });
+        await safeReply({ embeds: [themeErr(t('economy.bank.noBank', lang))], flags: MessageFlags.Ephemeral });
         return;
       }
       try {
         updateUser(gid, uid, { balance: balance + amount, bank: bank - amount });
       } catch {
-        await safeReply({ embeds: [themeErr('Errore durante il prelievo, riprova più tardi.')], flags: MessageFlags.Ephemeral });
+        await safeReply({ embeds: [themeErr(t('economy.bank.withdrawFailed', lang))], flags: MessageFlags.Ephemeral });
         return;
       }
       await safeReply({
-        embeds: [scheda('Prelievo dalla banca', '👛', `Prelevati **${themeNum(amount)}** 🪙 dalla banca.\n👛 Portafoglio: **${themeNum(balance + amount)}** 🪙\n🏦 Banca: **${themeNum(bank - amount)}** 🪙`)],
+        embeds: [scheda(t('economy.bank.withdrawTitle', lang), '👛', t('economy.bank.withdrawBody', lang, { a: themeNum(amount), w: themeNum(balance + amount), b: themeNum(bank - amount) }))],
       });
       return;
     }
-    await safeReply({ embeds: [themeErr('Sottocomando non valido. Usa `/bank deposita` o `/bank preleva`.')], flags: MessageFlags.Ephemeral });
+    await safeReply({ embeds: [themeErr(t('economy.bank.badSub', lang))], flags: MessageFlags.Ephemeral });
   },
 };

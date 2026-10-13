@@ -124,5 +124,471 @@
       "Outlook not so good.",
       "Very doubtful."
     ]
+  },
+  "moderation": {
+    "invalidUser": "❌ Invalid user.",
+    "noReason": "No reason specified",
+    "selfAction": "You can't do that to yourself!",
+    "botAction": "You can't do that to me!",
+    "ownerAction": "You can't moderate the server owner.",
+    "hierarchy": "Role equal to or higher than yours.",
+    "failed": "❌ Operation failed.",
+    "notInGuild": "User not in this server.",
+    "ban": {
+      "self": "You can't ban yourself!",
+      "bot": "You can't ban me!",
+      "owner": "You can't ban the server owner.",
+      "noPerms": "I don't have permission to ban this user.",
+      "title": "🚫 User banned",
+      "user": "User",
+      "moderator": "Moderator",
+      "deletedMessages": "Deleted messages",
+      "reason": "Reason",
+      "failed": "Error while banning."
+    },
+    "kick": {
+      "self": "You can't kick yourself!",
+      "bot": "You can't kick me!",
+      "owner": "You can't kick the server owner.",
+      "notFound": "User not found in this server.",
+      "noPerms": "I don't have permission to kick this user.",
+      "title": "👢 User kicked",
+      "user": "User",
+      "moderator": "Moderator",
+      "reason": "Reason",
+      "failed": "Error while kicking."
+    },
+    "timeout": {
+      "badDuration": "Invalid duration. Use formats like `30s`, `10m`, `2h`, `1d` (min 5s, max 28d).",
+      "notInGuild": "User not in this server.",
+      "self": "You can't time yourself out!",
+      "bot": "You can't time me out!",
+      "isBot": "You can't time out a bot.",
+      "owner": "You can't time out the server owner.",
+      "noPerms": "I can't moderate this user (my permissions or role hierarchy are insufficient).",
+      "title": "⏱️ Timeout applied",
+      "failed": "Timeout error: check my permissions (Moderate Members) and role hierarchy."
+    },
+    "untimeout": {
+      "notInGuild": "User not in this server.",
+      "noPerms": "I can't moderate this user (bot role too low or missing permissions).",
+      "owner": "You can't moderate the server owner.",
+      "notTimedOut": "{tag} is not currently timed out.",
+      "title": "✅ Timeout removed",
+      "failed": "Error while removing the timeout.",
+      "defaultReason": "Timeout removed"
+    },
+    "unban": {
+      "badId": "Invalid ID: must be a numeric user ID (17–20 digits).",
+      "notBanned": "User not banned (or nonexistent ID): nothing to unban.",
+      "title": "✅ User unbanned",
+      "failed": "Error while unbanning: check my permissions (Ban Members)."
+    },
+    "slowmode": {
+      "badValue": "Invalid value: use 0–21600 seconds (0 = off).",
+      "notText": "Slowmode only works in text channels (voice not supported).",
+      "off": "🐢 Slowmode off",
+      "on": "🐢 Slowmode updated",
+      "failed": "Error: check my permissions (Manage Channels) and role hierarchy."
+    },
+    "lock": {
+      "notText": "Use this command in a server text channel.",
+      "noEveryone": "@everyone role not found.",
+      "on": "🔒 Channel locked",
+      "onDesc": "Only staff can write in this channel.",
+      "off": "🔓 Channel unlocked",
+      "offDesc": "Everyone can write in this channel again.",
+      "failed": "Permission error: check that I can manage the channel."
+    },
+    "lockdown": {
+      "already": "Lockdown already active on this server. Use `/lockdown off` to restore first.",
+      "noChannels": "No text channels found.",
+      "none": "No active lockdown on this server.",
+      "on": "🔒 Lockdown enabled",
+      "off": "🔓 Lockdown over"
+    },
+    "nuke": {
+      "notText": "Use this command in a server text channel (threads can't be regenerated).",
+      "noPerms": "I lack the **Manage Channels** permission: can't regenerate this channel.",
+      "notManageable": "I can't manage this channel (role hierarchy or insufficient permissions).",
+      "confirmTitle": "⚠️ Confirm nuke",
+      "cancel": "Cancel"
+    },
+    "segnala": {
+      "noReason": "Describe the reason.",
+      "self": "You can't report yourself.",
+      "isBot": "You can't report a bot.",
+      "noLog": "Log channel not configured: ask staff to set it.",
+      "sent": "✅ Report sent to staff. Thank you!",
+      "reported": "Reported",
+      "from": "From",
+      "channel": "Channel",
+      "reason": "Reason"
+    },
+    "warn": {
+      "noReason": "No reason specified",
+      "isBot": "You can't warn a bot.",
+      "owner": "You can't warn the server owner.",
+      "failed": "Error while warning.",
+      "escalatedTimeout": "⚠️ **{n} warns reached: automatic {minutes}-minute timeout.**",
+      "escalatedKick": "⚠️ **{n} warns reached: automatic kick.**",
+      "escalatedBan": "⚠️ **{n} warns reached: automatic ban.**",
+      "auditSuffix": "{n} warns reached",
+      "title": "⚠️ Warn #{n} — {tag}",
+      "reason": "Reason",
+      "moderator": "Moderator",
+      "warnId": "Warn ID",
+      "dmTitle": "⚠️ You received a warn in {server}",
+      "dmTotal": "Total warns"
+    },
+    "warnazioni": {
+      "invalid": "Invalid rules.",
+      "saved": "✅ Rules saved",
+      "reset": "✅ Rules reset: **3 warns → 10 min timeout**.",
+      "needManage": "You need the **Manage Server** permission."
+    },
+    "warnings": {
+      "owner": "You can't edit the server owner's warns.",
+      "badId": "Invalid warn ID.",
+      "none": "✅ No warns",
+      "removed": "✅ Warn removed",
+      "notFound": "not found.",
+      "cleared": "🧹 Warns cleared",
+      "noneFor": "{tag} has no warns.",
+      "removedDesc": "Warn `{id}` of {tag} removed.",
+      "clearedDesc": "All warns of {tag} have been removed."
+    },
+    "caso": {
+      "notFound": "Case not found.",
+      "none": "✅ No cases",
+      "noText": "Note text missing.",
+      "saveFailed": "Could not save the note.",
+      "needManage": "Requires `ManageGuild` permission to delete a case.",
+      "deleted": "🗑️ Case deleted",
+      "saved": "📝 Note saved",
+      "unknownSub": "Unknown subcommand.",
+      "user": "User",
+      "moderator": "Moderator",
+      "date": "Date",
+      "reason": "Reason",
+      "noCasesFor": "{tag} has no{ttype} registered cases.",
+      "historyOf": "📋 History of {tag} ({n})",
+      "more": "…and {n} more.",
+      "noteSavedDesc": "Note for {tag} saved as case `#{id}`.",
+      "deletedDesc": "Case `#{id}` deleted.",
+      "notFoundDesc": "Case `#{id}` not found."
+    },
+    "clear": {
+      "badQty": "Invalid quantity (1-100).",
+      "notText": "Use this command in a server text channel.",
+      "empty": "No messages to delete.",
+      "tooOld": "No messages deleted (only last-14-days messages can be bulk deleted).",
+      "oldError": "Cannot delete (messages older than 14 days can't be bulk deleted).",
+      "permError": "Cannot delete messages. Check my permissions (Manage Messages, Read History).",
+      "done": "🧹 Cleanup done",
+      "doneDesc": "Deleted **{n}** messages{what}.",
+      "ofUser": "by {tag}",
+      "ofBots": "from bots",
+      "withLinks": "with links",
+      "withText": "containing \"{text}\""
+    }
+  },
+  "economy": {
+    "guildOnly": "Server-only command.",
+    "invalidUser": "Invalid user.",
+    "balance": {
+      "title": "💰 {name}'s balance",
+      "wallet": "👛 Wallet",
+      "bank": "🏦 Bank",
+      "total": "💎 Total"
+    },
+    "pay": {
+      "badAmount": "❌ Invalid amount.",
+      "isBot": "❌ You can't pay a bot.",
+      "self": "❌ You can't pay yourself.",
+      "insufficient": "❌ Insufficient balance (you have **{n}** 🪙).",
+      "sent": "💸 Payment sent"
+    },
+    "bank": {
+      "badSub": "Invalid subcommand. Use `/bank deposita` or `/bank preleva`.",
+      "badAmount": "Invalid amount: enter an integer ≥ 1.",
+      "noWallet": "Insufficient wallet funds.",
+      "depositFailed": "Deposit error, try again later.",
+      "depositTitle": "Bank deposit",
+      "noBank": "Insufficient bank funds.",
+      "withdrawFailed": "Withdrawal error, try again later.",
+      "withdrawTitle": "Bank withdrawal",
+      "depositBody": "Deposited **{a}** 🪙 safe from theft!\n👛 Wallet: **{w}** 🪙\n🏦 Bank: **{b}** 🪙",
+      "withdrawBody": "Withdrew **{a}** 🪙 from the bank.\n👛 Wallet: **{w}** 🪙\n🏦 Bank: **{b}** 🪙"
+    },
+    "daily": {
+      "failed": "Error claiming the daily, try again later.",
+      "title": "🎁 Daily reward!",
+      "noInterestHint": "\n🏦 Deposit with `/bank deposita` to earn interest!",
+      "body": "You received **{reward}** 🪙!{interest}\n{flames}\n🔥 Streak: **{streak}** {giorni} (+\\{bonus} bonus)\n⏳ Next bonus {next}",
+      "interestLine": "\n🏦 Bank interest (2%): **+{interest}** 🪙",
+      "dayOne": "day",
+      "dayMany": "days"
+    },
+    "leaderboard": {
+      "empty": "📭 No economy data yet. Use `/daily` or `/work`!",
+      "title": "🏆 Richest — {server}",
+      "leftUser": "*Left user*"
+    },
+    "work": {
+      "cooldown": "⏳ You can work again {ts}",
+      "done": "💼 Shift complete!",
+      "jobs": [
+        "Programmer|💻",
+        "Pizza chef|🍕",
+        "Streamer|🎥",
+        "Courier|📦",
+        "Teacher|📚",
+        "Mechanic|🔧"
+      ],
+      "body": "{emoji} You worked as **{job}** and earned **{n}** 🪙!\n👛 New balance: **{bal}** 🪙"
+    },
+    "rob": {
+      "badTarget": "❌ Invalid target.",
+      "tooPoor": "❌ The victim is too poor (min 100 🪙 in wallet).",
+      "failTitle": "🚨 Heist failed!",
+      "failBody": "Caught red-handed trying to rob {target}!\n💸 Fine paid: **{fine}** 🪙\n🛡️ The bank stays safe from theft: use `/bank deposita`!",
+      "winTitle": "🥷 Heist successful!",
+      "winBody": "{thief} 🆚 {target}\n💰 Loot: **{n}** 🪙 stolen from the wallet!\n🛡️ Remember: bank money can't be stolen."
+    },
+    "slots": {
+      "badBet": "❌ Invalid bet: use an integer between 10 and 10,000 🪙.",
+      "overCap": "❌ Bet above the server cap (**{n}** 🪙).",
+      "noFunds": "❌ Insufficient balance (you have **{n}** 🪙).",
+      "nextSpin": "⏳ Next spin {ts}.",
+      "title": "🎰 Slot Machine",
+      "noCombo": "No combination",
+      "trio": "{s} triple (x{n})",
+      "pair": "Pair (x1.5)",
+      "win": "🎉 **WIN!** +**{n}** 🪙 (x{mult})\n📍 {combo}",
+      "lose": "😢 You lost **{n}** 🪙.\n📍 {combo} — try again!",
+      "bet": "💰 Bet: **{n}** 🪙",
+      "paytable": "📖 Payout table",
+      "paytableBody": "7️⃣7️⃣7️⃣ → **x10**\n💎💎💎 → **x6**\nTriple → **x4**\nPair → **x1.5**"
+    },
+    "rep": {
+      "invalidUser": "Invalid user.",
+      "self": "You can't give rep to yourself!",
+      "isBot": "You can't give rep to a bot!",
+      "given": "⭐ Rep given!",
+      "givenDesc": "⭐ {giver} gave +1 rep to {target}! (Total: **{n}**)",
+      "showTitle": "⭐ {tag}'s reputation",
+      "topTitle": "⭐ Rep leaderboard — {server}",
+      "leftUser": "Left user",
+      "empty": "📭 No rep given yet. Use `/rep dai`!",
+      "showDesc": "**{n}** rep received"
+    },
+    "lotteria": {
+      "winner": "🎉 WE HAVE A WINNER! 🎉",
+      "winnerDesc": "🥳 Congratulations {user}!\n\nYou won **{prize}** 🪙 with **{total}** total tickets in play!",
+      "infoTitle": "🎰 Server lottery",
+      "pot": "🍯 Pot",
+      "price": "🎟️ Ticket price",
+      "sold": "📊 Tickets sold",
+      "mine": "🎫 Your tickets",
+      "thresholdHit": "🔥 Threshold reached: drawing imminent!",
+      "thresholdWait": "Auto-draw starts at **{n}** tickets. Use `/lotteria compra`!",
+      "badCount": "You can buy 1 to {max} tickets at a time.",
+      "noFunds": "Insufficient balance: **{n}** tickets cost **{cost}** 🪙 (you have **{bal}** 🪙).",
+      "buyFailed": "Purchase failed ({err}). Balance refunded.",
+      "bought": "🎟️ Tickets purchased!",
+      "boughtDesc": "{user} bought **{n}** tickets for **{cost}** 🪙\n🍯 Pot: **{pot}** 🪙 • 📊 Tickets: **{total}/{threshold}**",
+      "needManage": "You need the **Manage Server** permission to draw the winner.",
+      "drawingBusy": "⏳ Drawing already in progress, wait a few seconds.",
+      "needMin": "Need at least **{min}** tickets to draw (now: **{n}**). No refund: purchased tickets stay valid.",
+      "emptyPot": "❌ Empty pot: cannot draw."
+    },
+    "shop": {
+      "needManageRoles": "❌ You need the **Manage Roles** permission to use this command.",
+      "empty": "📭 No roles for sale. Come back later!",
+      "title": "🛒 Role shop",
+      "more": "…and **{n}** more roles.",
+      "notForSale": "❌ {role} is not for sale. See `/shop lista`.",
+      "cantSellEveryone": "❌ You can't sell the @everyone role.",
+      "cantSellManaged": "❌ That role is managed by an integration and can't be sold.",
+      "cantSellHigher": "❌ I can't manage that role: it's above my highest role. Move my role higher in the hierarchy.",
+      "alreadyOwn": "❌ You already own {role}.",
+      "noFunds": "❌ Insufficient balance: {role} costs **{price}** 🪙 (you have **{bal}** 🪙).",
+      "assignFailed": "❌ I couldn't assign you the role. You've been refunded.",
+      "bought": "🛒 Purchase complete!",
+      "boughtDesc": "{user} purchased {role} for **{price}** 🪙",
+      "unknownSub": "❌ Unknown subcommand."
+    }
+  },
+  "tickets": {
+    "needManage": "You need the **Manage Server** permission.",
+    "onlyStaff": "Staff only.",
+    "ownerOrStaff": "Only the owner or staff.",
+    "needTicketChannel": "Use this subcommand inside a ticket channel.",
+    "alreadyClosed": "Ticket already closed.",
+    "alreadyOpen": "The ticket is already open.",
+    "panel": {
+      "badChannel": "Invalid text channel.",
+      "badTypes": "Invalid types. Use: {types}.",
+      "cantWrite": "I can't write in that channel.",
+      "registerFailed": "Panel published but not registered.",
+      "published": "✅ Panel published in {channel} ({n} sections).",
+      "noQuestions": "ℹ️ No pre-open questions for **{type}**: the ticket opens right away.",
+      "questionsSet": "✅ Questions for **{type}** set ({n}):\n{list}",
+      "questionsReset": "✅ Questions for **{type}** removed: the ticket opens right away."
+    },
+    "member": {
+      "isOwner": "They own the ticket.",
+      "added": "✅ User added",
+      "addedDesc": "{user} added to ticket #{n}.",
+      "removed": "✅ User removed",
+      "removedDesc": "{user} removed from ticket #{n}.",
+      "channelPermError": "Channel permission error."
+    },
+    "claim": {
+      "taken": "🖐️ Claimed",
+      "takenDesc": "Ticket #{n} claimed by {user}!",
+      "releasedDesc": "{user} released ticket #{n}."
+    },
+    "close": {
+      "failed": "Error while closing the ticket.",
+      "done": "✅ Ticket closed",
+      "doneDesc": "Transcript sent to logs and owner."
+    },
+    "reopen": {
+      "done": "🔓 Ticket reopened",
+      "doneDesc": "Ticket **#{n}** reopened."
+    },
+    "priority": {
+      "invalid": "Invalid priority.",
+      "done": "⚡ Priority updated",
+      "doneDesc": "Ticket #{n}: {label}."
+    },
+    "assign": {
+      "badStaff": "Invalid staffer.",
+      "done": "🖐️ Ticket assigned",
+      "doneDesc": "Ticket #{n} assigned to {user}."
+    },
+    "subject": {
+      "done": "📝 Subject updated",
+      "doneDesc": "Ticket #{n}: \"{text}\".",
+      "removedDesc": "Subject of ticket #{n} removed."
+    },
+    "note": {
+      "done": "📌 Note saved",
+      "doneDesc": "Note #{n} on ticket #{t} (staff-logs only).",
+      "invalid": "Invalid note."
+    },
+    "transcript": {
+      "noAccess": "No access.",
+      "failed": "Error generating the transcript.",
+      "caption": "📝 Transcript of ticket #{n}:"
+    },
+    "rename": {
+      "done": "✏️ Renamed",
+      "doneDesc": "Channel renamed to **{name}**.",
+      "failed": "I can't rename: check my permissions."
+    },
+    "type": {
+      "invalid": "Invalid type.",
+      "done": "🔄 Type changed",
+      "doneDesc": "Ticket #{n} is now **{type}**."
+    },
+    "transfer": {
+      "alreadyOwner": "Already the owner.",
+      "failed": "Transfer failed.",
+      "done": "🔄 Ticket transferred",
+      "doneDesc": "Ticket #{n} now belongs to {user}."
+    },
+    "protect": {
+      "notFound": "Ticket not found.",
+      "on": "📌 Ticket protected",
+      "onDesc": "Ticket #{n} resists auto-close and deletion.",
+      "off": "📌 Protection removed",
+      "offDesc": "Ticket #{n} follows automatic rules again."
+    },
+    "blacklist": {
+      "empty": "⛔ Blacklist empty.",
+      "needUser": "Specify a user.",
+      "isBot": "You can't block a bot.",
+      "added": "⛔ {user} will no longer be able to open tickets.",
+      "alreadyListed": "ℹ️ {user} was already blacklisted.",
+      "removed": "✅ {user} removed from the blacklist.",
+      "notListed": "ℹ️ {user} was not blacklisted.",
+      "failed": "Blacklist operation failed."
+    },
+    "autodelete": {
+      "on": "🗑️ Closed tickets will be deleted after **{n} days** (📌 protected ones resist).",
+      "off": "🗑️ Auto-delete off."
+    },
+    "move": {
+      "badCategory": "Invalid category.",
+      "done": "📁 Ticket moved",
+      "doneDesc": "Ticket #{n} moved to **{cat}**.",
+      "failed": "Move failed: check my permissions."
+    },
+    "tag": {
+      "empty": "ℹ️ No tags. Create one with `/ticket tag azione:Crea`.",
+      "notFound": "Tag not found. See the list with `/ticket tag azione:Lista`.",
+      "needName": "Specify the tag name.",
+      "needText": "Specify the tag text.",
+      "saved": "✅ Tag **{name}** saved ({n} characters).",
+      "removed": "✅ Tag **{name}** deleted.",
+      "sent": "✅ Tag **{name}** sent.",
+      "cantWrite": "I can't write in the channel.",
+      "invalid": "Invalid tag data."
+    },
+    "archive": {
+      "empty": "🗃️ No closed tickets in archive.",
+      "title": "🗃️ Closed ticket archive ({n})",
+      "footer": "Full transcripts in the log channel"
+    },
+    "stats": {
+      "open": "📂 Open",
+      "closed": "🔒 Closed",
+      "total": "📊 Total",
+      "byType": "By type",
+      "avgClose": "⏱️ Avg close time",
+      "avgRating": "⭐ Avg rating",
+      "topStaff": "🏆 Top staff",
+      "avgCloseUnit": "{n} min",
+      "avgRatingVal": "{n}/5 ({c} votes)",
+      "staffClosed": "closes"
+    },
+    "statsTitle": "🎫 Ticket stats — {server}",
+    "ai": {
+      "disabled": "AI disabled for tickets in this server.",
+      "isClosed": "The ticket is closed.",
+      "cantRead": "Cannot read the ticket messages.",
+      "emptyHistory": "No text messages to analyze in the ticket.",
+      "unavailable": "AI unavailable, try again later.",
+      "staffOnlyPublish": "Only staff can publish the draft.",
+      "cantWrite": "I can't write in the channel.",
+      "draftPublished": "✅ Draft published in the ticket."
+    }
+  },
+  "levels": {
+    "top": {
+      "empty": "📭 No XP yet. Chat to level up!",
+      "title": "⭐ Level top — {server}",
+      "leftUser": "*Left user*",
+      "line": "Lvl **{lvl}** ({xp} XP)"
+    },
+    "rewards": {
+      "empty": "📭 No level rewards configured. Use the dashboard (Level rewards section).",
+      "title": "🏆 Level rewards",
+      "row": "⭐ Level **{lvl}** → <@&{role}>",
+      "more": "…and **{n}** more rewards.",
+      "unknownSub": "❌ Unknown subcommand."
+    },
+    "rank": {
+      "title": "⭐ {name}'s rank",
+      "levelLine": "**Level {lvl}** • **{pct}%**",
+      "xpLine": "✨ **{xp}** / **{need}** XP",
+      "messages": "💬 Messages: **{n}**",
+      "voice": "🎙️ Voice: **{n} min**",
+      "nextReward": "\n🎁 Next reward: {role} at level **{lvl}**",
+      "total": "(total **{n}**)"
+    }
   }
 }

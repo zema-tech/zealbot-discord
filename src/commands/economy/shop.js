@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, MessageFlags } = require('discord.js');
 const { getUser, addBalance } = require('../../database/economy');
 const { getItem, listItems } = require('../../database/shop');
+const { t, getLang } = require('../../utils/i18n');
 
 // theme.js con fallback inline: mai crash se il require fallisce.
 let _T = null;
@@ -14,8 +15,8 @@ const applyFooter = _T?.applyFooter ?? ((embed, interaction) => {
 const num = _T?.num ?? ((n) => (Number.isFinite(Number(n)) ? Number(n).toLocaleString('it-IT') : 'n/d'));
 const truncate = _T?.truncate ?? ((s, m) => String(s ?? '').slice(0, m));
 
-function noPerm() {
-  return { content: '❌ Ti serve il permesso **Gestisci ruoli** per usare questo comando.', flags: MessageFlags.Ephemeral };
+function noPerm(lang) {
+  return { content: t('economy.shop.needManageRoles', lang), flags: MessageFlags.Ephemeral };
 }
 
 function dashboardMsg(guildId, sezione) {
@@ -56,19 +57,20 @@ module.exports = {
   async execute(interaction) {
     const sub = interaction.options.getSubcommand();
     const guildId = interaction.guild.id;
+    const lang = getLang(guildId);
 
     if (sub === 'lista') {
       const items = listItems(guildId);
       if (!items.length) {
-        return interaction.reply({ content: '📭 Nessun ruolo in vendita. Torna più tardi!', flags: MessageFlags.Ephemeral });
+        return interaction.reply({ content: t('economy.shop.empty', lang), flags: MessageFlags.Ephemeral });
       }
       // Slice anti-limite 4096 char: con tanti ruoli la description esploderebbe.
       const MAX = 25;
       const righe = items.slice(0, MAX).map((i) => `<@&${i.roleId}> — **${num(i.price)}** 🪙`);
-      if (items.length > MAX) righe.push(`…e altri **${num(items.length - MAX)}** ruoli.`);
+      if (items.length > MAX) righe.push(t('economy.shop.more', lang, { n: num(items.length - MAX) }));
       const embed = applyFooter(new EmbedBuilder()
         .setColor(COLORS.gold)
-        .setTitle('🛒 Negozio ruoli')
+        .setTitle(t('economy.shop.title', lang))
         .setDescription(truncate(righe.join('\n'), 4096)), interaction);
       return interaction.reply({ embeds: [embed] });
     }
@@ -77,20 +79,20 @@ module.exports = {
       const role = interaction.options.getRole('ruolo');
       const item = getItem(guildId, role.id);
       if (!item) {
-        return interaction.reply({ content: `❌ ${role} non è in vendita. Guarda \`/shop lista\`.`, flags: MessageFlags.Ephemeral });
+        return interaction.reply({ content: t('economy.shop.notForSale', lang, { role: `${role}` }), flags: MessageFlags.Ephemeral });
       }
-      const invalid = validateSellable(role, interaction.guild);
+      const invalid = validateSellable(role, interaction.guild, lang);
       if (invalid) return interaction.reply({ content: invalid, flags: MessageFlags.Ephemeral });
 
       const member = interaction.member;
       if (member.roles.cache.has(role.id)) {
-        return interaction.reply({ content: `❌ Possiedi già ${role}.`, flags: MessageFlags.Ephemeral });
+        return interaction.reply({ content: t('economy.shop.alreadyOwn', lang, { role: `${role}` }), flags: MessageFlags.Ephemeral });
       }
 
       const user = getUser(guildId, interaction.user.id);
       if (!Number.isFinite(user.balance) || user.balance < item.price) {
         return interaction.reply({
-          content: `❌ Saldo insufficiente: ${role} costa **${num(item.price)}** 🪙 (hai **${num(user.balance)}** 🪙).`,
+          content: t('economy.shop.noFunds', lang, { role: `${role}`, price: num(item.price), bal: num(user.balance) }),
           flags: MessageFlags.Ephemeral,
         });
       }
@@ -101,24 +103,24 @@ module.exports = {
       } catch {
         // Rimborso: l'addebito è andato a buon fine ma l'assegnazione no.
         addBalance(guildId, interaction.user.id, item.price);
-        return interaction.reply({ content: '❌ Non sono riuscito ad assegnarti il ruolo. Sei stato rimborsato.', flags: MessageFlags.Ephemeral });
+        return interaction.reply({ content: t('economy.shop.assignFailed', lang), flags: MessageFlags.Ephemeral });
       }
 
       const embed = applyFooter(new EmbedBuilder()
         .setColor(COLORS.success)
-        .setTitle('🛒 Acquisto completato!')
-        .setDescription(`${interaction.user} ha acquistato ${role} per **${num(item.price)}** 🪙`), interaction);
+        .setTitle(t('economy.shop.bought', lang))
+        .setDescription(t('economy.shop.boughtDesc', lang, { user: `${interaction.user}`, role: `${role}`, price: num(item.price) })), interaction);
       return interaction.reply({ embeds: [embed] });
     }
 
     // aggiungi / rimuovi = solo dalla dashboard (nessuna scrittura qui).
     if (sub === 'aggiungi' || sub === 'rimuovi') {
       if (!interaction.memberPermissions?.has(PermissionFlagsBits.ManageRoles)) {
-        return interaction.reply(noPerm());
+        return interaction.reply(noPerm(lang));
       }
       return interaction.reply({ content: dashboardMsg(guildId, 'Negozio'), flags: MessageFlags.Ephemeral });
     }
 
-    return interaction.reply({ content: '❌ Sottocomando sconosciuto.', flags: MessageFlags.Ephemeral });
+    return interaction.reply({ content: t('economy.shop.unknownSub', lang), flags: MessageFlags.Ephemeral });
   },
 };

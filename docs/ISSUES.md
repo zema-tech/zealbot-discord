@@ -3,18 +3,18 @@
 1. ~~`npm ci` at root fails with `Unsupported URL Type "workspace:"`~~ RESOLVED:
    orphan Next-era workspaces (`apps/dashboard`, `packages/db|config|ui`)
    removed; plain `npm ci` works again. CI workaround dropped.
-2. Full bot-message i18n is partial: `src/utils/i18n.js` + JSON locales cover
-   a handful of commands; most replies are hardcoded Italian, and slash
-   names/descriptions stay Italian by documented choice. Rolling out `t()`
-   everywhere is future work (see `docs/CONFIG.md` lingue / `docs/en/CONFIG.md`).
-   Default language stays `it` (flipping to `en` would silently change UX
-   for existing Italian servers).
+2. Full bot-message i18n: `src/core/i18n.js` (i18next + fs-backend) + `t()`
+   covers moderation/economy/tickets/levels commands; most other replies are
+   still hardcoded Italian, and slash names/descriptions stay Italian by
+   documented choice. Product default is now English (`FALLBACK='en'`,
+   `guildConfig.language` default `'en'`): guilds that never set a language
+   see English — explicit product decision, `/language` (admin) to switch.
 3. Prettier: `npm run format` exists but is opt-in — ~200 files predate the
    config and a mass reformat would nuke blame. Gate CI on ESLint only.
 4. ~~`apps/dashboard` (Next.js) experimental~~ RESOLVED (Option B):
    removed entirely; Express is the only dashboard. Reintroduction needs an ADR.
-5. Product default language is Italian (`FALLBACK_LANG='it'`), not English:
-   deliberate (see 2), against the letter of the i18n request.
+5. ~~Product default language is Italian~~ RESOLVED: default is now
+   English everywhere (`src/core/i18n.js`, `utils/i18n.js`, `guildConfig`).
 6. `scripts/gen-docs.js` writes to `docs/COMMANDS.md`, but docs now live in
    `docs/it/` + `docs/en/`. Decide: generator targets `docs/it/COMMANDS.md`
    (+ English edition strategy) before re-running, or it recreates the old path.

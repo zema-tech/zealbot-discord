@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, MessageFlags } = require('discord.js');
+const { t, getLang } = require('../../utils/i18n');
 let theme = null;
 try { theme = require('../../utils/theme'); } catch { theme = null; }
 const COLORS = theme?.COLORS ?? { primary: 0x5865f2, success: 0x57f287, error: 0xed4245 };
@@ -16,36 +17,37 @@ module.exports = {
   cooldown: 3,
   async execute(interaction) {
     if (!interaction.guild) {
-      return interaction.reply({ embeds: [errEmbed('Usa questo comando dentro un server.')], flags: MessageFlags.Ephemeral }).catch(() => null);
+      return interaction.reply({ embeds: [errEmbed(t('common.guildOnly', getLang(interaction.guildId)))], flags: MessageFlags.Ephemeral }).catch(() => null);
     }
+    const lang = getLang(interaction.guildId);
     const sub = interaction.options.getSubcommand();
     if (!interaction.channel?.isTextBased?.() || typeof interaction.channel.permissionOverwrites?.edit !== 'function') {
-      return interaction.reply({ embeds: [errEmbed('Usa questo comando in un canale testuale del server.')], flags: MessageFlags.Ephemeral }).catch(() => null);
+      return interaction.reply({ embeds: [errEmbed(t('moderation.lock.notText', lang))], flags: MessageFlags.Ephemeral }).catch(() => null);
     }
     if (interaction.channel.isThread?.() || interaction.channel.isVoiceBased?.()) {
-      return interaction.reply({ embeds: [errEmbed('Usa questo comando in un canale testuale del server.')], flags: MessageFlags.Ephemeral }).catch(() => null);
+      return interaction.reply({ embeds: [errEmbed(t('moderation.lock.notText', lang))], flags: MessageFlags.Ephemeral }).catch(() => null);
     }
     const everyone = interaction.guild.roles.everyone;
     if (!everyone) {
-      return interaction.reply({ embeds: [errEmbed('Ruolo @everyone non trovato.')], flags: MessageFlags.Ephemeral }).catch(() => null);
+      return interaction.reply({ embeds: [errEmbed(t('moderation.lock.noEveryone', lang))], flags: MessageFlags.Ephemeral }).catch(() => null);
     }
     try {
       if (sub === 'on') {
         await interaction.channel.permissionOverwrites.edit(everyone, { SendMessages: false });
-        const embed = new EmbedBuilder().setColor(COLORS.primary).setTitle('🔒 Canale bloccato').setDescription('Solo lo staff può scrivere in questo canale.').setTimestamp();
+        const embed = new EmbedBuilder().setColor(COLORS.primary).setTitle(t('moderation.lock.on', lang)).setDescription(t('moderation.lock.onDesc', lang)).setTimestamp();
         applyFooter(embed, interaction);
         await interaction.reply({ embeds: [embed] }).catch(() => null);
       } else {
         await interaction.channel.permissionOverwrites.edit(everyone, { SendMessages: null });
-        const embed = okEmbed('🔓 Canale sbloccato', 'Tutti possono di nuovo scrivere in questo canale.');
+        const embed = okEmbed(t('moderation.lock.off', lang), t('moderation.lock.offDesc', lang));
         applyFooter(embed, interaction);
         await interaction.reply({ embeds: [embed] }).catch(() => null);
       }
     } catch {
       if (interaction.replied || interaction.deferred) {
-        await interaction.followUp({ embeds: [errEmbed('Errore permessi: verifica che io possa gestire il canale.')], flags: MessageFlags.Ephemeral }).catch(() => {});
+        await interaction.followUp({ embeds: [errEmbed(t('moderation.lock.failed', lang))], flags: MessageFlags.Ephemeral }).catch(() => {});
       } else {
-        await interaction.reply({ embeds: [errEmbed('Errore permessi: verifica che io possa gestire il canale.')], flags: MessageFlags.Ephemeral }).catch(() => {});
+        await interaction.reply({ embeds: [errEmbed(t('moderation.lock.failed', lang))], flags: MessageFlags.Ephemeral }).catch(() => {});
       }
     }
   },
