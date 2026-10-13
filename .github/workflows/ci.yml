@@ -14,11 +14,6 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      # The root package.json declares npm workspaces (apps/*, packages/*)
-      # whose `workspace:*` protocol npm cannot resolve. The bot + Express
-      # dashboard need root deps only, so drop the field for this job.
-      # (Next.js dashboard in apps/dashboard uses Bun/pnpm instead.)
-      - run: node -e "const fs=require('fs');const p=require('./package.json');delete p.workspaces;fs.writeFileSync('package.json',JSON.stringify(p,null,2))"
       - run: npm ci
       - run: npm run build:commander
       - run: npm run lint

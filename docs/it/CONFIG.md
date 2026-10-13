@@ -61,9 +61,11 @@ Note:
 
 I testi di risposta passano da `src/utils/i18n.js`: `t(chiave, lingua, vars)`
 con fallback per-chiave all'italiano, `getLang(guildId)` legge `language` da
-`guildConfig` (`/lingua imposta`). Lingue supportate: `it`, `en`
+`guildConfig` (si cambia con `/lingua` — niente comando `/language` separato:
+sarebbe un duplicato). Lingue supportate: `it`, `en`
 (`SUPPORTED_LANGS`, fallback `it`). Le stringhe canoniche vivono in
-`src/locales/<lingua>.json` (`it.js`/`en.js` le riesportano per compatibilità).
+`src/locales/<lingua>.json` (`it.js`/`en.js` le riesportano per compatibilità),
+motore `i18next` sotto la stessa API (niente fs-backend: i JSON viaggiano col codice).
 
 Copertura attuale: parziale (una manciata di comandi); nomi e descrizioni
 slash restano in italiano.

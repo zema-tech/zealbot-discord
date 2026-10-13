@@ -11,11 +11,7 @@ npm start       # bot (+ dashboard con npm run dashboard)
 Requisiti comuni:
 
 - **Node.js ≥ 22.12** (consigliato **Node 24**; @discordjs/voice lo richiede)
-- **Toolchain**: il bot puro e la dashboard Express (`src/dashboard`) vanno con `npm`.
-  Per la dashboard Next.js (`apps/dashboard`, protocollo `workspace:*`) serve
-  **Bun** (primario, vedi `apps/dashboard/README.md`) oppure **pnpm**
-  (`pnpm-workspace.yaml` incluso): `npm` NON supporta `workspace:*` e fallisce
-  l'install se risolvi quei package.
+- **Toolchain**: `npm` per tutto (bot + dashboard Express).
 - File `.env` creato da `.env.example` con almeno `DISCORD_TOKEN` e `CLIENT_ID`
 - Deploy degli slash command: `npm run deploy` (dopo ogni aggiunta/modifica di comandi)
 - Start: `npm start` (= `node src/index.js`) · Test: `npm test`
@@ -24,12 +20,12 @@ Requisiti comuni:
 
 | Host | Disco | Storage consigliato | Dashboard | Note |
 |------|-------|---------------------|-----------|------|
-| Render | effimero | sqlite su Disk (`/app/data`) | ✅ via `$PORT` | Blueprint `render.yaml` (bot + dashboard Next opzionale) |
-| Railway | effimero | sqlite su Volume | ✅ via `$PORT` | `railway.toml` (Dockerfile root; dashboard Next = servizio separato) |
+| Render | effimero | sqlite su Disk (`/app/data`) | ✅ via `$PORT` | Blueprint `render.yaml` |
+| Railway | effimero | sqlite su Volume | ✅ via `$PORT` | `railway.toml` (Dockerfile root) |
 | Fly.io | effimero | sqlite su Volume (`/app/data`) | ✅ porta 3000 | `fly.toml` (healthcheck `/healthz`: imposta le env dashboard) |
 | Pterodactyl | persistente | sqlite | ✅ porta pannello | Egg NodeJS generico |
-| Docker | effimero* | sqlite su volume | ✅ `$PORT`/`3000` | `docker-compose.yml` (*persistente con volume); dashboard Next: `docker build -f apps/dashboard/Dockerfile` |
-| VPS / locale | persistente | sqlite (Node 22+) o json | ✅ | PM2 consigliato; dashboard Next con Bun/PM2 |
+| Docker | effimero* | sqlite su volume | ✅ `$PORT`/`3000` | `docker-compose.yml` (*persistente con volume) |
+| VPS / locale | persistente | sqlite (Node 22+) o json | ✅ | PM2 consigliato |
 | Termux | persistente | json | ✅ | Sviluppo, non produzione |
 | Replit | persistente | json | ✅ | Sempre-on a pagamento |
 
@@ -128,6 +124,24 @@ docker compose --profile dashboard up -d --build
   nel Dockerfile prima di `USER node`:
   `RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*`.
 
+### Immagine precompilata (GHCR, senza build)
+
+Ogni tag `vX.Y.Z` pubblica `ghcr.io/zema-tech/zealbot-discord:latest`
+(multi-arch amd64/arm64) via `.github/workflows/docker-publish.yml`:
+
+```yaml
+services:
+  bot:
+    image: ghcr.io/zema-tech/zealbot-discord:latest
+    env_file: .env
+    environment:
+      DB_BACKEND: sqlite
+      DB_SQLITE_PATH: /app/data/bot.db
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+```
+
 ## 4. Railway / Render
 
 **Via rapida (Render):** il repo include `render.yaml` (Docker + healthcheck
@@ -152,15 +166,6 @@ Procedura manuale (valida per entrambi, filesystem effimero: serve disco persist
 5. Render free: lo spin-down per inattività **spegne il bot** (il bot deve stare
    sempre online) — serve istanza sempre attiva o un piano a pagamento.
 
-**Dashboard Next.js (TypeScript):** `render.yaml` include anche il servizio
-`zealbot-dashboard` (`apps/dashboard/Dockerfile`, healthcheck `/`):
-compila le env di `apps/dashboard/.env.example` (`DISCORD_CLIENT_ID/SECRET`,
-`NEXTAUTH_SECRET`, `NEXTAUTH_URL`, `BOT_TOKEN`). Su Railway crea un servizio
-separato con Dockerfile `apps/dashboard/Dockerfile`; su Fly copia `fly.toml`
-cambiando Dockerfile e porta. Build locale: `docker build -f
-apps/dashboard/Dockerfile -t zealbot-dashboard .` (richiede Bun o pnpm per i
-workspace, vedi Requisiti).
-
 ## 5. Pterodactyl — nota egg
 
 Nessun egg ufficiale: usa un egg generico **NodeJS** (versione 20):
@@ -182,7 +187,7 @@ Nessun egg ufficiale: usa un egg generico **NodeJS** (versione 20):
 
 | Sintomo | Causa probabile e fix |
 |---|---|
-| `Unsupported URL Type "workspace:"` su `npm install` | Stai risolvendo `apps/dashboard` o `packages/*` con **npm**. Per il **bot + dashboard Express** usa solo le dipendenze root (`npm ci` sul lock del bot). Per **Next** in `apps/dashboard` usa **Bun** o **pnpm**. |
+| `Unsupported URL Type "workspace:"` su `npm install` | Resto storico: aggiorna il lock con `npm install` e riprova (i workspace orfani sono stati rimossi). |
 | `DisallowedIntents` / bot online ma non risponde | Abilita nel [Developer Portal](https://discord.com/developers/applications) → Bot → **Privileged Gateway Intents**: **Server Members Intent** e **Message Content Intent** (il bot usa `GuildMembers` + `MessageContent`, vedi `src/index.js`). `GuildPresences` **non** serve. |
 | Slash command mancanti o vecchi | Lancia `npm run deploy` (serve `CLIENT_ID`; con `GUILD_ID` i comandi arrivano subito sul server di test, senza devi attendere fino a ~1h per la propagazione globale). |
 | `TokenInvalid` / `TOKEN_INVALID` | `DISCORD_TOKEN` errato o rigenerato: aggiorna `.env` (mai committarlo) e riavvia. |

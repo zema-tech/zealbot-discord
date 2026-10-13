@@ -1,0 +1,57 @@
+site_name: ZealBot Docs
+site_description: Self-hosted multi-server Discord bot — docs (EN/IT).
+site_url: https://zema-tech.github.io/zealbot-discord/
+repo_url: https://github.com/zema-tech/zealbot-discord
+repo_name: zema-tech/zealbot-discord
+
+theme:
+  name: material
+  palette:
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+
+nav:
+  - Home: README.md
+  - Guide (EN):
+      - Architecture: en/ARCHITECTURE.md
+      - Commands: en/COMMANDS.md
+      - Configuration: en/CONFIG.md
+      - Hosting: en/HOSTING.md
+      - MCP: en/MCP.md
+      - Internal API: en/API.md
+      - Agents: en/AGENTS.md
+  - Guide (IT):
+      - Architettura: it/ARCHITECTURE.md
+      - Comandi: it/COMMANDS.md
+      - Configurazione: it/CONFIG.md
+      - Hosting: it/HOSTING.md
+      - MCP: it/MCP.md
+      - API interne: it/API.md
+      - Agenti: it/AGENTS.md
+  - Project:
+      - Known issues: ISSUES.md
+
+markdown_extensions:
+  - tables
+  - fenced_code
+  - toc:
+      permalink: true

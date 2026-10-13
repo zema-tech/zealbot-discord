@@ -1,10 +1,14 @@
-[English](README.en.md) | [Italiano](README.it.md)
+[English](README.md) | [Italiano](README.it.md)
 
 # ⚡ ZealBot
 
+📚 **Sito docs:** https://zema-tech.github.io/zealbot-discord/
+
 ![Node](https://img.shields.io/badge/node-22%2B-brightgreen)
 ![discord.js](https://img.shields.io/badge/discord.js-v14-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![CodeQL](https://github.com/zema-tech/zealbot-discord/actions/workflows/codeql.yml/badge.svg)
+![Docker](https://github.com/zema-tech/zealbot-discord/actions/workflows/docker-publish.yml/badge.svg)
 ![Commands](https://img.shields.io/badge/slash%20commands-85%2B-orange)
 [![Donate](https://img.shields.io/badge/donate-Stripe-635BFF?logo=stripe&logoColor=white)](https://donate.stripe.com/test_aFa9AMegr8Me61bgAXcbC01)
 
@@ -52,9 +56,6 @@ npm start
 ```
 
 > **Bot + dashboard Express** (`src/dashboard`): usa **npm** come sopra.
-> La dashboard **Next.js** in `apps/dashboard` usa dipendenze `workspace:*`
-> (Bun/pnpm): **non** fare solo `npm install` in root se stai sviluppando
-> quel path — vedi [docs/HOSTING.md](docs/it/HOSTING.md).
 
 ```bash
 npm test   # smoke senza token: comandi, eventi, commander, DB
@@ -164,7 +165,17 @@ Griglia server (Entra / Invita) · moduli a categorie · Welcome a sezioni · ov
 
 Health: `GET /healthz` → `ok`, `guilds`, `commands`, `backend`.
 
-> Decisione dashboard (bloccata): Express (`src/dashboard`) è l'unica supportata. L'app Next.js in `apps/dashboard` è sperimentale.
+### Immagine Docker
+
+Immagini precompilate su GHCR a ogni tag `vX.Y.Z` (multi-arch amd64/arm64):
+
+```bash
+docker pull ghcr.io/zema-tech/zealbot-discord:latest
+```
+
+Vedi `docs/it/HOSTING.md` per un `docker-compose.yml` che usa l'immagine.
+
+> Decisione dashboard: Express (`src/dashboard`) è l'unica supportata.
 ---
 
 ## Struttura
@@ -174,8 +185,7 @@ src/commands/          slash per categoria
 src/events/            listener Discord
 src/modules/           descrittori + commander bridge
 src/database/          json / sqlite
-src/dashboard/         Express + UI (produzione tipica)
-apps/dashboard/        Next.js opzionale (Bun/pnpm, workspace:*)
+src/dashboard/         Express + UI
 packages/commander/    core TS (gate, breaker, guardian)
 docs/                  CONFIG, COMMANDS, HOSTING (it/en)
 .github/FUNDING.yml    link donazioni (Sponsor button)

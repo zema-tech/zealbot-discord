@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node -e "const fs=require('fs');const p=require('./package.json');delete p.workspaces;fs.writeFileSync('package.json',JSON.stringify(p,null,2))"
+      - run: npm ci --omit=dev --no-audit --no-fund
+      - uses: changesets/action@v1
+        with:
+          publish: npm run release
+          title: 'chore(release): version packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

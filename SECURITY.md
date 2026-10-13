@@ -45,6 +45,5 @@ High-interest areas (see also `decisions/`):
 - `src/events/secretGuard.js` (secret patterns),
 - `src/modules/commander.js` (gates, breaker).
 
-Out of scope: the optional Next.js dashboard in `apps/dashboard` until its
-Phase-3 cutover is declared in `PLAN.md`; upstream dependency vulnerabilities
+Out of scope: upstream dependency vulnerabilities
 (report those upstream, but tell us if they bite).

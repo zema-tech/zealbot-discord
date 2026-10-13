@@ -61,9 +61,12 @@ Notes:
 
 Reply texts go through `src/utils/i18n.js`: `t(key, lang, vars)` with
 per-key fallback to Italian, `getLang(guildId)` reads `language` from
-`guildConfig` (`/lingua imposta`). Supported languages: `it`, `en`
+`guildConfig` (change it with `/lingua` — no separate `/language` command:
+it would duplicate it). Supported languages: `it`, `en`
 (`SUPPORTED_LANGS`, fallback `it`). Canonical strings live in
-`src/locales/<lang>.json` (`it.js`/`en.js` re-export them for compatibility).
+`src/locales/<lang>.json` (`it.js`/`en.js` re-export them for compatibility),
+powered by the `i18next` engine under the same API (no fs-backend: JSONs
+ship with the code).
 
 Current coverage is partial (a handful of commands); slash names and
 descriptions stay in Italian.

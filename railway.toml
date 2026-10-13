@@ -12,5 +12,3 @@ healthcheckTimeout = 30
 
 # Volume Railway (da creare nel pannello → Volumes → mount /app/data),
 # con DB_BACKEND=sqlite e DB_SQLITE_PATH=/app/data/bot.db nelle Variables.
-# Per la dashboard Next.js invece: servizio separato con
-# Dockerfile = apps/dashboard/Dockerfile + env di apps/dashboard/.env.example.

@@ -1,5 +1,4 @@
-# Fly.io — deploy del bot (Dockerfile root). Dashboard Next: app separata
-# con Dockerfile = apps/dashboard/Dockerfile (copia questo file e cambia).
+# Fly.io — deploy del bot (Dockerfile root).
 # Uso: fly launch --no-deploy && fly volumes create bot_data -s 1 && fly deploy
 app = "zealbot"
 

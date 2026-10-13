@@ -33,6 +33,26 @@ const locales = {
   en: loadLocale('en'),
 };
 
+// Motore i18next sopra gli stessi JSON (stessa API, stesso fallback IT):
+// init sincrono su risorse inline — niente fs-backend perché i JSON
+// viaggiano col codice. Se i18next manca/rompe, t() resta sul lookup manuale.
+let i18n = null;
+try {
+  const i18next = require('i18next');
+  const instance = i18next.createInstance();
+  instance.init({
+    lng: FALLBACK_LANG,
+    fallbackLng: FALLBACK_LANG,
+    resources: { it: { translation: locales.it }, en: { translation: locales.en } },
+    interpolation: { prefix: '{', suffix: '}', escapeValue: false },
+    initImmediate: false,
+    showSupportNotice: false,
+  });
+  i18n = instance;
+} catch {
+  i18n = null;
+}
+
 function lookup(obj, key) {
   const parts = String(key).split('.');
   let cur = obj;
@@ -61,6 +81,15 @@ function normalizeLang(lang) {
  */
 function t(key, lang = 'it', vars = {}) {
   const l = SUPPORTED_LANGS.includes(lang) ? lang : FALLBACK_LANG;
+  // Via i18next quando disponibile (stesso fallback IT configurato sopra).
+  if (i18n) {
+    try {
+      const out = i18n.t(String(key), { lng: l, ...(vars || {}) });
+      // i18next ritorna la chiave se manca ovunque: identico al fallback manuale.
+      if (typeof out === 'string' && out !== String(key)) return out;
+      if (typeof out !== 'string') return out;
+    } catch {}
+  }
   let val = lookup(locales[l], key);
   if (val === undefined && l !== FALLBACK_LANG) val = lookup(locales[FALLBACK_LANG], key);
   if (val === undefined) return key;

@@ -189,7 +189,7 @@ Server grid (Join / Invite) · categorized modules · sectioned Welcome · 7/14/
 
 Health: `GET /healthz` → `ok`, `guilds`, `commands`, `backend`.
 
-> Dashboard decision (locked): Express (`src/dashboard`) is the only supported dashboard. The Next.js app in `apps/dashboard` is experimental.
+> Dashboard decision: Express (`src/dashboard`) is the only supported dashboard.
 
 ---
 
@@ -200,8 +200,7 @@ src/commands/          slash commands by category
 src/events/            Discord listeners
 src/modules/           descriptors + commander bridge
 src/database/          json / sqlite
-src/dashboard/         Express + UI (typical production)
-apps/dashboard/        optional Next.js (Bun/pnpm, workspace:*)
+src/dashboard/         Express + UI
 packages/commander/    TS core (gate, breaker, guardian)
 docs/                  CONFIG, COMMANDS, HOSTING (it/en)
 .github/FUNDING.yml    donation links (Sponsor button)

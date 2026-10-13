@@ -2,10 +2,14 @@
 
 # ⚡ ZealBot
 
+📚 **Docs site:** https://zema-tech.github.io/zealbot-discord/
+
 [![CI](https://github.com/zema-tech/zealbot-discord/actions/workflows/ci.yml/badge.svg)](https://github.com/zema-tech/zealbot-discord/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/zema-tech/zealbot-discord/actions/workflows/codeql.yml/badge.svg)](https://github.com/zema-tech/zealbot-discord/actions/workflows/codeql.yml)
+[![Docker](https://github.com/zema-tech/zealbot-discord/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/zema-tech/zealbot-discord/actions/workflows/docker-publish.yml)
 ![Node](https://img.shields.io/badge/node-22%2B-brightgreen)
 ![discord.js](https://img.shields.io/badge/discord.js-v14-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Commands](https://img.shields.io/badge/slash%20commands-85%2B-orange)
 [![Donate](https://img.shields.io/badge/donate-Stripe-635BFF?logo=stripe&logoColor=white)](https://donate.stripe.com/test_aFa9AMegr8Me61bgAXcbC01)
 **Production-ready multi-server Discord bot** with ~85 slash commands, per-guild feature toggles, a modern web dashboard, and a central **Commander** architecture (gate · timeout · circuit-breaker · **Guardian**).
@@ -59,8 +63,7 @@ npm test                      # smoke tests (no token required)
 npm run dashboard             # web panel (separate process)
 ```
 
-> **Note:** The production dashboard lives in `src/dashboard` (Express).  
-> The Next.js version in `apps/dashboard` is experimental and uses workspace dependencies (Bun/pnpm). See [docs/en/HOSTING.md](docs/en/HOSTING.md).
+> **Note:** The production dashboard lives in `src/dashboard` (Express).
 
 ---
 
@@ -89,6 +92,28 @@ docker compose up -d --build
 ```
 
 Health: `GET /healthz`. Data persists via the `./data`, `./logs`, `./backups` volumes — see [docs/en/HOSTING.md](docs/en/HOSTING.md).
+
+### Docker image
+
+Prebuilt images publish to GHCR on every `vX.Y.Z` tag (multi-arch amd64/arm64):
+
+```bash
+docker pull ghcr.io/zema-tech/zealbot-discord:latest
+```
+
+```yaml
+# docker-compose.ghcr.yml — run without building
+services:
+  bot:
+    image: ghcr.io/zema-tech/zealbot-discord:latest
+    env_file: .env
+    environment:
+      DB_BACKEND: sqlite
+      DB_SQLITE_PATH: /app/data/bot.db
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+```
 
 ### Fly.io
 
@@ -206,7 +231,6 @@ src/events/            Discord event listeners
 src/modules/           descriptors + commander bridge
 src/database/          json / sqlite store
 src/dashboard/         Express dashboard (production)
-apps/dashboard/        Next.js dashboard (experimental)
 packages/commander/    TypeScript core (gate, breaker, guardian)
 docs/                  CONFIG · COMMANDS · HOSTING · AGENTS (it/en)
 .github/FUNDING.yml    donation links (Sponsor button)

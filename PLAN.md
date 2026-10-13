@@ -1,5 +1,9 @@
 # PLAN — Nuova dashboard Next.js (sostituisce Express+EJS)
 
+> SUPERSEDED (Opzione B): `apps/dashboard/` è stata rimossa; Express
+> (`src/dashboard`) resta l'unica dashboard supportata. Questo piano resta
+> come riferimento storico — non reintrodurre una seconda dashboard senza ADR.
+
 > Stato: Fase 1 completata (scaffold + @repo/ui + toggle moduli + annunci +
 > overview con anteprima guild; `tsc --noEmit` e `next build` verdi).
 > La vecchia dashboard (`src/dashboard/`, Express + vanilla JS) resta attiva

@@ -1,6 +1,6 @@
 # Docs
 
-[English](../README.en.md) | [Italiano](../README.it.md)
+Start here in your language, or jump straight to a guide below.
 
 | Guide | English | Italiano |
 |---|---|---|

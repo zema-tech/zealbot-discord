@@ -1,0 +1,55 @@
+# Dependabot — aggiornamenti automatici settimanali.
+# Raggruppati per ridurre il rumore; max 5 PR aperte per ecosistema.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "03:00"
+      timezone: UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - automated
+    groups:
+      dev-dependencies:
+        dependency-type: development
+      discord:
+        patterns:
+          - discord.js
+          - "@discordjs/*"
+  - package-ecosystem: npm
+    directory: /packages/commander
+    schedule:
+      interval: weekly
+      day: monday
+      time: "03:00"
+      timezone: UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - automated
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "03:00"
+      timezone: UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - automated
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "03:00"
+      timezone: UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - automated

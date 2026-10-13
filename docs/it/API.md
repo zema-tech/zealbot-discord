@@ -50,4 +50,4 @@ Due strati (gli stessi di `/config` e dashboard):
 ## Decisione dashboard (bloccata)
 
 **Opzione B: Express (`src/dashboard`) è l'unica dashboard supportata.**
-L'app Next.js in `apps/dashboard` è sperimentale finché il cutover di Fase 3 non è dichiarato in `PLAN.md`. Non costruirci feature sopra; non metterla nelle istruzioni di installazione come default.
+L'app Next.js sperimentale è stata rimossa; non reintrodurre una seconda dashboard senza un ADR.

@@ -23,3 +23,9 @@ src/database/*.json
 
 .DS_Store
 docs/
+test/
+*.md
+# Eccezioni: librerie lette a runtime (skill, modelli memoria).
+!skills/*.md
+!memory/modelli/*.md
+.github/
