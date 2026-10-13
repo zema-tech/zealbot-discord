@@ -1,6 +1,6 @@
 # ZealBot — immagine production
 # Base: node:24-slim (package.json: engines node>=22; start = "node src/index.js").
-FROM node:24-slim
+FROM node:26-slim
 
 ENV NODE_ENV=production
 
