@@ -817,17 +817,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#lingue-dei-messaggi-i18n_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lingue dei messaggi (i18n)
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1071,17 +1060,6 @@
       
         <li class="md-nav__item">
   <a href="#lingue-dei-messaggi-i18n" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lingue dei messaggi (i18n)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lingue-dei-messaggi-i18n_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Lingue dei messaggi (i18n)
@@ -1406,37 +1384,24 @@ e compila almeno le obbligatorie. Mai committare <code>.env</code>.</p>
   (<code>src/jobs/backup.js</code>), non env.</li>
 </ul>
 <h2 id="lingue-dei-messaggi-i18n">Lingue dei messaggi (i18n)<a class="headerlink" href="#lingue-dei-messaggi-i18n" title="Permanent link">&para;</a></h2>
-<p>I testi di risposta passano da <code>src/utils/i18n.js</code>: <code>t(chiave, lingua, vars)</code>
-con fallback per-chiave all'italiano, <code>getLang(guildId)</code> legge <code>language</code> da
-<code>guildConfig</code> (si cambia con <code>/lingua</code> — niente comando <code>/language</code> separato:
-sarebbe un duplicato). Lingue supportate: <code>it</code>, <code>en</code>
-(<code>SUPPORTED_LANGS</code>, fallback <code>it</code>). Le stringhe canoniche vivono in
-<code>src/locales/&lt;lingua&gt;.json</code> (<code>it.js</code>/<code>en.js</code> le riesportano per compatibilità),
-motore <code>i18next</code> sotto la stessa API (niente fs-backend: i JSON viaggiano col codice).</p>
-<p>Copertura attuale: parziale (una manciata di comandi); nomi e descrizioni
-slash restano in italiano.</p>
+<p>I testi di risposta passano da <code>src/core/i18n.js</code> (motore i18next con fs-backend
+sopra <code>src/locales/&lt;lingua&gt;.json</code>, fallback inline se il backend fallisce):
+<code>t(guildId, chiave, vars)</code> con fallback per-chiave all'inglese,
+<code>getGuildLanguage(guildId)</code> legge <code>language</code> da <code>guildConfig</code>
+(si cambia con <code>/language</code>, solo admin; <code>/lingua</code> rimanda alla dashboard).
+Lingue supportate: <code>en</code>, <code>it</code> (fallback <code>en</code>).
+<code>src/utils/i18n.js</code> mantiene la vecchia API <code>t(chiave, lingua, vars)</code> sugli
+stessi JSON per i chiamanti esistenti.</p>
+<p>Copertura attuale: comandi moderazione, economy, ticket, livelli; nomi e
+descrizioni slash restano in italiano.</p>
 <p>Per aggiungere una lingua (es. <code>es</code>):</p>
 <ol>
 <li>Copia <code>src/locales/en.json</code> in <code>src/locales/es.json</code> e traduci i valori
-   (le chiavi mancanti ricadono sull'italiano automaticamente).</li>
-<li>Aggiungi <code>'es'</code> a <code>SUPPORTED_LANGS</code> in <code>src/utils/i18n.js</code>.</li>
-<li>Usa <code>t('chiave', await getLang(guildId), { vars })</code> nei nuovi testi invece
-   di stringhe hardcoded; non cambiare i testi esistenti senza motivo.</li>
-</ol>
-<h2 id="lingue-dei-messaggi-i18n_1">Lingue dei messaggi (i18n)<a class="headerlink" href="#lingue-dei-messaggi-i18n_1" title="Permanent link">&para;</a></h2>
-<p>I testi di risposta passano da <code>src/utils/i18n.js</code>: <code>t(chiave, lingua, vars)</code>
-con fallback per-chiave all'italiano, <code>getLang(guildId)</code> legge <code>language</code> da
-<code>guildConfig</code> (<code>/lingua imposta</code>). Lingue supportate: <code>it</code>, <code>en</code>
-(<code>SUPPORTED_LANGS</code>, fallback <code>it</code>).</p>
-<p>Copertura attuale: parziale (una manciata di comandi, es. ping/help/serverinfo).
-I nomi/descrizioni slash restano in italiano.</p>
-<p>Per aggiungere una lingua (es. <code>es</code>):</p>
-<ol>
-<li>Crea <code>src/locales/es.js</code> con le stesse chiavi di <code>it.js</code> (le mancanti
-   ricadono sull'italiano automaticamente).</li>
-<li>Aggiungi <code>'es'</code> a <code>SUPPORTED_LANGS</code> in <code>src/utils/i18n.js</code>.</li>
-<li>Usa <code>t('chiave', await getLang(guildId), { vars })</code> nei nuovi testi invece
-   di stringhe hardcoded; non cambiare i testi esistenti senza motivo.</li>
+   (le chiavi mancanti ricadono sull'inglese automaticamente).</li>
+<li>Aggiungi <code>'es'</code> a <code>SUPPORTED</code> in <code>src/core/i18n.js</code> (e a <code>SUPPORTED_LANGS</code>
+   in <code>src/utils/i18n.js</code> per i chiamanti legacy).</li>
+<li>Usa <code>t(guildId, 'chiave', { vars })</code> nei nuovi testi invece di stringhe
+   hardcoded; non cambiare i testi esistenti senza motivo.</li>
 </ol>
 
 

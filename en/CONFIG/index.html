@@ -1384,22 +1384,23 @@ and fill in at least the required ones. Never commit <code>.env</code>.</p>
   (<code>src/jobs/backup.js</code>), not env.</li>
 </ul>
 <h2 id="bot-message-languages-i18n">Bot message languages (i18n)<a class="headerlink" href="#bot-message-languages-i18n" title="Permanent link">&para;</a></h2>
-<p>Reply texts go through <code>src/utils/i18n.js</code>: <code>t(key, lang, vars)</code> with
-per-key fallback to Italian, <code>getLang(guildId)</code> reads <code>language</code> from
-<code>guildConfig</code> (change it with <code>/lingua</code> — no separate <code>/language</code> command:
-it would duplicate it). Supported languages: <code>it</code>, <code>en</code>
-(<code>SUPPORTED_LANGS</code>, fallback <code>it</code>). Canonical strings live in
-<code>src/locales/&lt;lang&gt;.json</code> (<code>it.js</code>/<code>en.js</code> re-export them for compatibility),
-powered by the <code>i18next</code> engine under the same API (no fs-backend: JSONs
-ship with the code).</p>
-<p>Current coverage is partial (a handful of commands); slash names and
-descriptions stay in Italian.</p>
+<p>Reply texts go through <code>src/core/i18n.js</code> (i18next engine with fs-backend
+over <code>src/locales/&lt;lang&gt;.json</code>, inline fallback if the backend fails):
+<code>t(guildId, key, vars)</code> with per-key fallback to English,
+<code>getGuildLanguage(guildId)</code> reads <code>language</code> from <code>guildConfig</code>
+(change it with <code>/language</code>, admins only; <code>/lingua</code> points to the dashboard).
+Supported languages: <code>en</code>, <code>it</code> (fallback <code>en</code>).
+<code>src/utils/i18n.js</code> keeps the legacy <code>t(key, lang, vars)</code> API on the same
+JSONs for existing callers.</p>
+<p>Current coverage: moderation, economy, tickets, levels commands; slash names
+and descriptions stay in Italian.</p>
 <p>To add a language (e.g. <code>es</code>):</p>
 <ol>
 <li>Copy <code>src/locales/en.json</code> to <code>src/locales/es.json</code> and translate the
-   values (missing keys automatically fall back to Italian).</li>
-<li>Add <code>'es'</code> to <code>SUPPORTED_LANGS</code> in <code>src/utils/i18n.js</code>.</li>
-<li>Use <code>t('key', await getLang(guildId), { vars })</code> in new texts instead of
+   values (missing keys automatically fall back to English).</li>
+<li>Add <code>'es'</code> to <code>SUPPORTED</code> in <code>src/core/i18n.js</code> (and <code>SUPPORTED_LANGS</code>
+   in <code>src/utils/i18n.js</code> for legacy callers).</li>
+<li>Use <code>t(guildId, 'key', { vars })</code> in new texts instead of
    hardcoded strings; don't churn existing texts without reason.</li>
 </ol>
 

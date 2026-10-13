@@ -1025,18 +1025,18 @@
 <li>~~<code>npm ci</code> at root fails with <code>Unsupported URL Type "workspace:"</code>~~ RESOLVED:
    orphan Next-era workspaces (<code>apps/dashboard</code>, <code>packages/db|config|ui</code>)
    removed; plain <code>npm ci</code> works again. CI workaround dropped.</li>
-<li>Full bot-message i18n is partial: <code>src/utils/i18n.js</code> + JSON locales cover
-   a handful of commands; most replies are hardcoded Italian, and slash
-   names/descriptions stay Italian by documented choice. Rolling out <code>t()</code>
-   everywhere is future work (see <code>docs/CONFIG.md</code> lingue / <code>docs/en/CONFIG.md</code>).
-   Default language stays <code>it</code> (flipping to <code>en</code> would silently change UX
-   for existing Italian servers).</li>
+<li>Full bot-message i18n: <code>src/core/i18n.js</code> (i18next + fs-backend) + <code>t()</code>
+   covers moderation/economy/tickets/levels commands; most other replies are
+   still hardcoded Italian, and slash names/descriptions stay Italian by
+   documented choice. Product default is now English (<code>FALLBACK='en'</code>,
+   <code>guildConfig.language</code> default <code>'en'</code>): guilds that never set a language
+   see English — explicit product decision, <code>/language</code> (admin) to switch.</li>
 <li>Prettier: <code>npm run format</code> exists but is opt-in — ~200 files predate the
    config and a mass reformat would nuke blame. Gate CI on ESLint only.</li>
 <li>~~<code>apps/dashboard</code> (Next.js) experimental~~ RESOLVED (Option B):
    removed entirely; Express is the only dashboard. Reintroduction needs an ADR.</li>
-<li>Product default language is Italian (<code>FALLBACK_LANG='it'</code>), not English:
-   deliberate (see 2), against the letter of the i18n request.</li>
+<li>~~Product default language is Italian~~ RESOLVED: default is now
+   English everywhere (<code>src/core/i18n.js</code>, <code>utils/i18n.js</code>, <code>guildConfig</code>).</li>
 <li><code>scripts/gen-docs.js</code> writes to <code>docs/COMMANDS.md</code>, but docs now live in
    <code>docs/it/</code> + <code>docs/en/</code>. Decide: generator targets <code>docs/it/COMMANDS.md</code>
    (+ English edition strategy) before re-running, or it recreates the old path.</li>
